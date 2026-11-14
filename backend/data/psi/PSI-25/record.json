@@ -1,0 +1,4174 @@
+{
+  "investigation": {
+    "psi_id": "PSI-25",
+    "title": "Burning and Suppression of Solids - II",
+    "acronym": "BASS-II",
+    "program": "BASS-II",
+    "related_programs": [
+      "BASS",
+      "SoFIE"
+    ],
+    "data_type": "flight experiment",
+    "platform": "International Space Station (ISS)",
+    "hardware": "Microgravity Science Glovebox (MSG)",
+    "dates": [
+      "01-01-2010",
+      "12-31-2022"
+    ],
+    "doi": "10.60555/4qc4-de67",
+    "reference_link": "https://doi.org/10.60555/4qc4-de67",
+    "objective": "BASS-II results contribute to the combustion computational models used in the design of fire detection and suppression systems in microgravity and on Earth."
+  },
+  "crew_environments": [
+    {
+      "value": "Space Station",
+      "basis": "stated",
+      "justification": "Flown on the ISS; Nomex was tested because it is heavily used aboard the ISS as a fire barrier (report p. 54)."
+    },
+    {
+      "value": "Spacecraft",
+      "basis": "stated",
+      "justification": "Aims to find the worst case for material flammability in spacecraft environments and compare it with the NASA-STD-6001 upward test (report p. 11)."
+    }
+  ],
+  "fire_safety_categories": [
+    {
+      "value": "Fire Prevention",
+      "evidence": {
+        "text": "Find the minimum O2 or flow at which a material burns in space; helps engineers select the safest materials.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 11; PSI-25 metadata (i_Investigation.txt) Research Impacts"
+      }
+    },
+    {
+      "value": "Fire Growth & Spread",
+      "evidence": {
+        "text": "Flame growth rates studied to see how quickly a fire in space can grow and whether flames reach a finite size.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 11"
+      }
+    },
+    {
+      "value": "Fire Suppression",
+      "evidence": {
+        "text": "Results feed models used to design fire detection and suppression systems; flows reduced until flames quenched.",
+        "source": "PSI-25 metadata (i_Investigation.txt) Objective; BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 101"
+      }
+    }
+  ],
+  "research_topics": [
+    {
+      "value": "Material Flammability",
+      "evidence": {
+        "text": "Flammability boundary for PMMA rods; minimum about 13.5% O2.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 83"
+      }
+    },
+    {
+      "value": "Flame Spread",
+      "evidence": {
+        "text": "Opposed and concurrent flame spread rates over films, slabs, rods and fabric.",
+        "source": "PSI-25 metadata (i_Investigation.txt) Approach; BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) pp. 21, 56, 71"
+      }
+    },
+    {
+      "value": "Flame Extinction",
+      "evidence": {
+        "text": "Quenching and blowoff extinction limits as a function of O2 and flow.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) pp. 21, 97, 109"
+      }
+    },
+    {
+      "value": "Combustion Behavior",
+      "evidence": {
+        "text": "Combustion products (O2, CO, CO2), heat release rate, global equivalence ratio.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) pp. 9-10, 19"
+      }
+    }
+  ],
+  "fuel": {
+    "types": [
+      "Solid Materials"
+    ],
+    "materials": [
+      "PMMA (acrylic) thin films 0.1-0.4 mm",
+      "PMMA slabs 1-5 mm",
+      "PMMA rods 1/4, 3/8, 1/2 in (clear and black)",
+      "SIBAL cotton-fiberglass fabric",
+      "Nomex III fabric",
+      "wax candle"
+    ],
+    "geometry": "Flat films and slabs (1- and 2-sided), cylindrical rods, fabric sheets, spherical sections"
+  },
+  "conditions": {
+    "oxygen_concentration": {
+      "min": 13.6,
+      "max": 22.2,
+      "unit": "% by volume",
+      "evidence": {
+        "text": "Calibrated initial O2 13.6-22.2% across 129 tests",
+        "source": "PSI-25_Experimental_table_BASS-II_transcribed.csv"
+      }
+    },
+    "pressure": {
+      "min": 101.3,
+      "max": 101.3,
+      "unit": "kPa",
+      "evidence": {
+        "text": "ISS cabin pressure; analyses use P = 1 atm. Not recorded per test.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) pp. 19, 36"
+      }
+    },
+    "airflow_velocity": {
+      "min": 0,
+      "max": 55,
+      "unit": "cm/s",
+      "evidence": {
+        "text": "Fan-driven duct flow up to ~55 cm/s (no restrictors) or ~35 cm/s (two restrictors); per-test values are free text.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 12"
+      }
+    },
+    "gravity_level": {
+      "values": [
+        "microgravity"
+      ],
+      "evidence": {
+        "text": "Flight platform: International Space Station",
+        "source": "PSI-25 metadata (i_Investigation.txt)"
+      }
+    },
+    "diluents": [
+      "N2"
+    ]
+  },
+  "measurement_types": [
+    {
+      "value": "Flame Spread Rate",
+      "evidence": {
+        "text": "Spread rate of the leading edge, e.g. steady 2.2 mm/s over 100 um PMMA film.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 21"
+      }
+    },
+    {
+      "value": "Extinction Conditions",
+      "evidence": {
+        "text": "Quenching flow speeds and blowoff limits vs O2.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) pp. 21, 83, 109"
+      }
+    },
+    {
+      "value": "Flame Size",
+      "evidence": {
+        "text": "Flame length, width and standoff distance over time.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 72 (Fig. 6.4)"
+      }
+    },
+    {
+      "value": "Burning Rate",
+      "evidence": {
+        "text": "Rod regression and mass burning rate along the flammability boundary.",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 72"
+      }
+    }
+  ],
+  "test_summary": {
+    "n_tests": 129,
+    "test_dates": [
+      "2014-02-14",
+      "2016-02-26"
+    ],
+    "by_principal_investigator": {
+      "T'ien": 29,
+      "Olson": 27,
+      "Fernandez-Pello": 27,
+      "Bhattacharjee": 22,
+      "Miller": 20,
+      "Ferkul": 4
+    },
+    "by_geometry": {
+      "rod": 54,
+      "fabric sheet": 30,
+      "film": 22,
+      "slab": 20,
+      "spherical section": 2,
+      "candle": 1
+    },
+    "by_material": {
+      "SIBAL cotton-fiberglass fabric, 2 cm wide": 18,
+      "PMMA rod 1/4 in, clear": 16,
+      "PMMA rod 1/4 in, black": 15,
+      "SIBAL cotton-fiberglass fabric, 1 cm wide": 9,
+      "PMMA film 0.1 mm, 2 cm wide": 8,
+      "PMMA rod 3/8 in, clear": 7,
+      "PMMA rod 3/8 in, black": 7,
+      "PMMA film 0.2 mm, 1 cm wide": 6,
+      "PMMA rod 1/2 in, clear": 5,
+      "PMMA film 0.2 mm, 2 cm wide": 4,
+      "PMMA rod 1/2 in, black": 4,
+      "Nomex III fabric": 3,
+      "PMMA film 0.3 mm, 2 cm wide": 2,
+      "PMMA film 0.4 mm, 2 cm wide": 2,
+      "PMMA slab 5 mm, 2 cm wide": 2,
+      "PMMA slab 1 mm, 2 cm wide": 2,
+      "PMMA slab 2 mm, 2 cm wide": 2,
+      "PMMA slab 4 mm, 2 cm wide": 2,
+      "Spherical section sample, 4 cm": 2,
+      "Wax candle (BASS-I leftover)": 1,
+      "PMMA slab 1 mm, 2 cm wide, 1-sided": 1,
+      "PMMA slab 3 mm, 2 cm wide, 1-sided": 1,
+      "PMMA slab 5 mm, 2 cm wide, 1-sided": 1,
+      "PMMA slab 3 mm, 2 cm wide, 2-sided": 1,
+      "PMMA slab 1 mm, 1 cm wide": 1,
+      "PMMA slab 2 mm, 1 cm wide": 1,
+      "PMMA slab 3 mm, 1 cm wide": 1,
+      "PMMA slab 4 mm, 1 cm wide": 1,
+      "PMMA slab 5 mm, 1 cm wide": 1,
+      "PMMA slab 2 mm, 2 cm wide, 1-sided": 1,
+      "PMMA slab 4 mm, 2 cm wide, 1-sided": 1,
+      "PMMA slab 3 mm, 2 cm wide": 1
+    }
+  },
+  "condition_sets": [
+    {
+      "set_id": "PSI-25-CS01",
+      "tests": [
+        {
+          "test_number": "B16",
+          "test_identifier": "sample 150m"
+        },
+        {
+          "test_number": "B19",
+          "test_identifier": "sample 151m"
+        },
+        {
+          "test_number": "B20",
+          "test_identifier": "sample 152m"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.1 mm, 2 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 17.0,
+      "oxygen_initial_range_pct": [
+        17.3,
+        17.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 3,
+      "flow_settings_raw": [
+        "fan: 44 (pot 0.68) | air: 3  0.5 pot   0.4 pot",
+        "fan: 47 (pot 1.05)   incr to pot 6.0 | air: 10   blowoff",
+        "fan: 48   pot 0.9   0.5 | air: 5   3      pot 0.5"
+      ],
+      "observed_events": [
+        "blowoff extinction"
+      ],
+      "test_dates": [
+        "7/2/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS02",
+      "tests": [
+        {
+          "test_number": "B6",
+          "test_identifier": "sample 153m"
+        },
+        {
+          "test_number": "B9",
+          "test_identifier": "sample 154m"
+        },
+        {
+          "test_number": "B15",
+          "test_identifier": "sample 149m"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.1 mm, 2 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        21.0,
+        21.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 3,
+      "flow_settings_raw": [
+        "fan: 0.9   1.3   2.75 | air: 3   5   approaching 10",
+        "fan: 0.6   0.35 | air: 2   <1",
+        "fan: 1.4 (50) incr to 10.0 pot | air: 10   max"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/7/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS03",
+      "tests": [
+        {
+          "test_number": "B1",
+          "test_identifier": "sample 147"
+        },
+        {
+          "test_number": "B3",
+          "test_identifier": "sample 148"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.1 mm, 2 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        22.2,
+        22.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 62 | air: 5",
+        "fan: 47 | air: 2"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/19/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS04",
+      "tests": [
+        {
+          "test_number": "B14",
+          "test_identifier": "sample 174m"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.2 mm, 1 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 15.0,
+      "oxygen_initial_range_pct": [
+        15.0,
+        15.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: pot 0.9   0.5 and down | air: 5  3  2   ext"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "7/2/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS05",
+      "tests": [
+        {
+          "test_number": "B18",
+          "test_identifier": "sample 176m"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.2 mm, 1 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 17.0,
+      "oxygen_initial_range_pct": [
+        17.4,
+        17.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: pot 1.02 (47)   incr to 7.0 | air: 10   blowoff"
+      ],
+      "observed_events": [
+        "blowoff extinction"
+      ],
+      "test_dates": [
+        "7/2/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS06",
+      "tests": [
+        {
+          "test_number": "B17",
+          "test_identifier": "sample 175m"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.2 mm, 1 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        17.5,
+        17.5
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: pot 1.2 (48)    0.9   0.4  | air: 5   3    pot 0.4"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/2/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS07",
+      "tests": [
+        {
+          "test_number": "B10",
+          "test_identifier": "sample 173m"
+        },
+        {
+          "test_number": "B21",
+          "test_identifier": "sample 174m"
+        },
+        {
+          "test_number": "B22",
+          "test_identifier": "sample 176m"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.2 mm, 1 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        20.7,
+        21.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 3,
+      "flow_settings_raw": [
+        "fan: 1.7 (52)   1.25   0.9   0.6   0.4   0.35 | air: 5  4  3  2  1",
+        "fan: 53   and down | air: 5 down to ext",
+        "fan: 53   42   41   40.5 | air: 5   2   0"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "7/7/2014",
+        "8/4/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS08",
+      "tests": [
+        {
+          "test_number": "B8",
+          "test_identifier": "sample 157m"
+        },
+        {
+          "test_number": "B11",
+          "test_identifier": "sample 158m"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.2 mm, 2 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        21.0,
+        21.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 1.4    incr to 10.0 | air: 10   max",
+        "fan: 2.5 (59)   1.3   0.7   0.5   0.35 | air: 5   3   1   <1"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/7/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS09",
+      "tests": [
+        {
+          "test_number": "B2",
+          "test_identifier": "sample 155"
+        },
+        {
+          "test_number": "B5",
+          "test_identifier": "sample 156"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.2 mm, 2 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        22.2,
+        22.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 62 | air: 5",
+        "fan: 59 | air: 5"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/19/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS10",
+      "tests": [
+        {
+          "test_number": "B4",
+          "test_identifier": "sample 159"
+        },
+        {
+          "test_number": "B12",
+          "test_identifier": "sample 160"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.3 mm, 2 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        22.2,
+        22.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 61 | air: 5",
+        "fan: 46.5 | air: 2"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/19/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS11",
+      "tests": [
+        {
+          "test_number": "B13",
+          "test_identifier": "sample 162m"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.4 mm, 2 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        21.0,
+        21.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 3.5 (68)    1.7   1.25   0.9   0.6   0.4   0.35 | air: 10   5  4  3  2  1"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/7/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS12",
+      "tests": [
+        {
+          "test_number": "B7",
+          "test_identifier": "sample 161"
+        }
+      ],
+      "principal_investigator": "Bhattacharjee",
+      "fuel": "PMMA film 0.4 mm, 2 cm wide",
+      "geometry": "film",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        22.2,
+        22.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 47 | air: 2"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/19/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS13",
+      "tests": [
+        {
+          "test_number": "F2",
+          "test_identifier": "sample 228m"
+        }
+      ],
+      "principal_investigator": "Ferkul",
+      "fuel": "Nomex III fabric",
+      "geometry": "fabric sheet",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        21.0,
+        21.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 92 | air: 15"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/28/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS14",
+      "tests": [
+        {
+          "test_number": "F1",
+          "test_identifier": "sample 227"
+        },
+        {
+          "test_number": "F3",
+          "test_identifier": "sample 229m"
+        }
+      ],
+      "principal_investigator": "Ferkul",
+      "fuel": "Nomex III fabric",
+      "geometry": "fabric sheet",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        21.7,
+        22.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 82 | air: 9.5",
+        "fan: 61 | air: 8"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/19/2014",
+        "8/1/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS15",
+      "tests": [
+        {
+          "test_number": "F4",
+          "test_identifier": "sample 39M"
+        }
+      ],
+      "principal_investigator": "Ferkul",
+      "fuel": "Wax candle (BASS-I leftover)",
+      "geometry": "candle",
+      "oxygen_pct": 17.0,
+      "oxygen_initial_range_pct": [
+        17.4,
+        17.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: see notes | air: 3 ign"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "6/24/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS16",
+      "tests": [
+        {
+          "test_number": "P9",
+          "test_identifier": "sample 202m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 1/2 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        17.6,
+        17.6
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: Fan pot 1.5 (5cm/s)   0.9   0.4   0.36   0.32   0.3   0.28 ext | air: 5 down to ext"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "7/14/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS17",
+      "tests": [
+        {
+          "test_number": "P5",
+          "test_identifier": "sample 202m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 1/2 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 19.0,
+      "oxygen_initial_range_pct": [
+        19.3,
+        19.3
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: Fan pot 1.5 (5cm/s)   0.9   0.4   0.36   0.32   0.308   0.3   0.29   0.28   0 ext | air: 5 down to ext"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "7/14/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS18",
+      "tests": [
+        {
+          "test_number": "P13a",
+          "test_identifier": "sample 203m"
+        },
+        {
+          "test_number": "P13b",
+          "test_identifier": "sample 203m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 1/2 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        20.6,
+        20.7
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: Fan pot 1.1 (5cm/s)   0.4   0.36   0.32   0.3   0.28   0.26   0 ext | air: 5 down to ext",
+        "fan: Fan pot 1.3 (5cm/s)   0.4   0.36   0.32 ext | air: 5 down to ext"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "7/14/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS19",
+      "tests": [
+        {
+          "test_number": "P21a",
+          "test_identifier": "sample 196M"
+        },
+        {
+          "test_number": "P21b",
+          "test_identifier": "sample 196M"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 1/4 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 16.0,
+      "oxygen_initial_range_pct": [
+        16.3,
+        16.3
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 46 | air: 5",
+        "fan: 46 | air: 5"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "6/23/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS20",
+      "tests": [
+        {
+          "test_number": "P2",
+          "test_identifier": "sample 188M"
+        },
+        {
+          "test_number": "P10",
+          "test_identifier": "sample 187m"
+        },
+        {
+          "test_number": "P17",
+          "test_identifier": "sample 192m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 1/4 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 17.0,
+      "oxygen_initial_range_pct": [
+        16.8,
+        17.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 3,
+      "flow_settings_raw": [
+        "fan:  | air: 5   2.5   2 (pot .9   .5   .35.  .33)",
+        "fan: 48   41 | air: 5   pots 0.4   0.36   0.32   0.31   0.30 extinguished",
+        "fan: 60  52  48  233  48  41 (2.6   1.6   1.2   10   1.2   0.36   0.34) | air: 5   3   2   22   2   low"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "6/16/2014",
+        "7/29/2014",
+        "7/3/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS21",
+      "tests": [
+        {
+          "test_number": "P1",
+          "test_identifier": "sample 185M"
+        },
+        {
+          "test_number": "P14",
+          "test_identifier": "sample 189M"
+        },
+        {
+          "test_number": "P15",
+          "test_identifier": "sample 190M"
+        },
+        {
+          "test_number": "P16",
+          "test_identifier": "sample 191m"
+        },
+        {
+          "test_number": "P19",
+          "test_identifier": "sample 194m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 1/4 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        17.5,
+        18.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 5,
+      "flow_settings_raw": [
+        "fan:  | air: 5  2   slow decr to ext",
+        "fan: 46   41 | air: 5   low (.85   .4   .32)",
+        "fan: 46   41 | air: 5   (0.36)",
+        "fan: 49  62  44  41.5  41 (pots 1.3   2.8   0.7   0.4   0.36   0.32) | air: 5  8  2  low",
+        "fan: 49  62  44  41.5  122   41 (pots 1.3   2.8   0.7   0.4   0.36   10.   0.32) | air: 5  8  2  max   0"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "6/16/2014",
+        "6/23/2014",
+        "7/22/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS22",
+      "tests": [
+        {
+          "test_number": "P6",
+          "test_identifier": "sample 186m"
+        },
+        {
+          "test_number": "P20",
+          "test_identifier": "sample 195m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 1/4 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 19.0,
+      "oxygen_initial_range_pct": [
+        18.9,
+        19.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 48   41 | air: 5   pots 0.4   0.36   0.32   0.31   off",
+        "fan: 55  47  etc (pot 1  2  1  2   etc) | air: 2  0  2  0  etc"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/3/2014",
+        "7/30/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS23",
+      "tests": [
+        {
+          "test_number": "P18",
+          "test_identifier": "sample 193m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 1/4 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 20.0,
+      "oxygen_initial_range_pct": [
+        20.0,
+        20.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 55  47  etc (pot 1  2  1  2   etc) | air: 2  0  2  0  etc"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/30/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS24",
+      "tests": [
+        {
+          "test_number": "P3b",
+          "test_identifier": "sample 215M"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 1/4 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 17.0,
+      "oxygen_initial_range_pct": [
+        17.4,
+        17.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan:  | air: 5   very low (0.85   0.32   0.31   0.305   0.30   0.295)"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "6/16/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS25",
+      "tests": [
+        {
+          "test_number": "P3a",
+          "test_identifier": "sample 215M"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 1/4 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        17.7,
+        17.7
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan:  | air: 5   2.5 (1.15   .5   .35   .33. .32   .315   .31   .3)"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "6/16/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS26",
+      "tests": [
+        {
+          "test_number": "P8",
+          "test_identifier": "sample 197m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 3/8 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 16.0,
+      "oxygen_initial_range_pct": [
+        16.4,
+        16.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 48   62   75 | air: 5   would not stay lit   10   15 ibid"
+      ],
+      "observed_events": [
+        "no sustained ignition"
+      ],
+      "test_dates": [
+        "7/3/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS27",
+      "tests": [
+        {
+          "test_number": "P4",
+          "test_identifier": "sample 197m"
+        },
+        {
+          "test_number": "P12",
+          "test_identifier": "sample 199m"
+        },
+        {
+          "test_number": "P23",
+          "test_identifier": "sample 201m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 3/8 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        17.5,
+        18.5
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 3,
+      "flow_settings_raw": [
+        "fan: 48   41 | air: 5   pots 0.4   0.36   0.32   0.308   .3   off",
+        "fan: 60  52  48  44.5  42  41.5  41 (2.6  1.6  1.2  .75  .5  .4  .36  0.34) | air: 5   3  2  1   0.5   lower",
+        "fan: 55  47  etc (pot 1  2  1  2   etc) | air: 2  0  2  0  etc"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/29/2014",
+        "7/3/2014",
+        "7/30/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS28",
+      "tests": [
+        {
+          "test_number": "P24",
+          "test_identifier": "sample 819L"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 3/8 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 19.0,
+      "oxygen_initial_range_pct": [
+        19.0,
+        19.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 55  47  etc (pot 1  2  1  2   etc) | air: 2  0  2  0  etc"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/30/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS29",
+      "tests": [
+        {
+          "test_number": "P22b",
+          "test_identifier": "sample 200m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 3/8 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 20.0,
+      "oxygen_initial_range_pct": [
+        20.0,
+        20.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 5   p.36   0.34   0.33   0.32   0.31 ext | air: 5 down to ext"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "7/8/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS30",
+      "tests": [
+        {
+          "test_number": "P22a",
+          "test_identifier": "sample 200m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 3/8 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        20.8,
+        20.8
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 5   0.36   0.32 ext after some time | air: 5   down to ext"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "7/8/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS31",
+      "tests": [
+        {
+          "test_number": "P25",
+          "test_identifier": "sample 217m"
+        }
+      ],
+      "principal_investigator": "Fernandez-Pello",
+      "fuel": "PMMA rod 3/8 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        20.9,
+        20.9
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 5   p.36   0.34   0.33   0.32   0.31 ext | air: 5 down to ext"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "7/8/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS32",
+      "tests": [
+        {
+          "test_number": "M7",
+          "test_identifier": "sample 177m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 1 mm, 1 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 19.0,
+      "oxygen_initial_range_pct": [
+        18.9,
+        18.9
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 2.6   1.3   0.8  0.7  0.6  0.5; 60   49  45  44  43  42 | air: 10   6  5  4.5  4  3"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/11/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS33",
+      "tests": [
+        {
+          "test_number": "M16",
+          "test_identifier": "sample 164m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 1 mm, 2 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 19.0,
+      "oxygen_initial_range_pct": [
+        19.2,
+        19.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 73  57  59  48  45  43  75 (4.2  2.2  2.4  1.2  0.8  0.5  4.4) | air: 10  6  3  2  1  10"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/23/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS34",
+      "tests": [
+        {
+          "test_number": "M6",
+          "test_identifier": "sample 163m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 1 mm, 2 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        21.8,
+        21.8
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 68   52   47   43   42   41 | air: 10   5   3   0"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/31/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS35",
+      "tests": [
+        {
+          "test_number": "M1",
+          "test_identifier": "sample 222"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 1 mm, 2 cm wide, 1-sided",
+      "geometry": "slab",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        22.2,
+        22.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 58   54 | air: 10  8"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/20/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS36",
+      "tests": [
+        {
+          "test_number": "M8",
+          "test_identifier": "sample 178m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 2 mm, 1 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 19.0,
+      "oxygen_initial_range_pct": [
+        19.1,
+        19.1
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 3.3   1.6  1.0   decr | air: 10   5>7  5 decr"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/11/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS37",
+      "tests": [
+        {
+          "test_number": "M17",
+          "test_identifier": "sample 166m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 2 mm, 2 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 19.0,
+      "oxygen_initial_range_pct": [
+        18.8,
+        18.8
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: Fan pot 3.7   1.7   1.5   1.3   0.8   0.6   0.5   0.3ext | air: 10   5   3   0ext"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "7/15/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS38",
+      "tests": [
+        {
+          "test_number": "M12",
+          "test_identifier": "sample 165m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 2 mm, 2 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        21.7,
+        21.7
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 41   42   41 | air: <1"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/31/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS39",
+      "tests": [
+        {
+          "test_number": "M14",
+          "test_identifier": "sample 223"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 2 mm, 2 cm wide, 1-sided",
+      "geometry": "slab",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        22.2,
+        22.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: pot 2.4   1.87  (54) | air: 10   ~8"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/20/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS40",
+      "tests": [
+        {
+          "test_number": "M9",
+          "test_identifier": "sample 179m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 3 mm, 1 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        18.0,
+        18.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 3.3   4.8;66  79 | air: 10   14"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/11/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS41",
+      "tests": [
+        {
+          "test_number": "M18",
+          "test_identifier": "sample 168m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 3 mm, 2 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        17.9,
+        17.9
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: Fan pot 3.5   5 (brief)   3  5   2.2 | air: 10   15 (brief)   10   8"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/15/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS42",
+      "tests": [
+        {
+          "test_number": "M2",
+          "test_identifier": "sample 224"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 3 mm, 2 cm wide, 1-sided",
+      "geometry": "slab",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        22.2,
+        22.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 116 (pot 9.3)    89   80   84 | air: 20  15  13   14"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/20/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS43",
+      "tests": [
+        {
+          "test_number": "M5",
+          "test_identifier": "sample 167"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 3 mm, 2 cm wide, 2-sided",
+      "geometry": "slab",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        22.2,
+        22.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan:  | air: 20  13  10  8  5"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/20/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS44",
+      "tests": [
+        {
+          "test_number": "M10",
+          "test_identifier": "sample 180m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 4 mm, 1 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 20.0,
+      "oxygen_initial_range_pct": [
+        20.1,
+        20.1
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 75   105   94/91   72/69   63/61  (4.4   8.0   6.6/6.3   4.0/3.7   3/0/2.7) | air: 10  17  14  10  8"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/23/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS45",
+      "tests": [
+        {
+          "test_number": "M19",
+          "test_identifier": "sample 170m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 4 mm, 2 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 19.0,
+      "oxygen_initial_range_pct": [
+        19.0,
+        19.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 75  105  94  75  77  79  59  61  57  55  53 (4.4  8.0  6.6  4.4  4.6  4.8  2.5  2.7  2.2  2.0  1.8) | air: 10  17  14  10  7  5"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/23/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS46",
+      "tests": [
+        {
+          "test_number": "M13",
+          "test_identifier": "sample 169m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 4 mm, 2 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        20.8,
+        20.8
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 52   47   43 | air: 6   5   4"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/31/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS47",
+      "tests": [
+        {
+          "test_number": "M15",
+          "test_identifier": "sample 225m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 4 mm, 2 cm wide, 1-sided",
+      "geometry": "slab",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        21.0,
+        21.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: ignited 10   adjusted down then up to 20   down in incrments to 15 | air: 10   8  7  8  10  20  18  16  15"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/7/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS48",
+      "tests": [
+        {
+          "test_number": "M11",
+          "test_identifier": "sample 181m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 5 mm, 1 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 20.0,
+      "oxygen_initial_range_pct": [
+        20.0,
+        20.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 3.9  6.5  4.6  3.3  2.9  2.8; 62.5  93  77  66  63  62 | air: 10   20   15  12"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/11/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS49",
+      "tests": [
+        {
+          "test_number": "M20",
+          "test_identifier": "sample 172m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 5 mm, 2 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        18.0,
+        18.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 67   58 | air: 10  8"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "8/1/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS50",
+      "tests": [
+        {
+          "test_number": "M4",
+          "test_identifier": "sample 171m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 5 mm, 2 cm wide",
+      "geometry": "slab",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        21.8,
+        21.8
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 52   47   43 | air: 5   4   3"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/31/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS51",
+      "tests": [
+        {
+          "test_number": "M3",
+          "test_identifier": "sample 226m"
+        }
+      ],
+      "principal_investigator": "Miller",
+      "fuel": "PMMA slab 5 mm, 2 cm wide, 1-sided",
+      "geometry": "slab",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        20.8,
+        20.8
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 3.0  3.1  3.2  6.4  5.5  5.4 | air: 10   20  18"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/11/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS52",
+      "tests": [
+        {
+          "test_number": "O5b",
+          "test_identifier": "sample 220m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 1/2 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 14.0,
+      "oxygen_initial_range_pct": [
+        14.2,
+        14.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 1.3 | air: 49   5 cm/s"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/21/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS53",
+      "tests": [
+        {
+          "test_number": "O5a",
+          "test_identifier": "sample 220m"
+        },
+        {
+          "test_number": "O13b",
+          "test_identifier": "sample 221m"
+        },
+        {
+          "test_number": "O22",
+          "test_identifier": "sample 220m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 1/2 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 15.0,
+      "oxygen_initial_range_pct": [
+        14.6,
+        15.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 3,
+      "flow_settings_raw": [
+        "fan: 1.3   2.7   1.3   0.7   0.45. 4.0 | air: 5  10  5   2   0 (49   62   49   44   42)",
+        "fan: 1.3   0.9 | air: 7   4? (49   ?)",
+        "fan: 49 (pot 1.1)   blowoff pot 5   out at fan 87 | air: 4 incr to 26.5"
+      ],
+      "observed_events": [
+        "blowoff extinction",
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "2/26/2016",
+        "7/21/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS54",
+      "tests": [
+        {
+          "test_number": "O13a",
+          "test_identifier": "sample 221m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 1/2 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 16.0,
+      "oxygen_initial_range_pct": [
+        15.9,
+        15.9
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 1.3   0.7   0.45   0.36   0.32   0.31 | air: 49  44  42  41  41  40.5 (5   2   0)"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/21/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS55",
+      "tests": [
+        {
+          "test_number": "O11",
+          "test_identifier": "sample 184m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 1/4 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 15.0,
+      "oxygen_initial_range_pct": [
+        15.4,
+        15.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: ign 5   0.36   0.32   0.31   0.305   blowoff 6.0 | air: 5   down then blowoff"
+      ],
+      "observed_events": [
+        "blowoff extinction"
+      ],
+      "test_dates": [
+        "7/8/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS56",
+      "tests": [
+        {
+          "test_number": "O14",
+          "test_identifier": "sample 183m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 1/4 in, black",
+      "geometry": "rod",
+      "oxygen_pct": 16.0,
+      "oxygen_initial_range_pct": [
+        16.3,
+        16.3
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 52   and down | air: 5 down to ext"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "8/1/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS57",
+      "tests": [
+        {
+          "test_number": "O9",
+          "test_identifier": "sample 209m"
+        },
+        {
+          "test_number": "O17",
+          "test_identifier": "sample 211m"
+        },
+        {
+          "test_number": "O18",
+          "test_identifier": "sample 212m"
+        },
+        {
+          "test_number": "O19",
+          "test_identifier": "sample 213m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 1/4 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 15.0,
+      "oxygen_initial_range_pct": [
+        15.0,
+        15.3
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 4,
+      "flow_settings_raw": [
+        "fan: 5   .36  .32 blowoff pt 4.0 | air:",
+        "fan: 49   46.5   44   42  41  72   decr (1.3   1.0   0.7   0.5   0.4   4.0   decr ) | air: 3   0   11",
+        "fan: 57  51  47  72  51  72  51  47 (2.3   1.5   1.0   4.0   1.5   4.0   1.5   1.0) | air: 5  2  0  11  2  11  2  0",
+        "fan: 52   and down | air: 5 down to ext"
+      ],
+      "observed_events": [
+        "blowoff extinction",
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "6/26/2014",
+        "7/22/2014",
+        "7/28/2014",
+        "8/1/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS58",
+      "tests": [
+        {
+          "test_number": "O7",
+          "test_identifier": "sample 214m"
+        },
+        {
+          "test_number": "O8a",
+          "test_identifier": "sample 208m"
+        },
+        {
+          "test_number": "O8b",
+          "test_identifier": "sample 208m"
+        },
+        {
+          "test_number": "O20",
+          "test_identifier": "sample 204m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 1/4 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 16.0,
+      "oxygen_initial_range_pct": [
+        15.5,
+        16.5
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 4,
+      "flow_settings_raw": [
+        "fan: 5   .36  .32  ..305   blowoff fan max 10 | air:",
+        "fan: 5   .36  .32  .31   extinguished | air:",
+        "fan: 5  .36  .32  .31 blowoff fan pot 6.0 | air:",
+        "fan: 49 (1.3 pot)   pots 7   8  9   10 | air: 5   8    incr to max 38.5"
+      ],
+      "observed_events": [
+        "blowoff extinction",
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "2/26/2016",
+        "6/26/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS59",
+      "tests": [
+        {
+          "test_number": "O6",
+          "test_identifier": "sample 206M"
+        },
+        {
+          "test_number": "O10",
+          "test_identifier": "sample 210m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 1/4 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 17.0,
+      "oxygen_initial_range_pct": [
+        16.7,
+        16.7
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 5   .36  .32  .31  .305   out .275 | air: see fan",
+        "fan: 49  44  41   122 (1.3   0.7   0.4   0.36   0.32   10) | air: 5  2   0   max"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "6/26/2014",
+        "7/22/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS60",
+      "tests": [
+        {
+          "test_number": "O3a",
+          "test_identifier": "sample 205M"
+        },
+        {
+          "test_number": "O3b",
+          "test_identifier": "sample 205M"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 1/4 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        18.0,
+        18.0
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan:  | air: 5  3",
+        "fan:  | air: 5  3  2  1  low"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "6/13/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS61",
+      "tests": [
+        {
+          "test_number": "O1",
+          "test_identifier": "sample 207"
+        },
+        {
+          "test_number": "O2",
+          "test_identifier": "sample 204"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 1/4 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 22.0,
+      "oxygen_initial_range_pct": [
+        22.2,
+        22.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 89  62  50  41 | air: 20  10  5  2  1",
+        "fan: .54 pot   0.45 pot | air: 0"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/18/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS62",
+      "tests": [
+        {
+          "test_number": "O12",
+          "test_identifier": "sample 217m"
+        },
+        {
+          "test_number": "O16",
+          "test_identifier": "sample 219m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 3/8 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 14.0,
+      "oxygen_initial_range_pct": [
+        13.6,
+        14.5
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: pots 1.4   3   0.9   0.7 | air: no ign at any flow",
+        "fan: 60 (2.6) | air: 5"
+      ],
+      "observed_events": [
+        "no sustained ignition"
+      ],
+      "test_dates": [
+        "7/29/2014",
+        "7/8/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS63",
+      "tests": [
+        {
+          "test_number": "O4",
+          "test_identifier": "sample 216m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 3/8 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 15.0,
+      "oxygen_initial_range_pct": [
+        14.8,
+        14.8
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 5   0.7   0.5   0.4   0.36 ext | air: 5   down to ext"
+      ],
+      "observed_events": [
+        "extinction (flow reduced)"
+      ],
+      "test_dates": [
+        "7/8/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS64",
+      "tests": [
+        {
+          "test_number": "O21",
+          "test_identifier": "sample 219m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 3/8 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 16.0,
+      "oxygen_initial_range_pct": [
+        15.9,
+        15.9
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 46 (pot 0.8)    pot 7   10 | air: incr to 28"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/26/2016"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS65",
+      "tests": [
+        {
+          "test_number": "O15a",
+          "test_identifier": "sample 218m"
+        },
+        {
+          "test_number": "O15b",
+          "test_identifier": "sample 218m"
+        }
+      ],
+      "principal_investigator": "Olson",
+      "fuel": "PMMA rod 3/8 in, clear",
+      "geometry": "rod",
+      "oxygen_pct": 17.0,
+      "oxygen_initial_range_pct": [
+        16.7,
+        17.1
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 57.5   47   42   41 (2.3   1.0   0.5   0.35   0.32) | air: 5  0",
+        "fan: 57.5   42   41   40 (2.3   0.5   0.35   0.34   0.33   0.32   0.31   0.30   0.29   0.28   0.27) | air: 5   0"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/28/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS66",
+      "tests": [
+        {
+          "test_number": "T19",
+          "test_identifier": "sample 143m"
+        },
+        {
+          "test_number": "T20",
+          "test_identifier": "sample 144m"
+        },
+        {
+          "test_number": "T21",
+          "test_identifier": "sample 145m"
+        },
+        {
+          "test_number": "T22",
+          "test_identifier": "sample 146m"
+        }
+      ],
+      "principal_investigator": "T'ien",
+      "fuel": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "geometry": "fabric sheet",
+      "oxygen_pct": 17.0,
+      "oxygen_initial_range_pct": [
+        17.1,
+        17.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 4,
+      "flow_settings_raw": [
+        "fan: 68.5   pot 3.6 | air: 11",
+        "fan: 3.6   0.9 | air: 11   3",
+        "fan: 1.6 pot   52 | air: 11   max(47)",
+        "fan: 3.4   1.7 | air: 10   5"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/9/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS67",
+      "tests": [
+        {
+          "test_number": "T24",
+          "test_identifier": "sample 133m"
+        }
+      ],
+      "principal_investigator": "T'ien",
+      "fuel": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "geometry": "fabric sheet",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        18.2,
+        18.2
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 1,
+      "flow_settings_raw": [
+        "fan: 3.3 66 | air: 10"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "7/9/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS68",
+      "tests": [
+        {
+          "test_number": "T27",
+          "test_identifier": "sample 146m"
+        },
+        {
+          "test_number": "T28a",
+          "test_identifier": "sample 144m"
+        },
+        {
+          "test_number": "T28b",
+          "test_identifier": "sample 144m"
+        },
+        {
+          "test_number": "T29",
+          "test_identifier": "sample 145m"
+        }
+      ],
+      "principal_investigator": "T'ien",
+      "fuel": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "geometry": "fabric sheet",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        20.7,
+        20.7
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 4,
+      "flow_settings_raw": [
+        "fan: 53   45 | air: 5   2",
+        "fan: 53 | air: 5",
+        "fan: 53 | air: 5",
+        "fan: 53   43 | air: 5   2(?)"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "8/4/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS69",
+      "tests": [
+        {
+          "test_number": "T9",
+          "test_identifier": "sample 133M"
+        },
+        {
+          "test_number": "T10",
+          "test_identifier": "sample 134M"
+        }
+      ],
+      "principal_investigator": "T'ien",
+      "fuel": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "geometry": "fabric sheet",
+      "oxygen_pct": 16.0,
+      "oxygen_initial_range_pct": [
+        16.4,
+        16.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: pot 2.5 | air: 10",
+        "fan: pot 1.1 | air: 5"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "6/24/2014",
+        "6/24/2018"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS70",
+      "tests": [
+        {
+          "test_number": "T11",
+          "test_identifier": "sample 135m"
+        },
+        {
+          "test_number": "T12",
+          "test_identifier": "sample 136m"
+        },
+        {
+          "test_number": "T14",
+          "test_identifier": "sample 140m"
+        },
+        {
+          "test_number": "T17",
+          "test_identifier": "sample 142m"
+        },
+        {
+          "test_number": "T18",
+          "test_identifier": "sample 141M"
+        },
+        {
+          "test_number": "T23",
+          "test_identifier": "sample 133m"
+        }
+      ],
+      "principal_investigator": "T'ien",
+      "fuel": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "geometry": "fabric sheet",
+      "oxygen_pct": 17.0,
+      "oxygen_initial_range_pct": [
+        16.8,
+        17.4
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 6,
+      "flow_settings_raw": [
+        "fan: 48 | air: 5",
+        "fan: pot 1.1 | air: 5",
+        "fan:  | air: 5  3",
+        "fan:  | air: 6   53",
+        "fan:  | air: 5  2",
+        "fan: 3.3   66 | air: 10"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "6/24/2018",
+        "6/27/2014",
+        "7/9/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS71",
+      "tests": [
+        {
+          "test_number": "T1",
+          "test_identifier": "sample 128"
+        },
+        {
+          "test_number": "T2",
+          "test_identifier": "sample 129"
+        },
+        {
+          "test_number": "T13",
+          "test_identifier": "sample 137"
+        },
+        {
+          "test_number": "T16",
+          "test_identifier": "sample 139"
+        }
+      ],
+      "principal_investigator": "T'ien",
+      "fuel": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "geometry": "fabric sheet",
+      "oxygen_pct": 18.0,
+      "oxygen_initial_range_pct": [
+        17.5,
+        18.5
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 4,
+      "flow_settings_raw": [
+        "fan: 80 | air: 10",
+        "fan: 80   59   55 | air: 9   5   4",
+        "fan:  | air: 5  1",
+        "fan:  | air: 5  3"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/14/2014",
+        "4/10/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS72",
+      "tests": [
+        {
+          "test_number": "T4",
+          "test_identifier": "sample 130"
+        },
+        {
+          "test_number": "T5",
+          "test_identifier": "sample 131"
+        },
+        {
+          "test_number": "T6",
+          "test_identifier": "sample 132"
+        },
+        {
+          "test_number": "T15",
+          "test_identifier": "sample 138"
+        }
+      ],
+      "principal_investigator": "T'ien",
+      "fuel": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "geometry": "fabric sheet",
+      "oxygen_pct": 19.0,
+      "oxygen_initial_range_pct": [
+        18.7,
+        18.8
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 4,
+      "flow_settings_raw": [
+        "fan: 80   46 | air: 9  1",
+        "fan: 2.72   0.50   0.42 | air: 10   2   1",
+        "fan:  | air: 5  2  1   <1",
+        "fan: 80122 | air: 9   29"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "2/14/2014",
+        "4/10/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS73",
+      "tests": [
+        {
+          "test_number": "T25",
+          "test_identifier": "sample 138m"
+        },
+        {
+          "test_number": "T26",
+          "test_identifier": "sample 137m"
+        }
+      ],
+      "principal_investigator": "T'ien",
+      "fuel": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "geometry": "fabric sheet",
+      "oxygen_pct": 21.0,
+      "oxygen_initial_range_pct": [
+        20.8,
+        20.8
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 53   45 | air: 5   2.5",
+        "fan: 53   45 | air: 5   2.5"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "8/4/2014"
+      ]
+    },
+    {
+      "set_id": "PSI-25-CS74",
+      "tests": [
+        {
+          "test_number": "T3",
+          "test_identifier": "sample 182m"
+        },
+        {
+          "test_number": "T7",
+          "test_identifier": "sample 182m"
+        }
+      ],
+      "principal_investigator": "T'ien",
+      "fuel": "Spherical section sample, 4 cm",
+      "geometry": "spherical section",
+      "oxygen_pct": 17.0,
+      "oxygen_initial_range_pct": [
+        17.2,
+        17.3
+      ],
+      "pressure_kpa": 101.3,
+      "n_tests": 2,
+      "flow_settings_raw": [
+        "fan: 63 | air: 10",
+        "fan: 3.4   67 | air: 10   5  3  1   decr"
+      ],
+      "observed_events": [],
+      "test_dates": [
+        "6/27/2014",
+        "7/9/2014"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "test_number": "B1",
+      "test_identifier": "sample 147",
+      "set_id": "PSI-25-CS03",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.1 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B2",
+      "test_identifier": "sample 155",
+      "set_id": "PSI-25-CS09",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.2 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B3",
+      "test_identifier": "sample 148",
+      "set_id": "PSI-25-CS03",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.1 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B4",
+      "test_identifier": "sample 159",
+      "set_id": "PSI-25-CS10",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.3 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B5",
+      "test_identifier": "sample 156",
+      "set_id": "PSI-25-CS09",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.2 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B6",
+      "test_identifier": "sample 153m",
+      "set_id": "PSI-25-CS02",
+      "oxygen_pct": 21.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.1 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B7",
+      "test_identifier": "sample 161",
+      "set_id": "PSI-25-CS12",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.4 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B8",
+      "test_identifier": "sample 157m",
+      "set_id": "PSI-25-CS08",
+      "oxygen_pct": 21.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.2 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B9",
+      "test_identifier": "sample 154m",
+      "set_id": "PSI-25-CS02",
+      "oxygen_pct": 21.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.1 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B10",
+      "test_identifier": "sample 173m",
+      "set_id": "PSI-25-CS07",
+      "oxygen_pct": 21.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.2 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B11",
+      "test_identifier": "sample 158m",
+      "set_id": "PSI-25-CS08",
+      "oxygen_pct": 21.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.2 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B12",
+      "test_identifier": "sample 160",
+      "set_id": "PSI-25-CS10",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.3 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B13",
+      "test_identifier": "sample 162m",
+      "set_id": "PSI-25-CS11",
+      "oxygen_pct": 21.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.4 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B14",
+      "test_identifier": "sample 174m",
+      "set_id": "PSI-25-CS04",
+      "oxygen_pct": 15.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA film 0.2 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B15",
+      "test_identifier": "sample 149m",
+      "set_id": "PSI-25-CS02",
+      "oxygen_pct": 21.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.1 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B16",
+      "test_identifier": "sample 150m",
+      "set_id": "PSI-25-CS01",
+      "oxygen_pct": 17.3,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.1 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B17",
+      "test_identifier": "sample 175m",
+      "set_id": "PSI-25-CS06",
+      "oxygen_pct": 17.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.2 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B18",
+      "test_identifier": "sample 176m",
+      "set_id": "PSI-25-CS05",
+      "oxygen_pct": 17.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Blowoff extinction",
+      "material": "PMMA film 0.2 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B19",
+      "test_identifier": "sample 151m",
+      "set_id": "PSI-25-CS01",
+      "oxygen_pct": 17.3,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Blowoff extinction",
+      "material": "PMMA film 0.1 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B20",
+      "test_identifier": "sample 152m",
+      "set_id": "PSI-25-CS01",
+      "oxygen_pct": 17.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.1 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B21",
+      "test_identifier": "sample 174m",
+      "set_id": "PSI-25-CS07",
+      "oxygen_pct": 20.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA film 0.2 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "B22",
+      "test_identifier": "sample 176m",
+      "set_id": "PSI-25-CS07",
+      "oxygen_pct": 20.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA film 0.2 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "F1",
+      "test_identifier": "sample 227",
+      "set_id": "PSI-25-CS14",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "Nomex III fabric",
+      "measurements": []
+    },
+    {
+      "test_number": "F2",
+      "test_identifier": "sample 228m",
+      "set_id": "PSI-25-CS13",
+      "oxygen_pct": 21.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "Nomex III fabric",
+      "measurements": []
+    },
+    {
+      "test_number": "F3",
+      "test_identifier": "sample 229m",
+      "set_id": "PSI-25-CS14",
+      "oxygen_pct": 21.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "Nomex III fabric",
+      "measurements": []
+    },
+    {
+      "test_number": "F4",
+      "test_identifier": "sample 39M",
+      "set_id": "PSI-25-CS15",
+      "oxygen_pct": 17.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "Wax candle (BASS-I leftover)",
+      "measurements": []
+    },
+    {
+      "test_number": "M1",
+      "test_identifier": "sample 222",
+      "set_id": "PSI-25-CS35",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 1 mm, 2 cm wide, 1-sided",
+      "measurements": []
+    },
+    {
+      "test_number": "M2",
+      "test_identifier": "sample 224",
+      "set_id": "PSI-25-CS42",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 3 mm, 2 cm wide, 1-sided",
+      "measurements": []
+    },
+    {
+      "test_number": "M3",
+      "test_identifier": "sample 226m",
+      "set_id": "PSI-25-CS51",
+      "oxygen_pct": 20.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 5 mm, 2 cm wide, 1-sided",
+      "measurements": []
+    },
+    {
+      "test_number": "M4",
+      "test_identifier": "sample 171m",
+      "set_id": "PSI-25-CS50",
+      "oxygen_pct": 21.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 5 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M5",
+      "test_identifier": "sample 167",
+      "set_id": "PSI-25-CS43",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 3 mm, 2 cm wide, 2-sided",
+      "measurements": []
+    },
+    {
+      "test_number": "M6",
+      "test_identifier": "sample 163m",
+      "set_id": "PSI-25-CS34",
+      "oxygen_pct": 21.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 1 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M7",
+      "test_identifier": "sample 177m",
+      "set_id": "PSI-25-CS32",
+      "oxygen_pct": 18.9,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 1 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M8",
+      "test_identifier": "sample 178m",
+      "set_id": "PSI-25-CS36",
+      "oxygen_pct": 19.1,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 2 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M9",
+      "test_identifier": "sample 179m",
+      "set_id": "PSI-25-CS40",
+      "oxygen_pct": 18.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 3 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M10",
+      "test_identifier": "sample 180m",
+      "set_id": "PSI-25-CS44",
+      "oxygen_pct": 20.1,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 4 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M11",
+      "test_identifier": "sample 181m",
+      "set_id": "PSI-25-CS48",
+      "oxygen_pct": 20.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 5 mm, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M12",
+      "test_identifier": "sample 165m",
+      "set_id": "PSI-25-CS38",
+      "oxygen_pct": 21.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 2 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M13",
+      "test_identifier": "sample 169m",
+      "set_id": "PSI-25-CS46",
+      "oxygen_pct": 20.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 4 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M14",
+      "test_identifier": "sample 223",
+      "set_id": "PSI-25-CS39",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 2 mm, 2 cm wide, 1-sided",
+      "measurements": []
+    },
+    {
+      "test_number": "M15",
+      "test_identifier": "sample 225m",
+      "set_id": "PSI-25-CS47",
+      "oxygen_pct": 21.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 4 mm, 2 cm wide, 1-sided",
+      "measurements": []
+    },
+    {
+      "test_number": "M16",
+      "test_identifier": "sample 164m",
+      "set_id": "PSI-25-CS33",
+      "oxygen_pct": 19.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 1 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M17",
+      "test_identifier": "sample 166m",
+      "set_id": "PSI-25-CS37",
+      "oxygen_pct": 18.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA slab 2 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M18",
+      "test_identifier": "sample 168m",
+      "set_id": "PSI-25-CS41",
+      "oxygen_pct": 17.9,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 3 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M19",
+      "test_identifier": "sample 170m",
+      "set_id": "PSI-25-CS45",
+      "oxygen_pct": 19.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 4 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "M20",
+      "test_identifier": "sample 172m",
+      "set_id": "PSI-25-CS49",
+      "oxygen_pct": 18.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA slab 5 mm, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "O1",
+      "test_identifier": "sample 207",
+      "set_id": "PSI-25-CS61",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O2",
+      "test_identifier": "sample 204",
+      "set_id": "PSI-25-CS61",
+      "oxygen_pct": 22.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O3a",
+      "test_identifier": "sample 205M",
+      "set_id": "PSI-25-CS60",
+      "oxygen_pct": 18.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O3b",
+      "test_identifier": "sample 205M",
+      "set_id": "PSI-25-CS60",
+      "oxygen_pct": 18.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O4",
+      "test_identifier": "sample 216m",
+      "set_id": "PSI-25-CS63",
+      "oxygen_pct": 14.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 3/8 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O5a",
+      "test_identifier": "sample 220m",
+      "set_id": "PSI-25-CS53",
+      "oxygen_pct": 15.1,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/2 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O5b",
+      "test_identifier": "sample 220m",
+      "set_id": "PSI-25-CS52",
+      "oxygen_pct": 14.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/2 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O6",
+      "test_identifier": "sample 206M",
+      "set_id": "PSI-25-CS59",
+      "oxygen_pct": 16.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O7",
+      "test_identifier": "sample 214m",
+      "set_id": "PSI-25-CS58",
+      "oxygen_pct": 16.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Blowoff extinction",
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O8a",
+      "test_identifier": "sample 208m",
+      "set_id": "PSI-25-CS58",
+      "oxygen_pct": 15.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O8b",
+      "test_identifier": "sample 208m",
+      "set_id": "PSI-25-CS58",
+      "oxygen_pct": 15.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Blowoff extinction",
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O9",
+      "test_identifier": "sample 209m",
+      "set_id": "PSI-25-CS57",
+      "oxygen_pct": 15.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Blowoff extinction",
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O10",
+      "test_identifier": "sample 210m",
+      "set_id": "PSI-25-CS59",
+      "oxygen_pct": 16.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O11",
+      "test_identifier": "sample 184m",
+      "set_id": "PSI-25-CS55",
+      "oxygen_pct": 15.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Blowoff extinction",
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "O12",
+      "test_identifier": "sample 217m",
+      "set_id": "PSI-25-CS62",
+      "oxygen_pct": 13.6,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "No sustained ignition",
+      "material": "PMMA rod 3/8 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O13a",
+      "test_identifier": "sample 221m",
+      "set_id": "PSI-25-CS54",
+      "oxygen_pct": 15.9,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/2 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O13b",
+      "test_identifier": "sample 221m",
+      "set_id": "PSI-25-CS53",
+      "oxygen_pct": 14.6,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/2 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O14",
+      "test_identifier": "sample 183m",
+      "set_id": "PSI-25-CS56",
+      "oxygen_pct": 16.3,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "O15a",
+      "test_identifier": "sample 218m",
+      "set_id": "PSI-25-CS65",
+      "oxygen_pct": 17.1,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 3/8 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O15b",
+      "test_identifier": "sample 218m",
+      "set_id": "PSI-25-CS65",
+      "oxygen_pct": 16.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 3/8 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O16",
+      "test_identifier": "sample 219m",
+      "set_id": "PSI-25-CS62",
+      "oxygen_pct": 14.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 3/8 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O17",
+      "test_identifier": "sample 211m",
+      "set_id": "PSI-25-CS57",
+      "oxygen_pct": 15.1,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O18",
+      "test_identifier": "sample 212m",
+      "set_id": "PSI-25-CS57",
+      "oxygen_pct": 15.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O19",
+      "test_identifier": "sample 213m",
+      "set_id": "PSI-25-CS57",
+      "oxygen_pct": 15.3,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O20",
+      "test_identifier": "sample 204m",
+      "set_id": "PSI-25-CS58",
+      "oxygen_pct": 16.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O21",
+      "test_identifier": "sample 219m",
+      "set_id": "PSI-25-CS64",
+      "oxygen_pct": 15.9,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 3/8 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "O22",
+      "test_identifier": "sample 220m",
+      "set_id": "PSI-25-CS53",
+      "oxygen_pct": 15.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Blowoff extinction; extinction (flow reduced)",
+      "material": "PMMA rod 1/2 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "P1",
+      "test_identifier": "sample 185M",
+      "set_id": "PSI-25-CS21",
+      "oxygen_pct": 17.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P2",
+      "test_identifier": "sample 188M",
+      "set_id": "PSI-25-CS20",
+      "oxygen_pct": 17.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P3a",
+      "test_identifier": "sample 215M",
+      "set_id": "PSI-25-CS25",
+      "oxygen_pct": 17.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "P3b",
+      "test_identifier": "sample 215M",
+      "set_id": "PSI-25-CS24",
+      "oxygen_pct": 17.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "P4",
+      "test_identifier": "sample 197m",
+      "set_id": "PSI-25-CS27",
+      "oxygen_pct": 18.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 3/8 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P5",
+      "test_identifier": "sample 202m",
+      "set_id": "PSI-25-CS17",
+      "oxygen_pct": 19.3,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 1/2 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P6",
+      "test_identifier": "sample 186m",
+      "set_id": "PSI-25-CS22",
+      "oxygen_pct": 18.9,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P8",
+      "test_identifier": "sample 197m",
+      "set_id": "PSI-25-CS26",
+      "oxygen_pct": 16.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "No sustained ignition",
+      "material": "PMMA rod 3/8 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P9",
+      "test_identifier": "sample 202m",
+      "set_id": "PSI-25-CS16",
+      "oxygen_pct": 17.6,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 1/2 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P10",
+      "test_identifier": "sample 187m",
+      "set_id": "PSI-25-CS20",
+      "oxygen_pct": 17.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P12",
+      "test_identifier": "sample 199m",
+      "set_id": "PSI-25-CS27",
+      "oxygen_pct": 17.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 3/8 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P13a",
+      "test_identifier": "sample 203m",
+      "set_id": "PSI-25-CS18",
+      "oxygen_pct": 20.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 1/2 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P13b",
+      "test_identifier": "sample 203m",
+      "set_id": "PSI-25-CS18",
+      "oxygen_pct": 20.6,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 1/2 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P14",
+      "test_identifier": "sample 189M",
+      "set_id": "PSI-25-CS21",
+      "oxygen_pct": 18.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P15",
+      "test_identifier": "sample 190M",
+      "set_id": "PSI-25-CS21",
+      "oxygen_pct": 18.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P16",
+      "test_identifier": "sample 191m",
+      "set_id": "PSI-25-CS21",
+      "oxygen_pct": 18.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P17",
+      "test_identifier": "sample 192m",
+      "set_id": "PSI-25-CS20",
+      "oxygen_pct": 16.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P18",
+      "test_identifier": "sample 193m",
+      "set_id": "PSI-25-CS23",
+      "oxygen_pct": 20.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P19",
+      "test_identifier": "sample 194m",
+      "set_id": "PSI-25-CS21",
+      "oxygen_pct": 17.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P20",
+      "test_identifier": "sample 195m",
+      "set_id": "PSI-25-CS22",
+      "oxygen_pct": 19.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P21a",
+      "test_identifier": "sample 196M",
+      "set_id": "PSI-25-CS19",
+      "oxygen_pct": 16.3,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P21b",
+      "test_identifier": "sample 196M",
+      "set_id": "PSI-25-CS19",
+      "oxygen_pct": 16.3,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 1/4 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P22a",
+      "test_identifier": "sample 200m",
+      "set_id": "PSI-25-CS30",
+      "oxygen_pct": 20.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 3/8 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P22b",
+      "test_identifier": "sample 200m",
+      "set_id": "PSI-25-CS29",
+      "oxygen_pct": 20.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 3/8 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P23",
+      "test_identifier": "sample 201m",
+      "set_id": "PSI-25-CS27",
+      "oxygen_pct": 18.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 3/8 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P24",
+      "test_identifier": "sample 819L",
+      "set_id": "PSI-25-CS28",
+      "oxygen_pct": 19.0,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "PMMA rod 3/8 in, black",
+      "measurements": []
+    },
+    {
+      "test_number": "P25",
+      "test_identifier": "sample 217m",
+      "set_id": "PSI-25-CS31",
+      "oxygen_pct": 20.9,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": "Extinction (flow reduced)",
+      "material": "PMMA rod 3/8 in, clear",
+      "measurements": []
+    },
+    {
+      "test_number": "T1",
+      "test_identifier": "sample 128",
+      "set_id": "PSI-25-CS71",
+      "oxygen_pct": 18.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T2",
+      "test_identifier": "sample 129",
+      "set_id": "PSI-25-CS71",
+      "oxygen_pct": 18.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T3",
+      "test_identifier": "sample 182m",
+      "set_id": "PSI-25-CS74",
+      "oxygen_pct": 17.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "Spherical section sample, 4 cm",
+      "measurements": []
+    },
+    {
+      "test_number": "T4",
+      "test_identifier": "sample 130",
+      "set_id": "PSI-25-CS72",
+      "oxygen_pct": 18.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T5",
+      "test_identifier": "sample 131",
+      "set_id": "PSI-25-CS72",
+      "oxygen_pct": 18.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T6",
+      "test_identifier": "sample 132",
+      "set_id": "PSI-25-CS72",
+      "oxygen_pct": 18.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T7",
+      "test_identifier": "sample 182m",
+      "set_id": "PSI-25-CS74",
+      "oxygen_pct": 17.3,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "Spherical section sample, 4 cm",
+      "measurements": []
+    },
+    {
+      "test_number": "T9",
+      "test_identifier": "sample 133M",
+      "set_id": "PSI-25-CS69",
+      "oxygen_pct": 16.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T10",
+      "test_identifier": "sample 134M",
+      "set_id": "PSI-25-CS69",
+      "oxygen_pct": 16.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T11",
+      "test_identifier": "sample 135m",
+      "set_id": "PSI-25-CS70",
+      "oxygen_pct": 17.1,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T12",
+      "test_identifier": "sample 136m",
+      "set_id": "PSI-25-CS70",
+      "oxygen_pct": 16.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T13",
+      "test_identifier": "sample 137",
+      "set_id": "PSI-25-CS71",
+      "oxygen_pct": 17.5,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T14",
+      "test_identifier": "sample 140m",
+      "set_id": "PSI-25-CS70",
+      "oxygen_pct": 16.9,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T15",
+      "test_identifier": "sample 138",
+      "set_id": "PSI-25-CS72",
+      "oxygen_pct": 18.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T16",
+      "test_identifier": "sample 139",
+      "set_id": "PSI-25-CS71",
+      "oxygen_pct": 17.6,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T17",
+      "test_identifier": "sample 142m",
+      "set_id": "PSI-25-CS70",
+      "oxygen_pct": 16.9,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T18",
+      "test_identifier": "sample 141M",
+      "set_id": "PSI-25-CS70",
+      "oxygen_pct": 17.4,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T19",
+      "test_identifier": "sample 143m",
+      "set_id": "PSI-25-CS66",
+      "oxygen_pct": 17.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T20",
+      "test_identifier": "sample 144m",
+      "set_id": "PSI-25-CS66",
+      "oxygen_pct": 17.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T21",
+      "test_identifier": "sample 145m",
+      "set_id": "PSI-25-CS66",
+      "oxygen_pct": 17.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T22",
+      "test_identifier": "sample 146m",
+      "set_id": "PSI-25-CS66",
+      "oxygen_pct": 17.1,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T23",
+      "test_identifier": "sample 133m",
+      "set_id": "PSI-25-CS70",
+      "oxygen_pct": 17.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T24",
+      "test_identifier": "sample 133m",
+      "set_id": "PSI-25-CS67",
+      "oxygen_pct": 18.2,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T25",
+      "test_identifier": "sample 138m",
+      "set_id": "PSI-25-CS73",
+      "oxygen_pct": 20.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T26",
+      "test_identifier": "sample 137m",
+      "set_id": "PSI-25-CS73",
+      "oxygen_pct": 20.8,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 2 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T27",
+      "test_identifier": "sample 146m",
+      "set_id": "PSI-25-CS68",
+      "oxygen_pct": 20.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T28a",
+      "test_identifier": "sample 144m",
+      "set_id": "PSI-25-CS68",
+      "oxygen_pct": 20.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T28b",
+      "test_identifier": "sample 144m",
+      "set_id": "PSI-25-CS68",
+      "oxygen_pct": 20.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "measurements": []
+    },
+    {
+      "test_number": "T29",
+      "test_identifier": "sample 145m",
+      "set_id": "PSI-25-CS68",
+      "oxygen_pct": 20.7,
+      "pressure_kpa": 101.3,
+      "airflow_cm_s": null,
+      "outcome": null,
+      "material": "SIBAL cotton-fiberglass fabric, 1 cm wide",
+      "measurements": []
+    }
+  ],
+  "computed_findings": [
+    {
+      "finding": "Initial O2 ranged 13.6-22.2% (reduced by N2 dilution from ISS air); most tests were below 19% O2.",
+      "data": {
+        "tests_by_initial_o2": {
+          "<16%": 17,
+          "16-19%": 61,
+          ">=19%": 51
+        },
+        "tests_by_geometry": {
+          "rod": 54,
+          "fabric sheet": 30,
+          "film": 22,
+          "slab": 20,
+          "spherical section": 2,
+          "candle": 1
+        }
+      },
+      "method": "Calibrated initial O2 column; values outside 10-25% excluded.",
+      "source": "PSI-25_Experimental_table_BASS-II_transcribed.csv"
+    },
+    {
+      "finding": "Lowest-O2 tests were almost all PMMA rods; one sample failed to ignite at 13.6% O2, while flames ignited higher survived down to final readings of about 13.6%.",
+      "data": [
+        {
+          "test": "O12",
+          "material": "PMMA rod 3/8 in, clear",
+          "o2_initial": "13.6",
+          "o2_final": "13.5",
+          "events": [
+            "no sustained ignition"
+          ]
+        },
+        {
+          "test": "O5b",
+          "material": "PMMA rod 1/2 in, clear",
+          "o2_initial": "14.2",
+          "o2_final": "14.1",
+          "events": []
+        },
+        {
+          "test": "O16",
+          "material": "PMMA rod 3/8 in, clear",
+          "o2_initial": "14.5",
+          "o2_final": "14.5",
+          "events": []
+        },
+        {
+          "test": "O13b",
+          "material": "PMMA rod 1/2 in, clear",
+          "o2_initial": "14.6",
+          "o2_final": "14.4",
+          "events": []
+        },
+        {
+          "test": "O4",
+          "material": "PMMA rod 3/8 in, clear",
+          "o2_initial": "14.8",
+          "o2_final": "13.6",
+          "events": [
+            "extinction (flow reduced)"
+          ]
+        },
+        {
+          "test": "O9",
+          "material": "PMMA rod 1/4 in, clear",
+          "o2_initial": "15",
+          "o2_final": "14.8",
+          "events": [
+            "blowoff extinction"
+          ]
+        },
+        {
+          "test": "B14",
+          "material": "PMMA film 0.2 mm, 1 cm wide",
+          "o2_initial": "15",
+          "o2_final": "none",
+          "events": [
+            "extinction (flow reduced)"
+          ]
+        },
+        {
+          "test": "O5a",
+          "material": "PMMA rod 1/2 in, clear",
+          "o2_initial": "15.1",
+          "o2_final": "14.2",
+          "events": []
+        },
+        {
+          "test": "O17",
+          "material": "PMMA rod 1/4 in, clear",
+          "o2_initial": "15.1",
+          "o2_final": "14.3",
+          "events": []
+        },
+        {
+          "test": "O18",
+          "material": "PMMA rod 1/4 in, clear",
+          "o2_initial": "15.2",
+          "o2_final": "14.5",
+          "events": []
+        },
+        {
+          "test": "O19",
+          "material": "PMMA rod 1/4 in, clear",
+          "o2_initial": "15.3",
+          "o2_final": "14.6",
+          "events": [
+            "extinction (flow reduced)"
+          ]
+        },
+        {
+          "test": "O11",
+          "material": "PMMA rod 1/4 in, black",
+          "o2_initial": "15.4",
+          "o2_final": "14.8",
+          "events": [
+            "blowoff extinction"
+          ]
+        },
+        {
+          "test": "O22",
+          "material": "PMMA rod 1/2 in, clear",
+          "o2_initial": "15.4",
+          "o2_final": "14.9",
+          "events": [
+            "blowoff extinction",
+            "extinction (flow reduced)"
+          ]
+        }
+      ],
+      "method": "Tests with initial O2 < 15.5%.",
+      "source": "PSI-25_Experimental_table_BASS-II_transcribed.csv; BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 97"
+    },
+    {
+      "finding": "Final CO in the 250 L glovebox reached up to 950 ppm (sensor over range in some tests); thick PMMA and rods gave the highest values.",
+      "data": {
+        "highest_final_co_ppm": {
+          "O13a": "950 (PMMA rod 1/2 in, clear)",
+          "O18": "816 (PMMA rod 1/4 in, clear)",
+          "O9": "794 (PMMA rod 1/4 in, clear)"
+        },
+        "tests_over_range": [
+          "M5",
+          "O4",
+          "O12",
+          "O13b"
+        ]
+      },
+      "method": "Max of 'Final CO (ppm)' numeric values.",
+      "source": "PSI-25_Experimental_table_BASS-II_transcribed.csv; context BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 16"
+    },
+    {
+      "finding": "Many tests deliberately ran the flow down to extinction to map limits; blowoff and no-ignition outcomes were also recorded.",
+      "data": {
+        "tests_with_event": {
+          "extinction (flow reduced)": 18,
+          "blowoff extinction": 7,
+          "no sustained ignition": 2
+        }
+      },
+      "method": "Keywords ('ext', 'blowoff', 'no ign', 'would not stay lit') in fan/air display text. Text was transcribed, so counts are approximate.",
+      "source": "PSI-25_Experimental_table_BASS-II_transcribed.csv"
+    }
+  ],
+  "key_findings": [
+    {
+      "finding": "Flame spread over black PMMA rods was seen down to 17.5% O2 in microgravity, while in normal gravity it was not seen below 19%.",
+      "fire_safety_relevance": "Low ventilation in space can let materials burn at O2 levels where Earth tests show no spread.",
+      "evidence": {
+        "text": "Comparison of minimum O2 for flame spread",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 58"
+      }
+    },
+    {
+      "finding": "The PMMA rod flammability boundary has a minimum near 13.5% O2, well below the 15.4% upward-burning limit measured in normal gravity.",
+      "fire_safety_relevance": "The standard Earth upward test may not be conservative for space; the low-flow 'Goldilocks' zone is typical of spacecraft ventilation near surfaces.",
+      "evidence": {
+        "text": "Flammability boundary minimum and comparison with 1g limit",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) pp. 83-84"
+      }
+    },
+    {
+      "finding": "Extrapolating the blowoff limit to zero flow gives a conservative estimate of the minimum O2 for material flammability in space.",
+      "fire_safety_relevance": "Proposed method to derate materials from normal-gravity tests so they will not burn in space.",
+      "evidence": {
+        "text": "Blowoff branch is linear with flow",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 83"
+      }
+    },
+    {
+      "finding": "Ignition delay near the limit can be almost 10 times the NASA-STD-6001 igniter on-time, and ignition limits sit at higher O2 than flammability limits.",
+      "fire_safety_relevance": "A material that fails to ignite in a standard test may still sustain a flame once lit by a longer heat source.",
+      "evidence": {
+        "text": "Olson conclusions",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 97"
+      }
+    },
+    {
+      "finding": "Thin PMMA flames went out by radiative extinction at opposed flows of about 1 cm/s (100-300 um) and 1.5 cm/s (400 um); the critical velocity was about 10 mm/s at 21% O2 and 30 mm/s at 16%.",
+      "fire_safety_relevance": "Cutting ventilation can extinguish flames on thin materials; less flow is needed to sustain them at higher O2.",
+      "evidence": {
+        "text": "Bhattacharjee results, Table 2.1",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) pp. 21, 36"
+      }
+    },
+    {
+      "finding": "Concurrent-flow quenching speeds for SIBAL fabric were 1-5 cm/s, higher at lower O2 (O2 varied 21% to 16%).",
+      "fire_safety_relevance": "Defines the ventilation level below which fabric fires quench on their own.",
+      "evidence": {
+        "text": "T'ien abstract",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 101"
+      }
+    },
+    {
+      "finding": "Nomex samples did not ignite; a wax candle ejected a burning droplet upstream.",
+      "fire_safety_relevance": "Supports Nomex as an ISS fire barrier; melting plastics can spread fire by ejecting burning droplets in microgravity.",
+      "evidence": {
+        "text": "Ferkul results",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) p. 54"
+      }
+    },
+    {
+      "finding": "Flames were fuel rich (global equivalence ratio about 1.3) with high CO/CO2 ratios; heat release was mostly well below 100 W.",
+      "fire_safety_relevance": "Small space fires are inefficient and produce relatively more CO; a fire this size would dilute to about 1.5 ppm CO in the US Lab, below the 10 ppm long-term SMAC.",
+      "evidence": {
+        "text": "Overall conclusions and combustion products",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) pp. 16, 19"
+      }
+    },
+    {
+      "finding": "Thicker PMMA spread more slowly; two-sided samples spread faster than one-sided. Near 19% O2, two-sided thick samples stopped spreading and were consumed from the trailing edge.",
+      "fire_safety_relevance": "Material thickness and exposure (one or both faces) change how fast a fire grows.",
+      "evidence": {
+        "text": "Miller/Wichman results",
+        "source": "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021) pp. 66, 71"
+      }
+    }
+  ],
+  "sources": [
+    "PSI-25_Experimental_table_BASS-II_transcribed.csv",
+    "PSI-25 metadata (i_Investigation.txt)",
+    "BASS-II_Summary_Report.pdf (NASA/TM-20210011385, 2021)"
+  ],
+  "notes": [
+    "Impossible final O2 readings (transcription/sensor errors), ignored: B2=1.6, P22a=0.6, P22b=39.1, T28a=0.9, T28b=40.4",
+    "Dates in 2018 for T9, T18; GMT day matches 2014 tests, probably a typo.",
+    "Final CO over sensor range for M5, O4, O12, O13b.",
+    "Table has 129 rows; the report states 126 tests (some samples were burned more than once, p. 11).",
+    "Flow speeds are free-text fan/air display sequences; kept raw, not converted to cm/s.",
+    "Tested at about 21% O2 or below and ~1 atm; no data at the raised-O2, reduced-pressure conditions planned for lunar habitats.",
+    "Microgravity only; no partial-gravity data.",
+    "Spherical section material (T3, T7) is not named in the table."
+  ]
+}

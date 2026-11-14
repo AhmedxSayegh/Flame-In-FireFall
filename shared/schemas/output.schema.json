@@ -1,0 +1,425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dashboard search result: ranked PSI investigations with top experiments",
+  "description": "What the model returns for one search. Inputs: each PSI record (investigation_schema.json), its report, and the user's field entries.",
+  "type": "object",
+  "required": [
+    "query",
+    "inputs_used",
+    "match_quality",
+    "ranked",
+    "overall_insights",
+    "gaps",
+    "caveats"
+  ],
+  "$defs": {
+    "match": {
+      "type": "string",
+      "description": "match | partial | no match | unknown, optionally followed by a short reason in parentheses",
+      "pattern": "^(match|partial|no match|unknown)( \\(.+\\))?$"
+    }
+  },
+  "properties": {
+    "query": {
+      "description": "Copy of the input query (see query_schema.json)",
+      "type": "object",
+      "required": [
+        "crew_environment",
+        "fire_safety_category",
+        "research_topic",
+        "investigation",
+        "fuel_type",
+        "measurement_type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "crew_environment": {
+          "enum": [
+            "All Environments",
+            "Spacecraft",
+            "Space Station",
+            "Lunar Base",
+            "Martian Base",
+            "Pressurized Rover"
+          ],
+          "default": "All Environments"
+        },
+        "fire_safety_category": {
+          "enum": [
+            "All Categories",
+            "Fire Prevention",
+            "Fire Detection",
+            "Fire Growth & Spread",
+            "Fire Suppression"
+          ],
+          "default": "All Categories"
+        },
+        "research_topic": {
+          "enum": [
+            "All Topics",
+            "Material Flammability",
+            "Flame Spread",
+            "Smoke & Aerosols",
+            "Flame Extinction",
+            "Combustion Behavior"
+          ],
+          "default": "All Topics"
+        },
+        "investigation": {
+          "enum": [
+            "All Investigations",
+            "BASS",
+            "BASS-II",
+            "Saffire-I",
+            "Saffire-II",
+            "Saffire-III",
+            "SAME",
+            "SAME-R",
+            "FLEX",
+            "FLEX-2",
+            "ACME"
+          ],
+          "default": "All Investigations"
+        },
+        "fuel_type": {
+          "enum": [
+            "All",
+            "Solid Materials",
+            "Liquid Fuels",
+            "Gaseous Fuels"
+          ],
+          "default": "All"
+        },
+        "measurement_type": {
+          "enum": [
+            "All Measurements",
+            "Flame Spread Rate",
+            "Flame Size",
+            "Burning Rate",
+            "Extinction Conditions",
+            "Smoke Particle Size",
+            "Detector Response"
+          ],
+          "default": "All Measurements"
+        },
+        "conditions": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional Experimental Conditions filter. Omit a field or set it to null for no filter.",
+          "properties": {
+            "oxygen_pct": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Target O2, % by volume"
+            },
+            "pressure_kpa": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "description": "Target pressure, kPa (1 psi = 6.895 kPa)"
+            },
+            "airflow_cm_s": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "description": "Target airflow velocity, cm/s"
+            },
+            "gravity_level": {
+              "enum": [
+                "All",
+                "microgravity",
+                "partial gravity",
+                "normal gravity",
+                null
+              ],
+              "default": "All"
+            }
+          }
+        }
+      }
+    },
+    "inputs_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "File names of the records and reports sent"
+    },
+    "lunar_reference": {
+      "type": "string",
+      "description": "Optional: reference conditions used to judge a crew environment, with their source"
+    },
+    "match_quality": {
+      "type": "string",
+      "description": "One line: strong / partial / weak, and why. Drives the dashboard's weak-match banner."
+    },
+    "ranked": {
+      "type": "array",
+      "description": "One entry per PSI investigation, best first",
+      "items": {
+        "type": "object",
+        "required": [
+          "psi_id",
+          "name",
+          "reference_link",
+          "rank",
+          "relevance_score",
+          "field_matches",
+          "top_experiments",
+          "top_experiments_comparison"
+        ],
+        "properties": {
+          "psi_id": {
+            "type": "string",
+            "examples": [
+              "PSI-69"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "reference_link": {
+            "type": "string",
+            "format": "uri",
+            "description": "Link to the investigation, copied from the record (DOI link or PSI page)",
+            "examples": [
+              "https://doi.org/10.60555/mbq8-0451"
+            ]
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "relevance_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "score_method": {
+            "type": "string"
+          },
+          "field_matches": {
+            "type": "object",
+            "description": "One entry per active filter",
+            "properties": {
+              "crew_environment": {
+                "$ref": "#/$defs/match"
+              },
+              "fire_safety_category": {
+                "$ref": "#/$defs/match"
+              },
+              "research_topic": {
+                "$ref": "#/$defs/match"
+              },
+              "investigation": {
+                "$ref": "#/$defs/match"
+              },
+              "fuel_type": {
+                "$ref": "#/$defs/match"
+              },
+              "oxygen": {
+                "$ref": "#/$defs/match"
+              },
+              "pressure": {
+                "$ref": "#/$defs/match"
+              },
+              "airflow": {
+                "$ref": "#/$defs/match"
+              },
+              "gravity": {
+                "$ref": "#/$defs/match"
+              },
+              "measurement_type": {
+                "$ref": "#/$defs/match"
+              }
+            }
+          },
+          "top_experiments": {
+            "type": "array",
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "required": [
+                "rank",
+                "experiment_id",
+                "tests",
+                "experiment",
+                "summary_of_key_findings",
+                "fire_safety_interpretation",
+                "evidence"
+              ],
+              "properties": {
+                "rank": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3
+                },
+                "experiment_id": {
+                  "type": "string",
+                  "description": "set_id from the record's condition_sets",
+                  "examples": [
+                    "PSI-69-CS56"
+                  ]
+                },
+                "tests": {
+                  "type": "array",
+                  "description": "Individual runs in this experiment, as numbered in the source table",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "test_number",
+                      "test_identifier"
+                    ],
+                    "properties": {
+                      "test_number": {
+                        "type": [
+                          "integer",
+                          "string"
+                        ],
+                        "examples": [
+                          20,
+                          "B1"
+                        ]
+                      },
+                      "test_identifier": {
+                        "type": "string",
+                        "examples": [
+                          "192F001",
+                          "sample 147"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "experiment": {
+                  "type": "string",
+                  "description": "Short label: fuel, O2, pressure, suppressant"
+                },
+                "why_selected": {
+                  "type": "string"
+                },
+                "summary_of_key_findings": {
+                  "type": "string",
+                  "description": "Measured results only, with numbers and units from the record"
+                },
+                "fire_safety_interpretation": {
+                  "type": "string",
+                  "description": "What the findings mean for human space exploration; label inferences"
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Record fields or report pages used, e.g. 'PSI-69 condition_sets (PSI-69-CS56)', 'FLEX_EIRD_v4.pdf p. 29'"
+                }
+              }
+            }
+          },
+          "runner_up": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Next experiment by relevance, starting with its experiment_id"
+          },
+          "top_experiments_comparison": {
+            "type": "object",
+            "description": "Side-by-side comparison of this investigation's top experiments, then a conclusion. Use only values from the record.",
+            "required": [
+              "experiment_ids",
+              "compared_on",
+              "similarities",
+              "differences",
+              "conclusion"
+            ],
+            "properties": {
+              "experiment_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "maxItems": 3,
+                "description": "experiment_id of each top experiment, in rank order"
+              },
+              "compared_on": {
+                "type": "array",
+                "description": "One row per attribute; keys of 'values' are experiment_ids",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "attribute",
+                    "values"
+                  ],
+                  "properties": {
+                    "attribute": {
+                      "type": "string",
+                      "examples": [
+                        "Fuel",
+                        "Oxygen",
+                        "Pressure",
+                        "Tests",
+                        "Outcomes",
+                        "Burning rate"
+                      ]
+                    },
+                    "values": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "similarities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "differences": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conclusion": {
+                "type": "string",
+                "description": "What the three experiments say together for the user's query, including how confident the evidence is"
+              }
+            }
+          }
+        }
+      }
+    },
+    "overall_insights": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What the inputs do not cover for this query"
+    },
+    "caveats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

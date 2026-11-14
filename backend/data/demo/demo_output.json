@@ -1,0 +1,418 @@
+{
+  "query": {
+    "crew_environment": "Lunar Base",
+    "fire_safety_category": "Fire Prevention",
+    "research_topic": "Material Flammability",
+    "investigation": "All Investigations",
+    "fuel_type": "Solid Materials",
+    "measurement_type": "Flame Spread Rate"
+  },
+  "inputs_used": [
+    "PSI-25/record.json",
+    "PSI-25/reports/BASS-II_Summary_Report.pdf",
+    "PSI-69/record.json",
+    "PSI-69/reports/FLEX_EIRD_v4.pdf"
+  ],
+  "lunar_reference": "Moon base cabin >=30% O2 at <=70.3 kPa (10.2 psi), from the Space Apps challenge brief",
+  "match_quality": "partial: BASS-II matches solid materials, flame spread and fire prevention but was tested at ISS cabin conditions; FLEX has Moon-base-like O2 and pressure but burned liquid fuels. Neither covers the whole query.",
+  "ranked": [
+    {
+      "psi_id": "PSI-25",
+      "name": "BASS-II - Burning and Suppression of Solids II (ISS, 2014-2016)",
+      "reference_link": "https://doi.org/10.60555/4qc4-de67",
+      "rank": 1,
+      "relevance_score": 80,
+      "score_method": "Average of 5 scored filters (Investigation = All Investigations skipped): crew 0 + category 1 + topic 1 + fuel 1 + measurement 1",
+      "field_matches": {
+        "crew_environment": "no match (tested at ISS cabin conditions, 13.6-22.2% O2 at ~101 kPa; no lunar conditions)",
+        "fire_safety_category": "match (Fire Prevention stated)",
+        "research_topic": "match (Material Flammability stated)",
+        "fuel_type": "match (PMMA films, slabs and rods; cotton-fiberglass fabric; Nomex)",
+        "measurement_type": "match (opposed and concurrent flame spread rates)"
+      },
+      "top_experiments": [
+        {
+          "rank": 1,
+          "experiment_id": "PSI-25-CS03",
+          "tests": [
+            {
+              "test_number": "B1",
+              "test_identifier": "sample 147"
+            },
+            {
+              "test_number": "B3",
+              "test_identifier": "sample 148"
+            }
+          ],
+          "experiment": "PMMA film 0.1 mm, 2 cm wide, 22.2% O2, ~101 kPa, opposed flow",
+          "why_selected": "Highest O2 tested in BASS-II, on a thin plastic film, from the opposed-flow flame spread study.",
+          "summary_of_key_findings": "Both runs started at 22.2% O2 with the air display set at 5 and 2 (B1, B3). O2 fell by 0-0.4 points and CO in the glovebox rose to 6 and 19 ppm. The report gives results for this material rather than these two runs: a steady spread rate of 2.2 mm/s over a 100 um film, and radiative extinction when the opposed flow dropped to about 1 cm/s for 100-300 um films.",
+          "fire_safety_interpretation": "Thin plastic films keep spreading flame in microgravity under weak ventilation and go out only when the flow falls to about 1 cm/s. The report also shows the extinction flow is lower at higher O2 (10 mm/s at 21% vs 30 mm/s at 16%), so in a 30%+ O2 lunar cabin, cutting ventilation would likely be a weaker safeguard. That last point is inferred; BASS-II has no tests above 22.2% O2.",
+          "evidence": [
+            "PSI-25 condition_sets (PSI-25-CS03)",
+            "BASS-II_Summary_Report.pdf p. 21",
+            "BASS-II_Summary_Report.pdf p. 36 (Table 2.1)"
+          ]
+        },
+        {
+          "rank": 2,
+          "experiment_id": "PSI-25-CS18",
+          "tests": [
+            {
+              "test_number": "P13a",
+              "test_identifier": "sample 203m"
+            },
+            {
+              "test_number": "P13b",
+              "test_identifier": "sample 203m"
+            }
+          ],
+          "experiment": "PMMA rod 1/2 in, black, 20.6-20.7% O2, ~101 kPa, opposed flow",
+          "why_selected": "Thick plastic part tested near air O2 in the opposed-flow flame spread task, with flow reduced to extinction.",
+          "summary_of_key_findings": "Both runs started at 20.6-20.7% O2 with about 5 cm/s flow, which was stepped down until the flame went out (P13a, P13b). Final CO reached 450 and 72 ppm. For black PMMA rods in general, the report finds spread rate increases with opposed flow and with O2, and flame spread in microgravity down to 17.5% O2, against no spread below 19% O2 in normal gravity.",
+          "fire_safety_interpretation": "Thick plastic parts can spread flame in microgravity at O2 levels where Earth tests show none, so Earth-based screening is not conservative for space. A higher-O2 lunar cabin would make this margin worse (inferred; not tested above 22.2% O2).",
+          "evidence": [
+            "PSI-25 condition_sets (PSI-25-CS18)",
+            "BASS-II_Summary_Report.pdf p. 56",
+            "BASS-II_Summary_Report.pdf p. 58"
+          ]
+        },
+        {
+          "rank": 3,
+          "experiment_id": "PSI-25-CS73",
+          "tests": [
+            {
+              "test_number": "T25",
+              "test_identifier": "sample 138m"
+            },
+            {
+              "test_number": "T26",
+              "test_identifier": "sample 137m"
+            }
+          ],
+          "experiment": "SIBAL cotton-fiberglass fabric, 2 cm wide, 20.8% O2, ~101 kPa, concurrent flow",
+          "why_selected": "Fabric, a common cabin material, at the highest O2 tested for it, from the concurrent flame spread study.",
+          "summary_of_key_findings": "Both runs started at 20.8% O2 with the air display stepped from 5 to 2.5 (T25, T26); O2 fell by 0.1 points and final CO was 17 and 24 ppm. For this fabric in general, the report found quenching flow speeds of 1-5 cm/s, higher at lower O2, over 16-21% O2.",
+          "fire_safety_interpretation": "Fabric fires spread with the airflow and only quench when ventilation falls to a few cm/s. Because the quench speed drops as O2 rises, fabric in a 30%+ O2 lunar cabin would likely keep burning at even weaker flows (inferred from the trend, not tested).",
+          "evidence": [
+            "PSI-25 condition_sets (PSI-25-CS73)",
+            "BASS-II_Summary_Report.pdf p. 101",
+            "BASS-II_Summary_Report.pdf p. 109"
+          ]
+        }
+      ],
+      "runner_up": "PSI-25-CS21: PMMA rod 1/4 in, black, ~18% O2 (5 runs, flow reduced to extinction).",
+      "top_experiments_comparison": {
+        "experiment_ids": [
+          "PSI-25-CS03",
+          "PSI-25-CS18",
+          "PSI-25-CS73"
+        ],
+        "compared_on": [
+          {
+            "attribute": "Material",
+            "values": {
+              "PSI-25-CS03": "PMMA film 0.1 mm",
+              "PSI-25-CS18": "PMMA rod 1/2 in, black",
+              "PSI-25-CS73": "Cotton-fiberglass fabric"
+            }
+          },
+          {
+            "attribute": "Flow direction",
+            "values": {
+              "PSI-25-CS03": "Opposed",
+              "PSI-25-CS18": "Opposed",
+              "PSI-25-CS73": "Concurrent"
+            }
+          },
+          {
+            "attribute": "Initial O2",
+            "values": {
+              "PSI-25-CS03": "22.2%",
+              "PSI-25-CS18": "20.6-20.7%",
+              "PSI-25-CS73": "20.8%"
+            }
+          },
+          {
+            "attribute": "Pressure",
+            "values": {
+              "PSI-25-CS03": "~101 kPa",
+              "PSI-25-CS18": "~101 kPa",
+              "PSI-25-CS73": "~101 kPa"
+            }
+          },
+          {
+            "attribute": "Tests",
+            "values": {
+              "PSI-25-CS03": "2",
+              "PSI-25-CS18": "2",
+              "PSI-25-CS73": "2"
+            }
+          },
+          {
+            "attribute": "Recorded events",
+            "values": {
+              "PSI-25-CS03": "none recorded",
+              "PSI-25-CS18": "flow reduced to extinction",
+              "PSI-25-CS73": "none recorded"
+            }
+          },
+          {
+            "attribute": "Final CO",
+            "values": {
+              "PSI-25-CS03": "6-19 ppm",
+              "PSI-25-CS18": "72-450 ppm",
+              "PSI-25-CS73": "17-24 ppm"
+            }
+          },
+          {
+            "attribute": "Extinction flow (report, material level)",
+            "values": {
+              "PSI-25-CS03": "~1 cm/s",
+              "PSI-25-CS18": "not given for this size",
+              "PSI-25-CS73": "1-5 cm/s"
+            }
+          }
+        ],
+        "similarities": [
+          "All are solid materials burned in microgravity at about air O2 (20.6-22.2%) and ISS cabin pressure.",
+          "In each, flames were sustained by weak forced flows of a few cm/s.",
+          "Two runs each, so the specific results rest on small samples; the main findings come from the report at material level."
+        ],
+        "differences": [
+          "The thick rod produced far more CO (up to 450 ppm) than the film or fabric (24 ppm or less).",
+          "Only the rod runs are recorded as being taken to extinction in the table.",
+          "The fabric was tested in concurrent flow; the film and rod in opposed flow."
+        ],
+        "conclusion": "BASS-II shows that solid cabin-type materials keep spreading flame in microgravity under weak ventilation at air-like O2, and go out only when flow falls to about 1-5 cm/s. It matches the material, measurement and prevention parts of the query directly, but none of its tests exceed 22.2% O2 or go below ISS cabin pressure, so its relevance to a lunar base is by extrapolation only. The specific runs are few (6); the stronger evidence is the report's material-level results."
+      }
+    },
+    {
+      "psi_id": "PSI-69",
+      "name": "FLEX - Flame Extinguishment Experiment (ISS, 2009-2011)",
+      "reference_link": "https://doi.org/10.60555/mbq8-0451",
+      "rank": 2,
+      "relevance_score": 50,
+      "score_method": "Average of 5 scored filters (Investigation=All skipped): crew 0.5 + category 1 + topic 1 + fuel 0 + measurement 0",
+      "field_matches": {
+        "crew_environment": "partial (inferred from tested conditions, not stated in documents)",
+        "fire_safety_category": "match (stated)",
+        "research_topic": "match (flammability limits / LOI of liquid fuels)",
+        "fuel_type": "no match (liquid droplets only)",
+        "measurement_type": "no match (burning rate, extinction diameter, flame size; no flame spread)"
+      },
+      "top_experiments": [
+        {
+          "rank": 1,
+          "experiment_id": "PSI-69-CS56",
+          "tests": [
+            {
+              "test_number": 20,
+              "test_identifier": "192F001"
+            },
+            {
+              "test_number": 21,
+              "test_identifier": "192F002"
+            },
+            {
+              "test_number": 22,
+              "test_identifier": "192F003"
+            },
+            {
+              "test_number": 37,
+              "test_identifier": "220R001"
+            },
+            {
+              "test_number": 38,
+              "test_identifier": "220R002"
+            }
+          ],
+          "experiment": "Methanol droplets, 34% O2, 71.2-72.1 kPa, no suppressant",
+          "why_selected": "Highest O2 tested, at the pressure closest to the lunar reference; 5 tests, the largest set at these conditions.",
+          "summary_of_key_findings": "None of the 5 flames went out on its own: 4 ended in disruption and 1 burned to completion. Burning rate was 0.53-0.72 (mean 0.65), about 1.5 times the mean of 0.44 for methanol at 20% O2 and the same pressure, where 2 of 3 tests ended in extinction. Burn times were 10.7-18.2 s for initial droplets of 3.3-3.6 mm.",
+          "fire_safety_interpretation": "At a Moon-base-like atmosphere, these flames burned faster and showed no self-extinction, unlike at 20% O2. For lunar fire prevention, this argues for controlling ignition sources and screening materials at the habitat's actual O2 and pressure, rather than relying on flames dying out. Flammability tests done only in normal air (21% O2, 1 atm) would likely understate the risk.",
+          "evidence": [
+            "PSI-69 condition_sets (Methanol, 70 kPa, 34% O2)",
+            "PSI-69 condition_sets (Methanol, 70 kPa, 20% O2)",
+            "PSI-69 computed_findings[1]"
+          ]
+        },
+        {
+          "rank": 2,
+          "experiment_id": "PSI-69-CS15",
+          "tests": [
+            {
+              "test_number": 19,
+              "test_identifier": "196F001"
+            },
+            {
+              "test_number": 23,
+              "test_identifier": "196F002"
+            },
+            {
+              "test_number": 24,
+              "test_identifier": "196F003"
+            },
+            {
+              "test_number": 39,
+              "test_identifier": "224F001"
+            }
+          ],
+          "experiment": "n-Heptane droplets, 34% O2, 71.3-72.4 kPa, no suppressant",
+          "why_selected": "Same lunar-like atmosphere with a sooting hydrocarbon fuel, giving a second fuel type.",
+          "summary_of_key_findings": "All 4 tests ended in disruption; none extinguished. Mean burning rate was 0.81 (0.73-0.90, 3 tests with data), the highest of any no-suppressant condition near 70 kPa and about 1.65 times the 0.49 mean for heptane at 20% O2 (2 tests: 1 extinction, 1 completion).",
+          "fire_safety_interpretation": "The sooting fuel showed the largest jump in burning rate between 20% and 34% O2. No test reached a clean extinction, so these runs cannot locate the flammability limit at lunar conditions. The report describes finding that limit (LOI) by repeating burn-to-completion and no-ignition tests at decreasing O2 (p. 44); no such sequence appears here at ~70 kPa. This is a data gap for setting a lunar cabin O2 level.",
+          "evidence": [
+            "PSI-69 condition_sets (Heptane, 70 kPa, 34% O2)",
+            "PSI-69 condition_sets (Heptane, 75 kPa, 20% O2)",
+            "FLEX_EIRD_v4.pdf p. 44"
+          ]
+        },
+        {
+          "rank": 3,
+          "experiment_id": "PSI-69-CS55",
+          "tests": [
+            {
+              "test_number": 25,
+              "test_identifier": "191R001"
+            },
+            {
+              "test_number": 26,
+              "test_identifier": "191F001"
+            },
+            {
+              "test_number": 40,
+              "test_identifier": "219R001"
+            },
+            {
+              "test_number": 41,
+              "test_identifier": "219F001"
+            }
+          ],
+          "experiment": "Methanol droplets, 30% O2, 71.2-71.8 kPa, no suppressant",
+          "why_selected": "30% O2 is the lowest O2 the brief expects for a Moon base, so this is the most favorable lunar case.",
+          "summary_of_key_findings": "3 tests ended in disruption and 1 burned to completion; none extinguished. Burning rate was 0.62-0.65 (mean 0.64). In the 2 tests with a measured final flame diameter, it was 0.17 of the initial droplet size on average, compared with 0.70 at 20% O2.",
+          "fire_safety_interpretation": "Even at the low end of the planned lunar O2 range, flames consumed nearly all of the fuel instead of going out early. Lowering the habitat target from 34% to 30% O2 did not restore the self-extinction seen at 20% in these tests. The report notes that at high O2, droplets tend to burn to completion rather than extinguish (p. 29), and these flight results are consistent with that.",
+          "evidence": [
+            "PSI-69 condition_sets (Methanol, 70 kPa, 30% O2)",
+            "PSI-69 computed_findings[0]",
+            "FLEX_EIRD_v4.pdf p. 29"
+          ]
+        }
+      ],
+      "top_experiments_comparison": {
+        "experiment_ids": [
+          "PSI-69-CS56",
+          "PSI-69-CS15",
+          "PSI-69-CS55"
+        ],
+        "compared_on": [
+          {
+            "attribute": "Fuel",
+            "values": {
+              "PSI-69-CS56": "Methanol (non-sooting)",
+              "PSI-69-CS15": "n-Heptane (sooting)",
+              "PSI-69-CS55": "Methanol (non-sooting)"
+            }
+          },
+          {
+            "attribute": "Oxygen",
+            "values": {
+              "PSI-69-CS56": "34%",
+              "PSI-69-CS15": "34%",
+              "PSI-69-CS55": "30%"
+            }
+          },
+          {
+            "attribute": "Pressure",
+            "values": {
+              "PSI-69-CS56": "71.2-72.1 kPa",
+              "PSI-69-CS15": "71.3-72.4 kPa",
+              "PSI-69-CS55": "71.2-71.8 kPa"
+            }
+          },
+          {
+            "attribute": "Tests",
+            "values": {
+              "PSI-69-CS56": "5",
+              "PSI-69-CS15": "4",
+              "PSI-69-CS55": "4"
+            }
+          },
+          {
+            "attribute": "Outcomes",
+            "values": {
+              "PSI-69-CS56": "4 disruption, 1 completion",
+              "PSI-69-CS15": "4 disruption",
+              "PSI-69-CS55": "3 disruption, 1 completion"
+            }
+          },
+          {
+            "attribute": "Extinctions",
+            "values": {
+              "PSI-69-CS56": "0",
+              "PSI-69-CS15": "0",
+              "PSI-69-CS55": "0"
+            }
+          },
+          {
+            "attribute": "Mean burning rate",
+            "values": {
+              "PSI-69-CS56": "0.65",
+              "PSI-69-CS15": "0.81",
+              "PSI-69-CS55": "0.64"
+            }
+          },
+          {
+            "attribute": "Burn time",
+            "values": {
+              "PSI-69-CS56": "10.7-18.2 s",
+              "PSI-69-CS15": "4.2-13.1 s",
+              "PSI-69-CS55": "10.3-22.2 s"
+            }
+          },
+          {
+            "attribute": "Final/initial diameter",
+            "values": {
+              "PSI-69-CS56": "0.37",
+              "PSI-69-CS15": "not measured",
+              "PSI-69-CS55": "0.17"
+            }
+          }
+        ],
+        "similarities": [
+          "All three ran at about 71-72 kPa, close to the 70.3 kPa Moon-base reference, with no suppressant.",
+          "None of the 13 tests ended in extinction; every flame disrupted or burned to completion.",
+          "All are liquid droplets of similar starting size (2.6-3.8 mm), so none measures solid materials or flame spread."
+        ],
+        "differences": [
+          "Fuel: n-heptane (CS15) burned fastest, about 25% above both methanol sets.",
+          "Oxygen: lowering methanol from 34% (CS56) to 30% (CS55) barely changed the burning rate (0.65 vs 0.64) or the outcomes.",
+          "Heptane burn times were shorter (4.2-13.1 s), consistent with its faster burning; all its tests ended in disruption.",
+          "CS56 has the most tests (5); CS15 has no measured final diameter."
+        ],
+        "conclusion": "Across both fuels and both lunar O2 levels, FLEX found no self-extinction at Moon-base-like conditions, and the sooting fuel burned fastest. Moving from 34% to 30% O2 did not change this, so the planned lower bound of lunar O2 still gives no self-extinction margin in these tests. Confidence is limited: 13 tests in total, liquid droplets only, microgravity rather than 1/6 g, and no solid-material or flame-spread data."
+      },
+      "runner_up": "PSI-69-CS14: n-Heptane, 30% O2, ~71-72 kPa (4 tests, all disruption, mean burning rate 0.66)."
+    }
+  ],
+  "overall_insights": [
+    "The two investigations cover different halves of the query: BASS-II has the solid materials and flame spread data, FLEX has the lunar-like atmosphere (30-34% O2, ~71 kPa). Neither has both.",
+    "Both point the same way for prevention: in microgravity, flames persist where Earth tests suggest they would not. BASS-II saw flame spread down to 17.5% O2 against 19% in normal gravity; FLEX saw no self-extinction in 17 runs at 30-34% O2 and about 71-72 kPa.",
+    "Higher O2 lowers the airflow a flame needs to survive (BASS-II thin PMMA: about 30 mm/s at 16% O2 against 10 mm/s at 21%), so ventilation shutdown is likely a weaker safeguard in a 30%+ O2 lunar cabin. Inferred; no solid-material tests above 22.2% O2.",
+    "Material screening for a lunar base should be done at the habitat's actual O2 and pressure. BASS-II proposes extrapolating normal-gravity blowoff limits to zero flow as a conservative way to estimate the minimum O2 for material flammability in space."
+  ],
+  "gaps": [
+    "No solid-material tests above 22.2% O2 or below ISS cabin pressure.",
+    "No partial-gravity (lunar 1/6 g) data in either investigation.",
+    "BASS-II flame spread rates are reported at material level in the report, not per test in the table.",
+    "FLEX covers liquid droplets only and does not measure flame spread."
+  ],
+  "caveats": [
+    "The BASS-II table was transcribed; five final O2 readings are impossible and were ignored, and flow speeds are free text.",
+    "FLEX 'Disruption' outcomes are not defined in the report.",
+    "FLEX burning-rate units are labelled 'mm' in the source table.",
+    "Lunar relevance is inferred from tested conditions; neither investigation names a lunar base.",
+    "This is a saved example prepared offline for the sample query, not a live Gemini result."
+  ]
+}

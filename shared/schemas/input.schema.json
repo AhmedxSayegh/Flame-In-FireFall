@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dashboard search input: the user's field entries",
+  "description": "Sent to the model with the investigation records. Option labels match the dashboard dropdowns. An 'All ...' option means no filter on that field.",
+  "type": "object",
+  "required": [
+    "crew_environment",
+    "fire_safety_category",
+    "research_topic",
+    "investigation",
+    "fuel_type",
+    "measurement_type"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "crew_environment": {
+      "enum": [
+        "All Environments",
+        "Spacecraft",
+        "Space Station",
+        "Lunar Base",
+        "Martian Base",
+        "Pressurized Rover"
+      ],
+      "default": "All Environments"
+    },
+    "fire_safety_category": {
+      "enum": [
+        "All Categories",
+        "Fire Prevention",
+        "Fire Detection",
+        "Fire Growth & Spread",
+        "Fire Suppression"
+      ],
+      "default": "All Categories"
+    },
+    "research_topic": {
+      "enum": [
+        "All Topics",
+        "Material Flammability",
+        "Flame Spread",
+        "Smoke & Aerosols",
+        "Flame Extinction",
+        "Combustion Behavior"
+      ],
+      "default": "All Topics"
+    },
+    "investigation": {
+      "enum": [
+        "All Investigations",
+        "BASS",
+        "BASS-II",
+        "Saffire-I",
+        "Saffire-II",
+        "Saffire-III",
+        "SAME",
+        "SAME-R",
+        "FLEX",
+        "FLEX-2",
+        "ACME"
+      ],
+      "default": "All Investigations"
+    },
+    "fuel_type": {
+      "enum": [
+        "All",
+        "Solid Materials",
+        "Liquid Fuels",
+        "Gaseous Fuels"
+      ],
+      "default": "All"
+    },
+    "measurement_type": {
+      "enum": [
+        "All Measurements",
+        "Flame Spread Rate",
+        "Flame Size",
+        "Burning Rate",
+        "Extinction Conditions",
+        "Smoke Particle Size",
+        "Detector Response"
+      ],
+      "default": "All Measurements"
+    },
+    "conditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional Experimental Conditions filter. Omit a field or set it to null for no filter.",
+      "properties": {
+        "oxygen_pct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Target O2, % by volume"
+        },
+        "pressure_kpa": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Target pressure, kPa (1 psi = 6.895 kPa)"
+        },
+        "airflow_cm_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Target airflow velocity, cm/s"
+        },
+        "gravity_level": {
+          "enum": [
+            "All",
+            "microgravity",
+            "partial gravity",
+            "normal gravity",
+            null
+          ],
+          "default": "All"
+        }
+      }
+    }
+  }
+}

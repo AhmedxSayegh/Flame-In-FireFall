@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --color-orange: #EA8B33;
+  --color-amber: #EEA23A;
+  --color-gold: #F3B940;
+  --color-navy: #132F45;
+  --color-teal: #32667F;
+  --color-ink: #2A2D31;
+  --color-muted: #6B7178;
+  --color-line: #E6E8EB;
+  --color-faint: #F5F6F7;
+  --font-display: "Antonio", "Oswald", "Arial Narrow", sans-serif;
+  --font-sans: "DM Sans", "Inter", system-ui, sans-serif;
+}
+
+html, body { background: #FFFFFF; color: var(--color-ink); }
+body { font-family: var(--font-sans); font-weight: 400; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, .display { font-family: var(--font-display); color: var(--color-navy); letter-spacing: 0.02em; }
+.tnum { font-variant-numeric: tabular-nums; }
+
+.field { @apply w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-[15px] text-ink outline-none transition-colors; }
+.field:hover { border-color: #C9CED4; }
+.field:focus { border-color: var(--color-orange); box-shadow: 0 0 0 3px rgb(234 139 51 / 0.15); }
+.field[aria-invalid="true"] { border-color: #B4472A; }
+select.field { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23132F45' stroke-width='1.5'%3E%3Cpath d='M2 4.5l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 2.25rem; }
+.label { @apply mb-1.5 block text-[11px] font-medium uppercase tracking-[0.14em] text-teal; }
+
+.btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-full bg-orange px-7 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#d97a24] disabled:opacity-50; }
+.btn-secondary { @apply inline-flex items-center justify-center gap-2 rounded-full border border-navy bg-white px-6 py-3 text-sm font-medium uppercase tracking-[0.14em] text-navy transition-colors hover:bg-faint; }
+.btn-ghost { @apply inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-medium text-navy transition-colors hover:border-navy; }
+.pill { @apply inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-ink; }
+.pill[aria-pressed="true"] { border-color: var(--color-orange); background: rgb(234 139 51 / 0.08); color: var(--color-navy); }
+
+:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 2px; }
+.recharts-tooltip-wrapper { outline: none; }

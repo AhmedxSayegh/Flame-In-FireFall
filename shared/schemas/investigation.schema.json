@@ -1,0 +1,605 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Investigation record: one JSON file per PSI investigation (backend/data/psi/<PSI-ID>/record.json)",
+  "description": "One record per investigation. 'All ...' options are UI filters, never stored values. Every tag carries evidence so it can be checked.",
+  "type": "object",
+  "required": [
+    "investigation",
+    "crew_environments",
+    "fire_safety_categories",
+    "research_topics",
+    "fuel",
+    "conditions",
+    "measurement_types",
+    "key_findings",
+    "sources"
+  ],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "required": [
+        "text",
+        "source"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Short supporting quote or paraphrase (under 25 words)"
+        },
+        "source": {
+          "type": "string",
+          "description": "File name plus page, sheet or figure"
+        }
+      }
+    },
+    "range": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "null = not reported. Never 0 for 'not reported'.",
+      "required": [
+        "min",
+        "max",
+        "unit",
+        "evidence"
+      ],
+      "properties": {
+        "min": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "max": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "planned": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Range in the requirements documents, if it differs from what was tested",
+          "properties": {
+            "min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "max": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "evidence": {
+              "$ref": "#/$defs/evidence"
+            }
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "investigation": {
+      "type": "object",
+      "required": [
+        "psi_id",
+        "title",
+        "program",
+        "data_type",
+        "reference_link"
+      ],
+      "properties": {
+        "psi_id": {
+          "type": "string",
+          "examples": [
+            "PSI-117"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "program": {
+          "enum": [
+            "BASS",
+            "BASS-II",
+            "Saffire-I",
+            "Saffire-II",
+            "Saffire-III",
+            "SAME",
+            "SAME-R",
+            "FLEX",
+            "FLEX-2",
+            "ACME",
+            "Other"
+          ]
+        },
+        "related_programs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "data_type": {
+          "enum": [
+            "flight experiment",
+            "ground experiment",
+            "simulation",
+            "mixed"
+          ]
+        },
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reference_link": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri",
+          "description": "Link to the investigation: DOI link if available, otherwise its PSI page"
+        }
+      }
+    },
+    "crew_environments": {
+      "description": "Relevance to crew environments. Documents rarely state this, so basis must say whether it is stated or inferred from conditions.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "value",
+          "basis",
+          "justification"
+        ],
+        "properties": {
+          "value": {
+            "enum": [
+              "Spacecraft",
+              "Space Station",
+              "Lunar Base",
+              "Martian Base",
+              "Pressurized Rover"
+            ]
+          },
+          "basis": {
+            "enum": [
+              "stated",
+              "inferred"
+            ]
+          },
+          "justification": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "fire_safety_categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "value",
+          "evidence"
+        ],
+        "properties": {
+          "value": {
+            "enum": [
+              "Fire Prevention",
+              "Fire Detection",
+              "Fire Growth & Spread",
+              "Fire Suppression"
+            ]
+          },
+          "evidence": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      }
+    },
+    "research_topics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "value",
+          "evidence"
+        ],
+        "properties": {
+          "value": {
+            "enum": [
+              "Material Flammability",
+              "Flame Spread",
+              "Smoke & Aerosols",
+              "Flame Extinction",
+              "Combustion Behavior"
+            ]
+          },
+          "evidence": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      }
+    },
+    "fuel": {
+      "type": "object",
+      "required": [
+        "types",
+        "materials"
+      ],
+      "properties": {
+        "types": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "Solid Materials",
+              "Liquid Fuels",
+              "Gaseous Fuels"
+            ]
+          }
+        },
+        "materials": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "geometry": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "e.g. droplet 0.5-7 mm, flat sheet, sphere"
+        }
+      }
+    },
+    "conditions": {
+      "type": "object",
+      "required": [
+        "oxygen_concentration",
+        "pressure",
+        "airflow_velocity",
+        "gravity_level"
+      ],
+      "properties": {
+        "oxygen_concentration": {
+          "$ref": "#/$defs/range",
+          "description": "unit: % by volume"
+        },
+        "pressure": {
+          "$ref": "#/$defs/range",
+          "description": "unit: kPa (1 atm = 101.325 kPa, 1 psi = 6.895 kPa)"
+        },
+        "airflow_velocity": {
+          "$ref": "#/$defs/range",
+          "description": "unit: cm/s; null if not reported (do not assume quiescent)"
+        },
+        "gravity_level": {
+          "type": "object",
+          "required": [
+            "values",
+            "evidence"
+          ],
+          "properties": {
+            "values": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "microgravity",
+                  "partial gravity",
+                  "normal gravity",
+                  "simulated microgravity"
+                ]
+              }
+            },
+            "evidence": {
+              "$ref": "#/$defs/evidence"
+            }
+          }
+        },
+        "diluents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "e.g. N2, He, CO2, Xe, O3"
+        }
+      }
+    },
+    "measurement_types": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "value",
+          "evidence"
+        ],
+        "properties": {
+          "value": {
+            "enum": [
+              "Flame Spread Rate",
+              "Flame Size",
+              "Burning Rate",
+              "Extinction Conditions",
+              "Smoke Particle Size",
+              "Detector Response"
+            ]
+          },
+          "evidence": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      }
+    },
+    "key_findings": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": [
+          "finding",
+          "fire_safety_relevance",
+          "evidence"
+        ],
+        "properties": {
+          "finding": {
+            "type": "string"
+          },
+          "fire_safety_relevance": {
+            "type": "string"
+          },
+          "evidence": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ambiguities and things a human must check"
+    },
+    "test_summary": {
+      "type": "object",
+      "description": "Counts and outcomes computed from the experiment table (code, not LLM)"
+    },
+    "condition_sets": {
+      "type": "array",
+      "description": "Distinct tested conditions with counts and outcomes, computed from the experiment table. Used for best-match ranking.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "set_id": {
+            "type": "string",
+            "description": "Experiment ID: <psi_id>-CS<nn>, e.g. PSI-69-CS56"
+          },
+          "tests": {
+            "type": "array",
+            "description": "Individual test runs in this experiment, as numbered in the source table",
+            "items": {
+              "type": "object",
+              "required": [
+                "test_number",
+                "test_identifier"
+              ],
+              "properties": {
+                "test_number": {
+                  "type": [
+                    "integer",
+                    "string"
+                  ],
+                  "description": "Test number as in the source table, e.g. 20 (FLEX) or B1 (BASS-II)"
+                },
+                "test_identifier": {
+                  "type": "string",
+                  "description": "Source table ID, e.g. FLEX identifier 192F001"
+                }
+              }
+            }
+          },
+          "fuel": {
+            "type": "string"
+          },
+          "pressure_kpa": {
+            "type": "number"
+          },
+          "oxygen_pct": {
+            "type": "number"
+          },
+          "suppressant": {
+            "type": "string"
+          },
+          "suppressant_pct": {
+            "type": "number"
+          },
+          "n_tests": {
+            "type": "integer"
+          },
+          "outcomes": {
+            "type": "object",
+            "description": "Outcome counts when the table records them (e.g. FLEX: Extinction/Disruption/Completion)"
+          },
+          "mean_initial_diameter_mm": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "mean_extinction_to_initial_ratio": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "mean_burning_rate": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "observed_events": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Events parsed from free-text notes when no outcome column exists (e.g. BASS-II)"
+          },
+          "principal_investigator": {
+            "type": "string"
+          },
+          "geometry": {
+            "type": "string"
+          },
+          "oxygen_initial_range_pct": {
+            "type": "array",
+            "items": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "flow_settings_raw": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "test_dates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "set_id",
+          "tests",
+          "fuel",
+          "n_tests"
+        ]
+      }
+    },
+    "computed_findings": {
+      "type": "array",
+      "description": "Patterns computed from the experiment table by code, with the method stated"
+    },
+    "tests": {
+      "type": "array",
+      "description": "One row per test run, used by the dashboard charts (GET /api/records). Built by the scripts in backend/tools.",
+      "items": {
+        "type": "object",
+        "required": [
+          "test_number",
+          "test_identifier",
+          "set_id",
+          "oxygen_pct",
+          "pressure_kpa",
+          "airflow_cm_s",
+          "outcome",
+          "measurements"
+        ],
+        "properties": {
+          "test_number": {
+            "type": [
+              "integer",
+              "string"
+            ]
+          },
+          "test_identifier": {
+            "type": "string"
+          },
+          "set_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Experiment (condition set) this test belongs to"
+          },
+          "oxygen_pct": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "pressure_kpa": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "airflow_cm_s": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "outcome": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "As recorded in the source table"
+          },
+          "measurements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "quantity",
+                "value",
+                "unit",
+                "definition"
+              ],
+              "properties": {
+                "quantity": {
+                  "enum": [
+                    "burning_rate",
+                    "flame_spread_rate",
+                    "flame_size",
+                    "extinction_condition",
+                    "smoke_particle_size",
+                    "detector_response"
+                  ]
+                },
+                "value": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "definition": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
