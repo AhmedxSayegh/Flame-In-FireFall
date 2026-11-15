@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { search, SchemaError, type SearchResult } from '../lib/api';
 import type { InputGravity, SearchInput } from '../types';
 
@@ -62,8 +62,13 @@ interface Ctx {
   /** experiment_ids in the comparison (2–3) */
   compareIds: string[];
   setCompareIds: (ids: string[]) => void;
+  /** experiment shown in the analysis panel; selecting one also selects its investigation */
   activeId: string | null;
   setActiveId: (id: string) => void;
+  /** psi_id highlighted in the ranking panel */
+  investigationId: string | null;
+  /** selects an investigation and its highest-ranked experiment; comparison selection is untouched */
+  selectInvestigation: (psiId: string) => void;
 }
 
 const SearchCtx = createContext<Ctx | null>(null);
@@ -82,7 +87,23 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const [result, setResult] = useState<SearchResult | null>(null);
   const [submittedForm, setSubmittedForm] = useState<FormState | null>(null);
   const [compareIds, setCompareIds] = useState<string[]>([]);
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeId, setActiveIdRaw] = useState<string | null>(null);
+  const [investigationId, setInvestigationId] = useState<string | null>(null);
+  const inFlight = useRef(false);
+
+  const setActiveId = useCallback((id: string) => {
+    setActiveIdRaw(id);
+    const inv = result?.output.ranked.find((r) => r.top_experiments.some((e) => e.experiment_id === id));
+    if (inv) setInvestigationId(inv.psi_id);
+  }, [result]);
+
+  const selectInvestigation = useCallback((psiId: string) => {
+    const inv = result?.output.ranked.find((r) => r.psi_id === psiId);
+    if (!inv) return;
+    setInvestigationId(psiId);
+    const top = [...inv.top_experiments].sort((a, b) => a.rank - b.rank)[0];
+    if (top) setActiveIdRaw(top.experiment_id);
+  }, [result]);
 
   useEffect(() => { try { sessionStorage.setItem(KEY, JSON.stringify(form)); } catch { /* ignore */ } }, [form]);
 
@@ -90,7 +111,9 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const reset = useCallback(() => { setForm(DEFAULT_FORM); setError(null); }, []);
 
   const apply = useCallback(async () => {
+    if (inFlight.current) return false;
     if (Object.keys(formErrors(form)).length) return false;
+    inFlight.current = true;
     setStatus('loading'); setError(null);
     try {
       const r = await search({ input: toInput(form), research_question: form.research_question.trim() || null });
@@ -99,21 +122,26 @@ export function SearchProvider({ children }: { children: ReactNode }) {
       const pool = r.output.ranked.flatMap((inv) => inv.top_experiments.map((e) => e.experiment_id));
       const first = r.output.ranked[0]?.top_experiments.map((e) => e.experiment_id) ?? [];
       const ids = (first.length >= 2 ? first : pool).slice(0, 3);
-      setCompareIds(ids); setActiveId(ids[0] ?? null);
+      setCompareIds(ids);
+      const firstInv = r.output.ranked[0];
+      setInvestigationId(firstInv?.psi_id ?? null);
+      setActiveIdRaw(firstInv?.top_experiments[0]?.experiment_id ?? null);
       return true;
     } catch (e) {
       setStatus('error');
       setError(e instanceof SchemaError
         ? { message: `The ${e.stage} did not pass ${e.stage}_schema validation.`, details: e.errors }
-        : { message: e instanceof Error ? e.message : 'Search failed', details: (e as { details?: string[] }).details ?? [] });
+        : { message: e instanceof Error ? e.message : 'Search failed', details: (e as {details?:string[]}).details ?? [] });
       return false;
+    } finally {
+      inFlight.current = false;
     }
   }, [form]);
 
   const value = useMemo<Ctx>(() => ({
     form, setField, reset, advancedOpen, setAdvancedOpen, status, error, result, submittedForm, apply,
-    compareIds, setCompareIds, activeId, setActiveId: (id: string) => setActiveId(id),
-  }), [form, setField, reset, advancedOpen, status, error, result, submittedForm, apply, compareIds, activeId]);
+    compareIds, setCompareIds, activeId, setActiveId, investigationId, selectInvestigation,
+  }), [form, setField, reset, advancedOpen, status, error, result, submittedForm, apply, compareIds, activeId, setActiveId, investigationId, selectInvestigation]);
 
   return <SearchCtx.Provider value={value}>{children}</SearchCtx.Provider>;
 }

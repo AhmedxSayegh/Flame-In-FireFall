@@ -34,3 +34,13 @@ select.field { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 
 :focus-visible { outline: 2px solid var(--color-orange); outline-offset: 2px; }
 .recharts-tooltip-wrapper { outline: none; }
+
+/* Targeted results-workspace interactions; existing palette and controls. */
+.condition-chip { transition: background-color 180ms, border-color 180ms; }
+.condition-chip:enabled:hover, .condition-chip:enabled:focus-visible { background: rgb(234 139 51 / 0.08); border-color: var(--color-orange); }
+.condition-chip:disabled { cursor: default; }
+.workspace-nav { position: relative; border: 1px solid var(--color-line); border-radius: 999px; isolation: isolate; }
+.workspace-tab { position: relative; flex: 1 1 0; width: 108px; padding: 8px 12px; font-size: 12px; border-radius: 999px; }
+.workspace-tab[aria-selected="true"] { color: var(--color-navy); }
+.workspace-indicator { position: absolute; inset: 0 auto 0 0; width: 33.333333%; border: 1px solid var(--color-orange); border-radius: 999px; background: rgb(234 139 51 / 0.08); transition: transform 200ms ease; z-index: -1; }
+@media (prefers-reduced-motion: reduce) { .workspace-indicator, .condition-chip { transition: none; } }

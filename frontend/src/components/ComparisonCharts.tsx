@@ -8,7 +8,7 @@ import {
 import { fmtNum } from '../lib/records';
 import { useSearch } from '../state/SearchContext';
 import { QUANTITY_LABEL, type ExperimentRecord, type Quantity } from '../types';
-import { SectionTitle } from './Decor';
+import { Panel, PanelTitle } from './Decor';
 import { axisLabel, axisProps, ChartFrame, EmptyState, seriesColor, TooltipBox, usePool, type PoolItem } from './Shared';
 
 interface Series { item: PoolItem; record: ExperimentRecord; i: number }
@@ -75,7 +75,7 @@ function MeasureScatter({ series, quantity, x, title, purpose, csv }: { series: 
   return (
     <ChartFrame title={title} subtitle={purpose} rows={rows} csvName={csv} empty={empty}
       controls={<GroupPicker groups={groups} value={key} onChange={setPick} />}
-      footnote={<Sources series={series} extra={group && <>
+      footnote={<Sources series={series} extra={<>
         <p>{pts.length} test{pts.length === 1 ? '' : 's'} plotted · y = {group?.definition} ({group?.unit}). Lines join tests within one experiment in order of {xm.label.toLowerCase()}; they are not fitted trends.</p>
         {!xVaries && pts.length > 0 && <p>All plotted tests share one {xm.label.toLowerCase()} value ({fmtNum(pts[0].x)} {xm.unit}), so this view shows test-to-test scatter only, not a dependence on {xm.label.toLowerCase()}.</p>}
         {data.noData.length > 0 && <p>No value with this definition: {data.noData.join(', ')}.</p>}
@@ -120,7 +120,7 @@ function FuelBars({ series }: { series: Series[] }) {
       rows={rows.map((r) => ({ experiment_id: r.exp, fuel: r.label, [`mean (${group?.unit})`]: +r.mean.toFixed(4), min: r.min, max: r.max, n: r.n, tests: r.tests.join(' ') }))}
       csvName="fuel_vs_burning_rate.csv" empty={empty}
       controls={<GroupPicker groups={groups} value={key} onChange={setPick} />}
-      footnote={<Sources series={series} extra={group && <p>y = {group.definition} ({group.unit}). Experiments without this definition are omitted rather than converted.</p>} />}>
+      footnote={<Sources series={series} extra={<p>y = {group?.definition} ({group?.unit}). Experiments without this definition are omitted rather than converted.</p>} />}>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data} margin={{ top: 22, right: 16, bottom: 24, left: 12 }} barCategoryGap="35%">
           <CartesianGrid stroke="#EEF0F2" vertical={false} />
@@ -202,10 +202,33 @@ function OutcomeDistribution({ series }: { series: Series[] }) {
   );
 }
 
-export function ComparisonCharts() {
+type ChartId = 'o2-burn' | 'flow-spread' | 'fuel-burn' | 'o2-ext' | 'outcomes';
+const CHARTS: { id: ChartId; label: string }[] = [
+  { id: 'o2-burn', label: 'O₂ vs. Burning Rate' },
+  { id: 'flow-spread', label: 'Airflow vs. Flame Spread' },
+  { id: 'fuel-burn', label: 'Fuel Type vs. Burning Rate' },
+  { id: 'o2-ext', label: 'O₂ vs. Extinction Outcome' },
+  { id: 'outcomes', label: 'Outcome Distribution' },
+];
+
+/** Whether each chart has at least one plottable test in the current series (no values are created). */
+function availability(series: Series[]): Record<ChartId, boolean> {
+  const tests = series.flatMap((s) => s.record.tests);
+  const has = (q: Quantity) => (t: (typeof tests)[number]) => t.measurements.some((m) => m.quantity === q);
+  return {
+    'o2-burn': tests.some((t) => has('burning_rate')(t) && t.oxygen_pct != null),
+    'flow-spread': tests.some((t) => has('flame_spread_rate')(t) && t.airflow_cm_s != null),
+    'fuel-burn': tests.some(has('burning_rate')),
+    'o2-ext': tests.some((t) => t.outcome != null && t.oxygen_pct != null),
+    outcomes: tests.some((t) => t.outcome != null),
+  };
+}
+
+export function ComparisonCharts({ className = '' }: { className?: string }) {
   const pool = usePool();
   const { compareIds, activeId, setActiveId } = useSearch();
   const [hidden, setHidden] = useState<Set<string>>(new Set());
+  const [pick, setPick] = useState<ChartId | null>(null);
   const all = compareIds.map((id, i) => ({ item: pool.get(id)!, i })).filter((x) => x.item);
   const noRecord = all.filter((x) => !x.item.record).map((x) => x.item.id);
   const series: Series[] = useMemo(
@@ -213,16 +236,21 @@ export function ComparisonCharts() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [compareIds.join(), hidden, pool],
   );
+  const avail = useMemo(() => availability(series), [series]);
+  const current: ChartId = pick ?? CHARTS.find((c) => avail[c.id])?.id ?? 'o2-burn';
   const toggle = (id: string) => setHidden((h) => { const n = new Set(h); if (n.has(id)) n.delete(id); else n.add(id); return n; });
 
+  if (all.length < 2) return <Panel id="charts" className={className}><PanelTitle index="04" title="Graphical Comparison" /><EmptyState title="Two distinct experiments are required for comparison" /></Panel>;
+
   return (
-    <section id="charts">
-      <SectionTitle index="03" title="Graphical Comparison" kicker="Each point is one recorded test. Hover for test details; click a mark to open that experiment's analysis." />
-      <div className="mb-6 flex flex-wrap items-center gap-2" role="group" aria-label="Toggle experiment series">
+    <Panel id="charts" className={className}>
+      <PanelTitle index="04" title="Graphical Comparison" kicker="One recorded test per mark. Hover for details; click a mark to analyse that experiment." />
+      <label className="mb-4 block"><span className="label">Chart type</span><select className="field w-full" aria-label="Chart type" value={current} onChange={e => setPick(e.target.value as ChartId)}>{CHARTS.map(c => <option key={c.id} value={c.id}>{c.label}{avail[c.id] ? '' : ' — no compatible data'}</option>)}</select></label>
+      <div className="mb-4 flex flex-wrap items-center gap-2" role="group" aria-label="Toggle experiment series">
         <span className="mr-1 text-[11px] uppercase tracking-[0.14em] text-muted">Series</span>
         {all.map(({ item, i }) => (
           <button key={item.id} type="button" className="pill" aria-pressed={!hidden.has(item.id)} onClick={() => toggle(item.id)}
-            onDoubleClick={() => setActiveId(item.id)} style={{ opacity: hidden.has(item.id) ? 0.5 : 1 }}>
+            onDoubleClick={() => setActiveId(item.id)} style={{ opacity: hidden.has(item.id) ? 0.5 : 1 }} title="Click to show/hide · double-click to analyse">
             <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden>
               {i === 0 && <circle cx="6" cy="6" r="4.5" fill={seriesColor(i)} stroke="#132F45" strokeWidth="0.75" />}
               {i === 1 && <rect x="1.5" y="1.5" width="9" height="9" fill={seriesColor(i)} stroke="#132F45" strokeWidth="0.75" />}
@@ -237,14 +265,14 @@ export function ComparisonCharts() {
         <p className="mb-4 text-xs text-muted">No numeric test record loaded for {noRecord.join(', ')}; these experiments appear in the table but not in charts.</p>
       )}
       {series.length === 0 ? <EmptyState title="No series to plot">Turn on at least one experiment series with a numeric record.</EmptyState> : (
-        <div className="grid gap-6 xl:grid-cols-2">
-          <MeasureScatter series={series} quantity="burning_rate" x="oxygen_pct" title="Oxygen Concentration vs. Burning Rate" purpose="How measured burning rate varies with ambient oxygen." csv="oxygen_vs_burning_rate.csv" />
-          <MeasureScatter series={series} quantity="flame_spread_rate" x="airflow_cm_s" title="Airflow Velocity vs. Flame Spread Rate" purpose="How flame propagation changes with imposed airflow." csv="airflow_vs_flame_spread.csv" />
-          <FuelBars series={series} />
-          <ExtinctionPlot series={series} />
-          <div className="xl:col-span-2"><OutcomeDistribution series={series} /></div>
+        <div role="tabpanel">
+          {current === 'o2-burn' && <MeasureScatter series={series} quantity="burning_rate" x="oxygen_pct" title="Oxygen Concentration vs. Burning Rate" purpose="How measured burning rate varies with ambient oxygen." csv="oxygen_vs_burning_rate.csv" />}
+          {current === 'flow-spread' && <MeasureScatter series={series} quantity="flame_spread_rate" x="airflow_cm_s" title="Airflow Velocity vs. Flame Spread Rate" purpose="How flame propagation changes with imposed airflow." csv="airflow_vs_flame_spread.csv" />}
+          {current === 'fuel-burn' && <FuelBars series={series} />}
+          {current === 'o2-ext' && <ExtinctionPlot series={series} />}
+          {current === 'outcomes' && <OutcomeDistribution series={series} />}
         </div>
       )}
-    </section>
+    </Panel>
   );
 }

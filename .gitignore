@@ -1,5 +1,7 @@
 # secrets and local data
 backend/.env
+.venv/
+backend/server*.log
 backend/runs/*
 !backend/runs/.gitkeep
 backend/data/cache/*
@@ -8,3 +10,4 @@ __pycache__/
 # frontend build output and packages
 frontend/node_modules/
 frontend/dist/
+frontend/.env.local

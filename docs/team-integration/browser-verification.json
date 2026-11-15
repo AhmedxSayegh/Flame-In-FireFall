@@ -1,0 +1,78 @@
+{
+  "backend_url": "http://127.0.0.1:5000",
+  "backend_status": {
+    "mode": "live",
+    "model": "gemini-4-hydrogen",
+    "configured_model": "gemini-4-hydrogen",
+    "report_mode": "text",
+    "investigations": [
+      {
+        "psi_id": "PSI-25",
+        "title": "Burning and Suppression of Solids - II",
+        "acronym": "BASS-II",
+        "reference_link": "https://doi.org/10.60555/4qc4-de67",
+        "experiments": 74,
+        "reports": [
+          {
+            "name": "BASS-II_Summary_Report.pdf",
+            "mb": 49.0
+          }
+        ]
+      },
+      {
+        "psi_id": "PSI-69",
+        "title": "Flame Extinguishment Experiment",
+        "acronym": "FLEX",
+        "reference_link": "https://doi.org/10.60555/mbq8-0451",
+        "experiments": 86,
+        "reports": [
+          {
+            "name": "FLEX_EIRD_v4.pdf",
+            "mb": 3.2
+          }
+        ]
+      }
+    ]
+  },
+  "query_sent": {
+    "input": {
+      "crew_environment": "Lunar Base",
+      "fire_safety_category": "Fire Prevention",
+      "research_topic": "Material Flammability",
+      "investigation": "All Investigations",
+      "fuel_type": "Solid Materials",
+      "measurement_type": "Flame Spread Rate",
+      "conditions": {
+        "oxygen_pct": 30,
+        "pressure_kpa": 70.3,
+        "airflow_cm_s": 1,
+        "gravity_level": "microgravity"
+      }
+    },
+    "research_question": "How do the available solid-fuel tests relate to these lunar-base conditions?"
+  },
+  "run_id": "20261115-014041-825",
+  "actual_backend_model": "gemini-4-hydrogen",
+  "duration_browser_s": 0.079,
+  "backend_api_request_count": 1,
+  "real_search_submissions_this_execution": 0,
+  "saved_live_verification_searches": 1,
+  "loaded_record_ids": [
+    "PSI-25-CS02",
+    "PSI-25-CS07",
+    "PSI-25-CS61",
+    "PSI-69-CS14",
+    "PSI-69-CS55",
+    "PSI-69-CS56"
+  ],
+  "checks": [
+    "Complete live backend search; loading state; exact filter serialization; output validation; API mode",
+    "Investigation highlighting and experiment tabs reflect real returned IDs",
+    "Loaded numeric records retain conditions, units, actual outcomes and source URLs",
+    "Comparison selection and every chart tab, including scientific no-data states",
+    "Chart data table matches loaded numeric test value/unit; source panels retain selected IDs and URLs",
+    "390/768/1024px results render without horizontal page overflow",
+    "Injected HTTP/schema/empty/record-endpoint failure states; no silent fallback"
+  ],
+  "browser_errors": []
+}

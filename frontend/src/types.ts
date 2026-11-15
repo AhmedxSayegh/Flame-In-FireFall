@@ -1,4 +1,4 @@
-// ─── Input schema (shared/schemas/input.schema.json) ──────────────────────
+// ─── Input schema (src/schemas/input.schema.json) ──────────────────────────
 export const CREW_ENVIRONMENTS = ['All Environments', 'Spacecraft', 'Space Station', 'Lunar Base', 'Martian Base', 'Pressurized Rover'] as const;
 export const FIRE_SAFETY_CATEGORIES = ['All Categories', 'Fire Prevention', 'Fire Detection', 'Fire Growth & Spread', 'Fire Suppression'] as const;
 export const RESEARCH_TOPICS = ['All Topics', 'Material Flammability', 'Flame Spread', 'Smoke & Aerosols', 'Flame Extinction', 'Combustion Behavior'] as const;
@@ -39,9 +39,18 @@ export interface SearchRequest {
   research_question: string | null;
 }
 
-// ─── Output schema (shared/schemas/output.schema.json) ────────────────────
-// The backend copies the user's input into output.query unchanged.
-export type Gravity = 'microgravity' | 'partial gravity' | 'normal gravity' | 'simulated microgravity';
+// ─── Output schema (src/schemas/output.schema.json) ────────────────────────
+export type OutputGravity = 'All' | 'microgravity' | 'partial gravity' | 'normal gravity' | 'simulated microgravity' | null;
+
+export interface OutputQuery {
+  crew_environment?: 'All' | Exclude<CrewEnvironment, 'All Environments'>;
+  fire_safety_category?: 'All' | Exclude<FireSafetyCategory, 'All Categories'>;
+  research_topic?: 'All' | Exclude<ResearchTopic, 'All Topics'>;
+  investigation?: 'All' | Exclude<Investigation, 'All Investigations'>;
+  fuel_type?: FuelType;
+  measurement_type?: 'All' | Exclude<MeasurementType, 'All Measurements'>;
+  conditions?: { oxygen_pct?: number | null; pressure_kpa?: number | null; airflow_cm_s?: number | null; gravity?: OutputGravity };
+}
 
 /** "match" | "partial" | "no match" | "unknown", optionally " (reason)". */
 export type MatchString = string;
@@ -52,13 +61,6 @@ export const FIELD_MATCH_KEYS = [
   'measurement_type', 'oxygen', 'pressure', 'airflow', 'gravity',
 ] as const;
 export type FieldMatchKey = (typeof FIELD_MATCH_KEYS)[number];
-
-/** Labels shown for field_matches keys. */
-export const FIELD_LABEL: Record<FieldMatchKey, string> = {
-  crew_environment: 'Crew environment', fire_safety_category: 'Fire safety category', research_topic: 'Research topic',
-  investigation: 'Investigation', fuel_type: 'Fuel type', measurement_type: 'Measurement', oxygen: 'Oxygen',
-  pressure: 'Pressure', airflow: 'Airflow', gravity: 'Gravity',
-};
 export type FieldMatches = Partial<Record<FieldMatchKey, MatchString>>;
 
 export interface TestRef { test_number: number | string; test_identifier: string }
@@ -98,7 +100,7 @@ export interface RankedInvestigation {
 }
 
 export interface SearchOutput {
-  query: SearchInput;
+  query: OutputQuery;
   inputs_used: string[];
   lunar_reference?: string;
   match_quality: string;
@@ -110,8 +112,8 @@ export interface SearchOutput {
 
 // ─── Experiment records (chart / source layer) ─────────────────────────────
 // The output schema carries formatted strings only. Charts need numbers, so they read
-// these records, keyed by experiment_id, from GET /api/records
-// (built by backend/pipeline.py experiment_records()).
+// these records, keyed by experiment_id. Map your backend's investigation_schema.json
+// to this shape in src/lib/recordAdapter.ts.
 
 export type Quantity = 'burning_rate' | 'flame_spread_rate' | 'flame_size' | 'extinction_condition' | 'smoke_particle_size' | 'detector_response';
 
@@ -163,31 +165,9 @@ export interface ExperimentRecord {
   fuel: string | null;
   fuel_type: Exclude<FuelType, 'All'> | null;
   sample: string | null;
-  gravity: Gravity | null;
+  gravity: Exclude<OutputGravity, 'All' | null> | null;
   tests: TestRecord[];
   sources: SourceRef[];
-}
-
-// ─── Backend response (backend/app.py, POST /api/search) ──────────────────
-/** How the result was produced. "saved_example" = no API key set; the backend returned its saved example. */
-export interface RunMeta {
-  mode: 'live' | 'saved_example';
-  model: string | null;
-  run_id: string;
-  duration_s: number;
-  valid: boolean;
-  validation_errors: string[];
-  /** Fields the backend corrected after Gemini answered (links, test lists). */
-  integrity_notes: string[];
-  query_matches_example?: boolean;
-  log?: string[];
-}
-
-export interface SearchResponse { output: SearchOutput; meta: RunMeta }
-
-/** GET /api/status */
-export interface BackendStatus {
-  mode: 'live' | 'saved_example';
-  model: string | null;
-  investigations: { psi_id: string; acronym?: string; title?: string; experiments: number; reports: { name: string; mb: number }[] }[];
+  /** true when the record is synthetic demo data, never NASA measurements */
+  demo?: boolean;
 }

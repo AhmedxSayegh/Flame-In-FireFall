@@ -1,0 +1,42 @@
+{
+  "requests": [
+    {
+      "url": "http://127.0.0.1:5000/api/status",
+      "http_status": 200,
+      "bytes": 542,
+      "mode": "live",
+      "model": "gemini-4-hydrogen"
+    },
+    {
+      "url": "http://127.0.0.1:5173/",
+      "http_status": 200,
+      "bytes": 943
+    },
+    {
+      "url": "http://127.0.0.1:5173/api/status",
+      "http_status": 200,
+      "bytes": 542,
+      "mode": "live",
+      "model": "gemini-4-hydrogen"
+    },
+    {
+      "url": "http://127.0.0.1:5173/api/records?experiment_ids=PSI-69-CS55",
+      "http_status": 200,
+      "bytes": 2290,
+      "loaded_record_ids": [
+        "PSI-69-CS55"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:5173/src/lib/schema.ts",
+      "http_status": 200,
+      "bytes": 9291
+    },
+    {
+      "url": "http://127.0.0.1:5173/@fs/C:/Users/Moath/Downloads/Flame-In-FireFall-main/shared/schemas/input.schema.json?import",
+      "http_status": 200,
+      "bytes": 2199
+    }
+  ],
+  "generation_requests": 0
+}

@@ -1,11 +1,12 @@
+import { ExperimentDetails } from './ExperimentDetails';
 import { ExternalLink, FileText } from 'lucide-react';
-import { type ReactNode, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import { XVAR_META, type XVar } from '../lib/chartData';
 import { fmtNum, measurementGroups, outcomeCounts } from '../lib/records';
 import { useSearch } from '../state/SearchContext';
 import { QUANTITY_LABEL, type ExperimentRecord } from '../types';
-import { Orbit, SectionTitle } from './Decor';
+import { Orbit, Panel, PanelTitle } from './Decor';
 import { axisLabel, axisProps, ChartFrame, EmptyState, TooltipBox, usePool, type PoolItem } from './Shared';
 
 const ORANGE = '#EA8B33', GOLD = '#F3B940', TEAL = '#32667F';
@@ -128,7 +129,7 @@ function IndividualGraph({ item, rec }: { item: PoolItem; rec: ExperimentRecord 
   );
 }
 
-function Block({ letter, title, accent, children }: { letter: string; title: string; accent: string; children: ReactNode }) {
+function Block({ letter, title, accent, children }: { letter: string; title: string; accent: string; children: React.ReactNode }) {
   return (
     <div>
       <div className="mb-3 flex items-baseline gap-3">
@@ -141,22 +142,30 @@ function Block({ letter, title, accent, children }: { letter: string; title: str
   );
 }
 
-export function SelectedExperimentAnalysis() {
+/** Tabs for the selected investigation's top experiments (max 3, rank order). */
+function ExperimentTabs() {
+  const pool=usePool();
+  const {activeId,setActiveId}=useSearch();
+  return <label className="mb-6 block"><span className="label">Selected experiment</span><select className="field w-full" aria-label="Selected experiment" value={activeId ?? ''} title={pool.get(activeId ?? '')?.exp.experiment} onChange={e => setActiveId(e.target.value)}>{[...pool.values()].map(it => <option key={it.id} value={it.id}>{it.id} · {it.exp.experiment}</option>)}</select></label>;
+}
+
+export function SelectedExperimentAnalysis({ className = '', onViewEvidence }: { className?: string; onViewEvidence: () => void }) {
   const pool = usePool();
-  const { activeId } = useSearch();
+  const { activeId, result } = useSearch();
   const item = activeId ? pool.get(activeId) : undefined;
 
   return (
-    <section id="analysis">
-      <SectionTitle index="04" title="Experiment Analysis" kicker="Select an experiment from the table or a chart to change this analysis." />
+    <Panel id="analysis" className={`@container ${className}`}>
+      <PanelTitle index="02" title="Experiment Analysis" kicker="Choose an experiment below, or click one in the comparison table or charts." />
+      <ExperimentTabs />
       {!item ? <EmptyState title="No experiment selected" /> : (
         <div key={item.id}>
-          <div className="relative mb-12">
-            <Orbit className="absolute -left-6 -top-6 w-[min(560px,100%)]" w={560} h={140} tilt={-4} />
-            <h2 className="relative text-[40px] font-medium uppercase leading-none sm:text-[56px]">{item.exp.experiment}</h2>
+          <div className="relative mb-8">
+            <Orbit className="absolute -left-6 -top-6 w-[min(480px,100%)]" w={560} h={140} tilt={-4} />
+            <h2 className="relative text-[32px] font-medium uppercase leading-none sm:text-[42px]">{item.exp.experiment}</h2>
           </div>
 
-          <div className="grid gap-12 lg:grid-cols-2">
+          <div className="grid gap-8 @2xl:grid-cols-2">
             <Block letter="B" title="Key Findings" accent={ORANGE}>
               <p className="text-[15px] leading-relaxed tnum">{item.exp.summary_of_key_findings}</p>
               {item.exp.why_selected && <p className="mt-3 text-xs text-muted">{item.exp.why_selected}</p>}
@@ -169,7 +178,8 @@ export function SelectedExperimentAnalysis() {
             </Block>
           </div>
 
-          <div className="mt-12">
+          <ExperimentDetails key={item.id} item={item} />
+          <div className="mt-10">
             <Block letter="D" title="Individual Graphical Representation" accent={GOLD}>
               {item.record ? <IndividualGraph item={item} rec={item.record} /> : (
                 <EmptyState title="No numeric test record loaded for this experiment">
@@ -179,9 +189,20 @@ export function SelectedExperimentAnalysis() {
             </Block>
           </div>
 
-          <div className="mt-12">
-            <Block letter="E" title="Original Source" accent={ORANGE}>
-              <dl className="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-[180px_1fr]">
+          <div className="mt-8"><h3 className="mb-3 text-xl uppercase">Relevant limitations</h3><p className="text-sm">Missing measurements remain unavailable; findings and interpretation apply only within the recorded conditions. Search-wide gaps and caveats supplied by the backend:</p><ul className="mt-2 space-y-2 text-sm">{[...(result?.output.gaps ?? []),...(result?.output.caveats ?? [])].map((text,i) => <li key={i}>{text}</li>)}</ul></div>
+          <button className="btn-ghost mt-6" onClick={onViewEvidence}>View evidence</button>
+        </div>
+      )}
+    </Panel>
+  );
+}
+
+export function SelectedExperimentEvidence() {
+  const pool=usePool(); const {activeId}=useSearch(); const item=pool.get(activeId ?? '');
+  if (!item) return <EmptyState title="No experiment selected" />;
+  return <Panel id="selected-evidence"><PanelTitle index="02" title="Selected experiment evidence" />          <div className="mt-3">
+            <div>
+              <dl className="grid grid-cols-[110px_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm sm:grid-cols-[160px_minmax(0,1fr)]">
                 <dt className="label mb-0">NASA PSI ID</dt><dd>{item.inv.psi_id}</dd>
                 <dt className="label mb-0">Investigation</dt><dd>{item.inv.name}</dd>
                 <dt className="label mb-0">Experiment ID</dt><dd className="tnum">{item.id}</dd>
@@ -191,19 +212,8 @@ export function SelectedExperimentAnalysis() {
                 <dd><a href={item.inv.reference_link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal hover:underline">{item.inv.reference_link} <ExternalLink size={12} /></a></dd>
                 <dt className="label mb-0">Evidence used</dt>
                 <dd><ul className="space-y-1">{item.exp.evidence.map((e) => <li key={e} className="flex items-start gap-2"><FileText size={13} className="mt-0.5 shrink-0 text-orange" strokeWidth={1.5} />{e}</li>)}</ul></dd>
-                {item.record?.sources.length ? <>
-                  <dt className="label mb-0">Reports &amp; papers</dt>
-                  <dd><ul className="space-y-1">{item.record.sources.map((s) => (
-                    <li key={s.label} className="flex items-start gap-2"><FileText size={13} className="mt-0.5 shrink-0 text-teal" strokeWidth={1.5} />
-                      <span>{s.url ? <a href={s.url} target="_blank" rel="noreferrer" className="text-teal hover:underline">{s.label}</a> : s.label}{s.pages ? `, ${s.pages}` : ''}
-                        {!s.verified && <span className="ml-1.5 text-[10px] uppercase tracking-[0.14em] text-muted">unverified</span>}</span>
-                    </li>))}</ul></dd>
-                </> : null}
               </dl>
-            </Block>
+            </div>
           </div>
-        </div>
-      )}
-    </section>
-  );
+</Panel>;
 }
