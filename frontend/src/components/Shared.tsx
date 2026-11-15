@@ -90,7 +90,7 @@ export function ChartFrame({ title, subtitle, controls, rows, csvName, footnote,
   const [view, setView] = useState<'chart' | 'table'>('chart');
   const cols = rows.length ? Object.keys(rows[0]) : [];
   return (
-    <figure className="rounded-xl border border-line bg-white p-5 sm:p-6">
+    <figure className="min-w-0 rounded-xl border border-line bg-white p-5 sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <figcaption className="display text-xl font-medium uppercase leading-tight">{title}</figcaption>
@@ -105,9 +105,9 @@ export function ChartFrame({ title, subtitle, controls, rows, csvName, footnote,
           </div>
         )}
       </div>
-      {controls && !empty && <div className="mt-4 flex flex-wrap gap-2">{controls}</div>}
+      {controls && <div className="mt-4 flex flex-wrap gap-2">{controls}</div>}
       <div className="mt-4">
-        {empty ?? (view === 'chart' ? children : (
+        {empty || (view === 'chart' ? children : (
           <div className="max-h-[320px] overflow-auto">
             <table className="w-full text-left text-xs tnum">
               <thead className="sticky top-0 bg-navy text-white"><tr>{cols.map((c) => <th key={c} className="px-3 py-2 font-medium">{c}</th>)}</tr></thead>
@@ -133,6 +133,11 @@ export function TooltipBox({ title, color, rows }: { title: string; color?: stri
     </div>
   );
 }
+
+export const paddedDomain = ([min, max]: [number, number]): [number, number] => {
+  const pad = min === max ? Math.max(Math.abs(min) * 0.03, 0.01) : (max - min) * 0.04;
+  return [min - pad, max + pad];
+};
 
 export const axisProps = {
   stroke: '#D5D9DE', tick: { fill: '#132F45', fontSize: 11 }, tickLine: false,

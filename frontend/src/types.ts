@@ -84,6 +84,14 @@ export interface TopExperimentsComparison {
   conclusion: string;
 }
 
+export interface ReportEvidence {
+  title: string;
+  text: string;
+  page: number;
+  test_numbers: (number | string)[];
+  url: string;
+}
+
 export interface RankedInvestigation {
   psi_id: string;
   name: string;
@@ -94,6 +102,7 @@ export interface RankedInvestigation {
   field_matches: FieldMatches;
   top_experiments: TopExperiment[];
   runner_up?: string | null;
+  report_evidence?: ReportEvidence[];
   top_experiments_comparison: TopExperimentsComparison;
 }
 
@@ -183,7 +192,7 @@ export interface RunMeta {
   log?: string[];
 }
 
-export interface SearchResponse { output: SearchOutput; meta: RunMeta }
+export interface SearchResponse { output: SearchOutput; meta: RunMeta; records?: unknown[] }
 
 /** GET /api/status */
 export interface BackendStatus {

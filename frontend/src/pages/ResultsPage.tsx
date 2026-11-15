@@ -7,7 +7,7 @@ import { ResearchGaps, SupportingSources } from '../components/GapsAndSources';
 import { InvestigationRanking } from '../components/InvestigationRanking';
 import { SelectedExperimentAnalysis } from '../components/SelectedExperimentAnalysis';
 import { DataSourceBadge, RunInfo, SavedExampleBanner } from '../components/Shared';
-import { DEFAULT_FORM, useSearch, type FormState } from '../state/SearchContext';
+import { useSearch, type FormState } from '../state/SearchContext';
 
 const CHIP_LABEL: Partial<Record<keyof FormState, string>> = {
   crew_environment: 'Environment', fire_safety_category: 'Category', research_topic: 'Topic', investigation: 'Investigation',
@@ -19,7 +19,9 @@ export default function ResultsPage() {
   const nav = useNavigate();
   if (!result || !submittedForm) return <Navigate to="/" replace />;
   const { output, meta } = result;
-  const chips = (Object.keys(CHIP_LABEL) as (keyof FormState)[]).filter((k) => submittedForm[k] !== DEFAULT_FORM[k]);
+  const { conditions, ...filters } = output.query;
+  const chips = (Object.entries({ ...filters, ...conditions }) as [keyof FormState, string | number | null][])
+    .filter(([key, value]) => CHIP_LABEL[key] && value != null && !(typeof value === 'string' && value.startsWith('All')));
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-white">
@@ -35,9 +37,10 @@ export default function ResultsPage() {
           <h1 className="text-[52px] font-medium uppercase leading-none sm:text-[80px]">Research Results</h1>
           <p className="mt-3 text-lg font-light text-teal">NASA PSI Combustion Experiment Analysis</p>
         </div>
-        <div className="mt-8 flex flex-wrap gap-2 border-y border-line py-3 text-xs">
-          {chips.length === 0 ? <span className="text-muted">No filters applied — all loaded investigations shown.</span> : chips.map((k) => (
-            <span key={k} className="pill"><span className="text-muted">{CHIP_LABEL[k]}</span> {submittedForm[k]}</span>
+        <div className="mt-8 flex flex-wrap items-center gap-2 border-y border-line py-3 text-xs" aria-label="Active result filters">
+          <span className="label mb-0 mr-1">Active filters</span>
+          {chips.length === 0 ? <span className="text-muted">All loaded investigations</span> : chips.map(([k, value]) => (
+            <span key={k} className="pill"><span className="text-muted">{CHIP_LABEL[k]}</span> {value}</span>
           ))}
           {submittedForm.research_question.trim() && <span className="pill max-w-full truncate"><span className="text-muted">Question</span> {submittedForm.research_question}</span>}
         </div>
@@ -49,7 +52,7 @@ export default function ResultsPage() {
         <Divider />
         <ExperimentComparisonTable />
         <Divider />
-        <ComparisonCharts />
+        <ComparisonCharts key={meta.run_id} />
         <Divider />
         <SelectedExperimentAnalysis />
         <Divider />

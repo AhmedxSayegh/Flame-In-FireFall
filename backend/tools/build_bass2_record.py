@@ -128,10 +128,10 @@ def test_rows(df, sets):
     set_of = {t["test_number"]: cs["set_id"] for cs in sets for t in cs["tests"]}
     rows = []
     for _, t in df.iterrows():
-        o2 = t.o2_i_n if t.o2_i_n is not None and O2_VALID[0] <= t.o2_i_n <= O2_VALID[1] else None
+        o2 = t.o2_i_n if O2_VALID[0] <= t.o2_i_n <= O2_VALID[1] else None
         rows.append({
             "test_number": t.test, "test_identifier": f"sample {t['sample']}", "set_id": set_of.get(t.test),
-            "oxygen_pct": r(o2), "pressure_kpa": 101.3, "airflow_cm_s": None,
+            "oxygen_pct": r(o2), "pressure_kpa": None, "airflow_cm_s": None,
             "outcome": "; ".join(t.events).capitalize() if t.events else None,
             "material": t.material, "measurements": [],
         })

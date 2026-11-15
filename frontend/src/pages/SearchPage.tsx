@@ -64,9 +64,9 @@ export default function SearchPage() {
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <button type="submit" className="btn-primary" disabled={status === 'loading'}>
               {status === 'loading' ? <Loader2 size={16} className="animate-spin" /> : null}
-              Apply Filters {status !== 'loading' && <ArrowRight size={16} />}
+              {status === 'loading' ? 'Searching…' : 'Apply Filters'} {status !== 'loading' && <ArrowRight size={16} />}
             </button>
-            <button type="button" className="btn-secondary" onClick={reset}><RotateCcw size={14} /> Reset</button>
+            <button type="button" className="btn-secondary" onClick={reset} disabled={status === 'loading'}><RotateCcw size={14} /> Reset</button>
           </div>
         </form>
       </main>

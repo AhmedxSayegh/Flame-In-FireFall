@@ -1,5 +1,5 @@
 import { AlertTriangle, Database, ExternalLink, FileText, Info } from 'lucide-react';
-import type { SearchOutput } from '../types';
+import type { ReportEvidence, SearchOutput } from '../types';
 import { SectionTitle } from './Decor';
 import { usePool } from './Shared';
 
@@ -43,6 +43,20 @@ export function ResearchGaps({ output }: { output: SearchOutput }) {
   );
 }
 
+export function ReportEvidenceList({ evidence }: { evidence: ReportEvidence[] }) {
+  return (
+    <ul className="space-y-2 text-sm">
+      {evidence.map((e) => (
+        <li key={e.url} className="border-l border-line pl-3">
+          <p className="font-medium">{e.title}</p>
+          <p>{e.text}</p>
+          <a className="text-teal hover:underline" href={e.url} target="_blank" rel="noreferrer">BASS-II Summary Report · PDF page {e.page}</a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function SupportingSources({ output }: { output: SearchOutput }) {
   const pool = usePool();
   return (
@@ -75,6 +89,12 @@ export function SupportingSources({ output }: { output: SearchOutput }) {
                     </div>
                   </div>
                 ))}
+                {!!inv.report_evidence?.length && (
+                  <>
+                    <h4 className="font-medium">Findings from the report</h4>
+                    <ReportEvidenceList evidence={inv.report_evidence} />
+                  </>
+                )}
                 {evidence.length > 0 && <p className="text-xs text-muted"><span className="font-medium text-navy">Relevant record fields / pages:</span> {evidence.join(' · ')}</p>}
               </div>
             </li>

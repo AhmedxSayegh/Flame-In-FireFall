@@ -46,7 +46,7 @@ export async function search(req: SearchRequest): Promise<SearchResult> {
     err.details = Array.isArray(body.details) ? body.details : [];
     throw err;
   }
-  const { output, meta } = body as SearchResponse;
+  const { output, meta, records: bundled } = body as SearchResponse;
 
   const vo = validateOutput(output);
   if (!vo.ok) throw new SchemaError('output', vo.errors);
@@ -54,14 +54,19 @@ export async function search(req: SearchRequest): Promise<SearchResult> {
   // Numeric per-test records for the charts. If this fails, tables and text still render.
   const records: Record<string, ExperimentRecord> = {};
   const ids = output.ranked.flatMap((r) => r.top_experiments.map((e) => e.experiment_id));
-  if (ids.length) {
+  const addRecords = (rawRecords: unknown[]) => {
+    for (const raw of rawRecords) {
+      const rec = adaptBackendRecord(raw);
+      if (rec) records[rec.experiment_id] = rec;
+    }
+  };
+  if (Array.isArray(bundled)) {
+    addRecords(bundled);
+  } else if (ids.length) {
     try {
       const r = await fetch(`${API}/records?experiment_ids=${encodeURIComponent(ids.join(','))}`);
       if (r.ok) {
-        for (const raw of ((await r.json()).records ?? []) as unknown[]) {
-          const rec = adaptBackendRecord(raw);
-          if (rec) records[rec.experiment_id] = rec;
-        }
+        addRecords((await r.json()).records ?? []);
       }
     } catch { /* charts show empty states that name the missing records */ }
   }

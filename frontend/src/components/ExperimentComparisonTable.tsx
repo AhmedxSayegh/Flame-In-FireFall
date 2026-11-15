@@ -1,20 +1,16 @@
 import { compareRows } from '../lib/compare';
-import { ATTRIBUTE_ALIASES, deriveAttributes, NA, TABLE_ATTRIBUTES } from '../lib/records';
+import { deriveAttributes, NA, TABLE_ATTRIBUTES } from '../lib/records';
 import { useSearch } from '../state/SearchContext';
 import { SectionTitle } from './Decor';
 import { EmptyState, SeriesDot, usePool, type PoolItem } from './Shared';
 
-/** Value for one cell: backend compared_on first, then the numeric record, else N/A. */
+/** Scientific values come from the test record. */
 export function cellValue(item: PoolItem, attribute: (typeof TABLE_ATTRIBUTES)[number]): string {
   if (attribute === 'Relevance')
     return `Investigation #${item.inv.rank} (${Math.round(item.inv.relevance_score)}/100) · experiment #${item.exp.rank}`;
-  for (const row of item.inv.top_experiments_comparison.compared_on) {
-    const mapped = ATTRIBUTE_ALIASES[row.attribute.toLowerCase()] ?? row.attribute;
-    if (mapped === attribute && row.values[item.id]) return row.values[item.id];
-  }
   if (item.record) return deriveAttributes(item.record)[attribute] ?? NA;
   if (attribute === 'Investigation / PSI ID') return `${item.inv.name} / ${item.inv.psi_id}`;
-  if (attribute === 'Test ID(s)') return item.exp.tests.map((t) => t.test_identifier).join(', ') || NA;
+  if (attribute === 'Test ID(s)') return item.exp.tests.map((t) => `#${t.test_number} · ${t.test_identifier}`).join(', ') || NA;
   if (attribute === 'Number of Tests') return String(item.exp.tests.length);
   return NA;
 }
@@ -24,12 +20,12 @@ export function ExperimentPicker() {
   const { compareIds, setCompareIds, activeId } = useSearch();
   const items = [...pool.values()];
   const toggle = (id: string) => {
-    if (compareIds.includes(id)) { if (compareIds.length > 2) setCompareIds(compareIds.filter((x) => x !== id)); }
+    if (compareIds.includes(id)) { if (compareIds.length > 1) setCompareIds(compareIds.filter((x) => x !== id)); }
     else if (compareIds.length < 3) setCompareIds([...compareIds, id]);
   };
   return (
     <div className="mb-6">
-      <p className="label">Select 2–3 experiments to compare <span className="normal-case tracking-normal text-muted">({compareIds.length}/3 selected)</span></p>
+      <p className="label">Select up to 3 experiments <span className="normal-case tracking-normal text-muted">({compareIds.length}/3 selected)</span></p>
       <div className="flex flex-wrap gap-2">
         {items.map((it) => {
           const on = compareIds.includes(it.id);
@@ -64,8 +60,8 @@ export function ExperimentComparisonTable() {
   const own = invs.size === 1 ? cols[0].inv.top_experiments_comparison : null;
   const exact = own && own.experiment_ids.length === cols.length && own.experiment_ids.every((id) => compareIds.includes(id));
   const computed = compareRows(compareIds, rows);
-  const sims = exact ? own!.similarities : computed.similarities;
-  const diffs = exact ? own!.differences : computed.differences;
+  const sims = exact && own.similarities.length ? own.similarities : computed.similarities;
+  const diffs = exact && own.differences.length ? own.differences : computed.differences;
   const conclusion = exact ? own!.conclusion
     : `${invs.size > 1 ? 'Cross-investigation' : 'Custom'} selection — statements computed from the table values above; no source conclusion exists for this combination. Records from different investigations keep their own PSI IDs and test identifiers.`;
 

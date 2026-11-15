@@ -9,22 +9,6 @@ export const TABLE_ATTRIBUTES = [
   'Number of Tests', 'Measurement', 'Experimental Outcome', 'Relevance',
 ] as const;
 
-/** Aliases so backend `compared_on` rows ("Oxygen", "Fuel", "Tests"…) land on the right table row. */
-export const ATTRIBUTE_ALIASES: Record<string, (typeof TABLE_ATTRIBUTES)[number]> = {
-  investigation: 'Investigation / PSI ID', 'psi id': 'Investigation / PSI ID',
-  'test ids': 'Test ID(s)', 'test id(s)': 'Test ID(s)',
-  fuel: 'Fuel / Material', material: 'Fuel / Material', 'fuel / material': 'Fuel / Material',
-  'fuel type': 'Fuel Type', sample: 'Sample Shape / Size', 'sample shape / size': 'Sample Shape / Size',
-  oxygen: 'Oxygen Concentration', 'oxygen concentration': 'Oxygen Concentration', o2: 'Oxygen Concentration',
-  pressure: 'Atmospheric Pressure', 'atmospheric pressure': 'Atmospheric Pressure',
-  airflow: 'Airflow Velocity', 'airflow velocity': 'Airflow Velocity', flow: 'Airflow Velocity',
-  gravity: 'Gravity Level', 'gravity level': 'Gravity Level',
-  tests: 'Number of Tests', 'number of tests': 'Number of Tests',
-  measurement: 'Measurement', 'burning rate': 'Measurement',
-  outcomes: 'Experimental Outcome', outcome: 'Experimental Outcome', 'experimental outcome': 'Experimental Outcome',
-  relevance: 'Relevance',
-};
-
 export const MEASUREMENT_TO_QUANTITY: Record<Exclude<MeasurementType, 'All Measurements'>, Quantity> = {
   'Flame Spread Rate': 'flame_spread_rate',
   'Flame Size': 'flame_size',
@@ -34,7 +18,7 @@ export const MEASUREMENT_TO_QUANTITY: Record<Exclude<MeasurementType, 'All Measu
   'Detector Response': 'detector_response',
 };
 
-export const fmtNum = (v: number) => (Number.isInteger(v) ? String(v) : v.toFixed(Math.abs(v) < 10 ? 2 : 1).replace(/\.?0+$/, ''));
+export const fmtNum = (v: number) => Number(v.toPrecision(5)).toString();
 
 export function rangeText(values: (number | null)[], unit: string): string {
   const nums = values.filter((v): v is number => typeof v === 'number' && Number.isFinite(v));
@@ -49,21 +33,28 @@ export function outcomeCounts(rec: ExperimentRecord): Record<string, number> {
   return out;
 }
 
+export const measurementKey = (m: { quantity: Quantity; unit: string; definition: string }) =>
+  JSON.stringify([m.quantity, m.unit, m.definition]);
+
 export function measurementGroups(rec: ExperimentRecord) {
   const g = new Map<string, { quantity: Quantity; unit: string; definition: string; values: number[] }>();
-  for (const t of rec.tests)
+  for (const t of rec.tests) {
+    const seen = new Set<string>();
     for (const m of t.measurements) {
-      const k = `${m.quantity}|${m.unit}|${m.definition}`;
+      const k = measurementKey(m);
+      if (seen.has(k)) continue;
+      seen.add(k);
       if (!g.has(k)) g.set(k, { quantity: m.quantity, unit: m.unit, definition: m.definition, values: [] });
       g.get(k)!.values.push(m.value);
     }
+  }
   return [...g.values()];
 }
 
 export function measurementText(rec: ExperimentRecord): string {
   const groups = measurementGroups(rec);
   if (!groups.length) return NA;
-  return groups.map((g) => `${QUANTITY_LABEL[g.quantity]}: ${rangeText(g.values, g.unit)} (n=${g.values.length})`).join('; ');
+  return groups.map((g) => `${QUANTITY_LABEL[g.quantity]}: ${rangeText(g.values, g.unit === 'unconfirmed' ? '(unit unconfirmed)' : g.unit)} (${g.values.length}/${rec.tests.length} runs)`).join('; ');
 }
 
 /** Table values derived strictly from the record. Anything absent → "N/A". */
@@ -71,7 +62,7 @@ export function deriveAttributes(rec: ExperimentRecord): Record<string, string> 
   const oc = outcomeCounts(rec);
   return {
     'Investigation / PSI ID': `${rec.investigation} / ${rec.psi_id}`,
-    'Test ID(s)': rec.tests.map((t) => t.test_identifier).join(', ') || NA,
+    'Test ID(s)': rec.tests.map((t) => `#${t.test_number} · ${t.test_identifier}`).join(', ') || NA,
     'Fuel / Material': rec.fuel ?? NA,
     'Fuel Type': rec.fuel_type ?? NA,
     'Sample Shape / Size': rec.sample ?? NA,
@@ -81,6 +72,6 @@ export function deriveAttributes(rec: ExperimentRecord): Record<string, string> 
     'Gravity Level': rec.gravity ?? NA,
     'Number of Tests': String(rec.tests.length),
     Measurement: measurementText(rec),
-    'Experimental Outcome': Object.keys(oc).length ? Object.entries(oc).map(([k, n]) => `${k} ×${n}`).join(', ') : NA,
+    'Experimental Outcome': Object.keys(oc).length ? [...Object.entries(oc).map(([k, n]) => `${k} ×${n}`), ...((rec.tests.length - Object.values(oc).reduce((a, n) => a + n, 0)) > 0 ? ['Some outcomes unreported'] : [])].join(', ') : NA,
   };
 }

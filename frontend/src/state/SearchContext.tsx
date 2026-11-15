@@ -81,10 +81,15 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<Ctx['error']>(null);
   const [result, setResult] = useState<SearchResult | null>(null);
   const [submittedForm, setSubmittedForm] = useState<FormState | null>(null);
-  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [compareIds, setComparison] = useState<string[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => { try { sessionStorage.setItem(KEY, JSON.stringify(form)); } catch { /* ignore */ } }, [form]);
+
+  const setCompareIds = useCallback((ids: string[]) => {
+    setComparison(ids);
+    setActiveId((current) => current && ids.includes(current) ? current : ids[0] ?? null);
+  }, []);
 
   const setField = useCallback(<K extends keyof FormState>(k: K, v: FormState[K]) => setForm((f) => ({ ...f, [k]: v })), []);
   const reset = useCallback(() => { setForm(DEFAULT_FORM); setError(null); }, []);
@@ -95,7 +100,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     try {
       const r = await search({ input: toInput(form), research_question: form.research_question.trim() || null });
       setResult(r); setSubmittedForm(form); setStatus('ready');
-      // Default comparison: top experiments in rank order across investigations (max 3).
+      // Default comparison: use the leading investigation when it has at least two experiments.
       const pool = r.output.ranked.flatMap((inv) => inv.top_experiments.map((e) => e.experiment_id));
       const first = r.output.ranked[0]?.top_experiments.map((e) => e.experiment_id) ?? [];
       const ids = (first.length >= 2 ? first : pool).slice(0, 3);
@@ -108,12 +113,12 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         : { message: e instanceof Error ? e.message : 'Search failed', details: (e as { details?: string[] }).details ?? [] });
       return false;
     }
-  }, [form]);
+  }, [form, setCompareIds]);
 
   const value = useMemo<Ctx>(() => ({
     form, setField, reset, advancedOpen, setAdvancedOpen, status, error, result, submittedForm, apply,
     compareIds, setCompareIds, activeId, setActiveId: (id: string) => setActiveId(id),
-  }), [form, setField, reset, advancedOpen, status, error, result, submittedForm, apply, compareIds, activeId]);
+  }), [form, setField, reset, advancedOpen, status, error, result, submittedForm, apply, compareIds, setCompareIds, activeId]);
 
   return <SearchCtx.Provider value={value}>{children}</SearchCtx.Provider>;
 }

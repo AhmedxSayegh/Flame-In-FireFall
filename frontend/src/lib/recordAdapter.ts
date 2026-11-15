@@ -1,4 +1,7 @@
-import type { ExperimentRecord } from '../types';
+import { QUANTITY_LABEL, type ExperimentRecord } from '../types';
+
+const finite = (value: unknown): number | null =>
+  typeof value === 'number' && Number.isFinite(value) ? value : null;
 
 /**
  * Checks one record from GET /api/records and keeps only well-formed values.
@@ -20,13 +23,13 @@ export function adaptBackendRecord(raw: unknown): ExperimentRecord | null {
     gravity: r.gravity ?? null,
     sources: Array.isArray(r.sources) ? r.sources : [],
     // Keep only numerically valid measurements; never coerce strings into numbers.
-    tests: r.tests.map((t) => ({
+    tests: r.tests.filter((t) => t && typeof t.test_identifier === 'string').map((t) => ({
       ...t,
-      oxygen_pct: typeof t.oxygen_pct === 'number' ? t.oxygen_pct : null,
-      pressure_kpa: typeof t.pressure_kpa === 'number' ? t.pressure_kpa : null,
-      airflow_cm_s: typeof t.airflow_cm_s === 'number' ? t.airflow_cm_s : null,
+      oxygen_pct: finite(t.oxygen_pct),
+      pressure_kpa: finite(t.pressure_kpa),
+      airflow_cm_s: finite(t.airflow_cm_s),
       outcome: t.outcome ?? null,
-      measurements: (t.measurements ?? []).filter((m) => typeof m.value === 'number' && Number.isFinite(m.value) && !!m.unit && !!m.definition),
+      measurements: (Array.isArray(t.measurements) ? t.measurements : []).filter((m) => m && finite(m.value) != null && Object.hasOwn(QUANTITY_LABEL, m.quantity) && !!m.unit && !!m.definition),
     })),
   };
 }
