@@ -1,9 +1,8 @@
 import Ajv2020 from 'ajv/dist/2020';
 import addFormats from 'ajv-formats';
-// The same JSON files the backend validates against (one source of truth).
 import inputSchema from '../../../shared/schemas/input.schema.json';
 import outputSchema from '../../../shared/schemas/output.schema.json';
-import type { InputGravity, MatchLevel, SearchInput, SearchOutput } from '../types';
+import type { InputGravity, MatchLevel, OutputGravity, OutputQuery, SearchInput, SearchOutput } from '../types';
 
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 addFormats(ajv);
@@ -25,6 +24,30 @@ export function validateInput(input: unknown): ValidationResult {
 export function validateOutput(output: unknown): ValidationResult {
   const ok = validateOutputFn(output);
   return { ok, errors: ok ? [] : fmt(validateOutputFn.errors) };
+}
+
+// ─── Normalization: input labels → output query ────────────────────────────
+// Input uses "All Environments" / "All Categories" / … ; output uses "All".
+// conditions.gravity_level → query.conditions.gravity. Other enum values are preserved verbatim.
+const toAll = <T extends string>(v: T): T | 'All' => (v.startsWith('All') ? 'All' : v);
+
+export function normalizeQuery(input: SearchInput): OutputQuery {
+  const c = input.conditions ?? {};
+  const gravity: OutputGravity = (c.gravity_level ?? null) as OutputGravity;
+  return {
+    crew_environment: toAll(input.crew_environment) as OutputQuery['crew_environment'],
+    fire_safety_category: toAll(input.fire_safety_category) as OutputQuery['fire_safety_category'],
+    research_topic: toAll(input.research_topic) as OutputQuery['research_topic'],
+    investigation: toAll(input.investigation) as OutputQuery['investigation'],
+    fuel_type: input.fuel_type,
+    measurement_type: toAll(input.measurement_type) as OutputQuery['measurement_type'],
+    conditions: {
+      oxygen_pct: c.oxygen_pct ?? null,
+      pressure_kpa: c.pressure_kpa ?? null,
+      airflow_cm_s: c.airflow_cm_s ?? null,
+      gravity,
+    },
+  };
 }
 
 /** Builds a schema-clean input object: drops null/empty conditions so `additionalProperties:false` holds. */

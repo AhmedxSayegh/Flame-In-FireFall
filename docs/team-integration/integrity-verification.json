@@ -1,0 +1,44 @@
+{
+  "protected_files_checked": 13,
+  "changed_protected_files": [],
+  "team_source_files_unchanged": [
+    "src/components/ComparisonCharts.tsx",
+    "src/components/Decor.tsx",
+    "src/components/ExperimentComparisonTable.tsx",
+    "src/components/GapsAndSources.tsx",
+    "src/components/InvestigationRanking.tsx",
+    "src/components/SelectedExperimentAnalysis.tsx",
+    "src/components/Shared.tsx",
+    "src/data/demoFixture.ts",
+    "src/index.css",
+    "src/lib/chartData.ts",
+    "src/lib/engine.ts",
+    "src/lib/records.ts",
+    "src/main.tsx",
+    "src/pages/SearchPage.tsx",
+    "src/schemas/input.schema.json",
+    "src/schemas/output.schema.json",
+    "src/types.ts",
+    "src/vite-env.d.ts"
+  ],
+  "integration_source_files_changed": [
+    "src/components/Filters.tsx",
+    "src/lib/api.ts",
+    "src/lib/recordAdapter.ts",
+    "src/lib/schema.ts",
+    "src/pages/ResultsPage.tsx",
+    "src/state/SearchContext.tsx"
+  ],
+  "dependency_versions_match_team": true,
+  "unchanged_configuration": [
+    "package-lock.json",
+    "vite.config.ts",
+    "tsconfig.json"
+  ],
+  "team_shared_schema_equality": {
+    "input": true,
+    "output": true
+  },
+  "backend_key_present_in_browser_assets": false,
+  "provider_calls": 0
+}

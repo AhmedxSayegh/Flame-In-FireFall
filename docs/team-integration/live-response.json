@@ -1,0 +1,905 @@
+{
+  "output": {
+    "query": {
+      "crew_environment": "Lunar Base",
+      "fire_safety_category": "Fire Prevention",
+      "research_topic": "Material Flammability",
+      "investigation": "All",
+      "fuel_type": "Solid Materials",
+      "measurement_type": "Flame Spread Rate",
+      "conditions": {
+        "oxygen_pct": 30,
+        "pressure_kpa": 70.3,
+        "airflow_cm_s": 1,
+        "gravity": "microgravity"
+      }
+    },
+    "inputs_used": [
+      "PSI-25/record.json",
+      "PSI-25/reports/BASS-II_Summary_Report.pdf",
+      "PSI-69/record.json",
+      "PSI-69/reports/FLEX_EIRD_v4.pdf"
+    ],
+    "match_quality": "partial: PSI-25 matches solid materials and flame spread rate at 1 atm/<=22.2% O2, while PSI-69 matches 30% O2 and 70.0 kPa but tests liquid droplets, not solids.",
+    "ranked": [
+      {
+        "psi_id": "PSI-25",
+        "name": "Burning and Suppression of Solids - II",
+        "reference_link": "https://doi.org/10.60555/4qc4-de67",
+        "rank": 1,
+        "relevance_score": 73,
+        "field_matches": {
+          "crew_environment": "no match (ISS and Spacecraft stated; no Lunar Base)",
+          "fire_safety_category": "match (Fire Prevention stated)",
+          "research_topic": "match (Material Flammability stated; PMMA boundary ~13.5% O2, p. 83; report p. 11/83-84 notes general material limits; 0-55 cm/s flow; 101.3 kPa; 13.6-22.2% O2; microgravity; Solid Materials; Flame Spread Rate)"
+        },
+        "top_experiments": [
+          {
+            "rank": 1,
+            "experiment_id": "PSI-25-CS07",
+            "tests": [
+              {
+                "test_number": "B10",
+                "test_identifier": "sample 173m"
+              },
+              {
+                "test_number": "B21",
+                "test_identifier": "sample 174m"
+              },
+              {
+                "test_number": "B22",
+                "test_identifier": "sample 176m"
+              }
+            ],
+            "experiment": "PMMA film 0.2 mm, 1 cm wide, 21.0% O2, 101.3 kPa, no suppressant",
+            "summary_of_key_findings": "In PSI-25 condition_sets (PSI-25-CS07), 3 tests ran at 21.0% O2 and 101.3 kPa with air flows stepped down (5 to 1, 5 down to ext, 5 to 0), observing 'extinction (flow reduced)'. In general for thin PMMA films, BASS-II_Summary_Report.pdf (p. 21, 36, 49) reports radiative extinction at ~1 cm/s (10 mm/s at 21% O2).",
+            "fire_safety_interpretation": "Shows that reducing ventilation flow to ~1 cm/s can cause radiative extinction of thin PMMA films at 21% O2 and 101.3 kPa. Inferred: at 30% O2 and 70.3 kPa (Lunar Base), flames would be more robust and less likely to extinguish at 1 cm/s.",
+            "evidence": [
+              "PSI-25 condition_sets (PSI-25-CS07)",
+              "BASS-II_Summary_Report.pdf p. 49",
+              "PSI-25 key_findings (Bhattacharjee results, pp. 21, 36)"
+            ],
+            "why_selected": "Tests solid PMMA film in microgravity with airflow stepped through 1 cm/s to extinction."
+          },
+          {
+            "rank": 2,
+            "experiment_id": "PSI-25-CS02",
+            "tests": [
+              {
+                "test_number": "B6",
+                "test_identifier": "sample 153m"
+              },
+              {
+                "test_number": "B9",
+                "test_identifier": "sample 154m"
+              },
+              {
+                "test_number": "B15",
+                "test_identifier": "sample 149m"
+              }
+            ],
+            "experiment": "PMMA film 0.1 mm, 2 cm wide, 21.0% O2, 101.3 kPa, no suppressant",
+            "summary_of_key_findings": "In PSI-25 condition_sets (PSI-25-CS02), 3 tests ran at 21.0% O2 and 101.3 kPa with air flows including <1 cm/s, 3-5 approaching 10, and 10 max; no extinction events were recorded in the table. In general for 100 um PMMA film at 20.7-21% O2, BASS-II_Summary_Report.pdf (pp. 49-50) reports a steady spread rate of 2.2 mm/s.",
+            "fire_safety_interpretation": "Demonstrates steady flame spread over thin PMMA film in low-speed microgravity flow at 21% O2 and 101.3 kPa. Inferred: thinner 0.1 mm materials may sustain spread even at <1 cm/s if O2 is raised to 30%.",
+            "evidence": [
+              "PSI-25 condition_sets (PSI-25-CS02)",
+              "BASS-II_Summary_Report.pdf pp. 49-50"
+            ],
+            "why_selected": "Tests solid PMMA film in microgravity with airflows including <1 cm/s."
+          },
+          {
+            "rank": 3,
+            "experiment_id": "PSI-25-CS61",
+            "tests": [
+              {
+                "test_number": "O1",
+                "test_identifier": "sample 207"
+              },
+              {
+                "test_number": "O2",
+                "test_identifier": "sample 204"
+              }
+            ],
+            "experiment": "PMMA rod 1/4 in, clear, 22.0% O2, 101.3 kPa, no suppressant",
+            "summary_of_key_findings": "In PSI-25 condition_sets (PSI-25-CS61), 2 tests ran at 22.0% O2 and 101.3 kPa with air flows of 20, 10, 5, 2, 1 (O1) and 0 (O2); no extinction events were recorded in the table. In general for PMMA rods, BASS-II_Summary_Report.pdf (p. 83) reports a flammability boundary minimum near 13.5% O2.",
+            "fire_safety_interpretation": "Shows thicker solid PMMA rods can burn at 22.0% O2 and 101.3 kPa down to 1 cm/s or 0 cm/s flow. Inferred: at 30% O2, thicker solid materials in a Lunar Base would ignite and sustain flames easily.",
+            "evidence": [
+              "PSI-25 condition_sets (PSI-25-CS61)",
+              "BASS-II_Summary_Report.pdf p. 83"
+            ],
+            "why_selected": "Tests solid PMMA rods at the highest O2 (22.0%) in the pre-selected sets, including 1 cm/s and 0 cm/s."
+          }
+        ],
+        "top_experiments_comparison": {
+          "experiment_ids": [
+            "PSI-25-CS07",
+            "PSI-25-CS02",
+            "PSI-25-CS61"
+          ],
+          "compared_on": [
+            {
+              "attribute": "Fuel or material",
+              "values": {
+                "PSI-25-CS07": "PMMA film 0.2 mm, 1 cm wide",
+                "PSI-25-CS02": "PMMA film 0.1 mm, 2 cm wide",
+                "PSI-25-CS61": "PMMA rod 1/4 in, clear"
+              }
+            },
+            {
+              "attribute": "O2",
+              "values": {
+                "PSI-25-CS07": "21.0%",
+                "PSI-25-CS02": "21.0%",
+                "PSI-25-CS61": "22.0%"
+              }
+            },
+            {
+              "attribute": "Pressure",
+              "values": {
+                "PSI-25-CS07": "101.3 kPa",
+                "PSI-25-CS02": "101.3 kPa",
+                "PSI-25-CS61": "101.3 kPa"
+              }
+            },
+            {
+              "attribute": "Number of tests",
+              "values": {
+                "PSI-25-CS07": "3",
+                "PSI-25-CS02": "3",
+                "PSI-25-CS61": "2"
+              }
+            },
+            {
+              "attribute": "Outcomes or events",
+              "values": {
+                "PSI-25-CS07": "extinction (flow reduced)",
+                "PSI-25-CS02": "None recorded",
+                "PSI-25-CS61": "None recorded"
+              }
+            },
+            {
+              "attribute": "Key measured values",
+              "values": {
+                "PSI-25-CS07": "Flow stepped 5 down to 0-1 cm/s",
+                "PSI-25-CS02": "Flow <1 to 10 cm/s (general 100 um spread: 2.2 mm/s)",
+                "PSI-25-CS61": "Flow 20 down to 0-1 cm/s"
+              }
+            }
+          ],
+          "similarities": [
+            "All three tested solid PMMA in microgravity at 101.3 kPa.",
+            "All three included low-speed airflows around 1 cm/s."
+          ],
+          "differences": [
+            "Geometry and thickness varied: 0.2 mm film (CS07), 0.1 mm film (CS02), and 1/4 in rod (CS61).",
+            "Only PSI-25-CS07 recorded flow-reduced extinction in the condition set."
+          ],
+          "conclusion": "Together, these experiments show that solid PMMA burns in microgravity at 21-22% O2 and 101.3 kPa, with thin 0.2 mm films extinguishing when flow is reduced to ~1 cm/s. Evidence is strong for 1 atm, 21-22% O2, but does not cover 30% O2 or 70.3 kPa."
+        },
+        "runner_up": "PSI-25-CS38: PMMA slab 2 mm, 2 cm wide at 22.0% O2, 101.3 kPa, and <1 cm/s airflow (1 test).",
+        "score_method": "Prescore 73 kept; 9 filters scored, 0 unknown. Matches fire safety category, research topic, fuel type, measurement type, airflow, and gravity; partial on O2 (13.6-22.2%) and pressure (101.3 kPa); no match on Lunar Base."
+      },
+      {
+        "psi_id": "PSI-69",
+        "name": "Flame Extinguishment Experiment",
+        "reference_link": "https://doi.org/10.60555/mbq8-0451",
+        "rank": 2,
+        "relevance_score": 72,
+        "field_matches": {
+          "crew_environment": "partial (inferred from 30-34% O2 and ~71 kPa; not stated)",
+          "fire_safety_category": "match (Fire Prevention stated)",
+          "research_topic": "match (Material Flammability stated)"
+        },
+        "top_experiments": [
+          {
+            "rank": 1,
+            "experiment_id": "PSI-69-CS55",
+            "tests": [
+              {
+                "test_number": 25,
+                "test_identifier": "191R001"
+              },
+              {
+                "test_number": 26,
+                "test_identifier": "191F001"
+              },
+              {
+                "test_number": 40,
+                "test_identifier": "219R001"
+              },
+              {
+                "test_number": 41,
+                "test_identifier": "219F001"
+              }
+            ],
+            "experiment": "Methanol, 30.0% O2, 70.0 kPa, no suppressant",
+            "summary_of_key_findings": "In PSI-69 condition_sets (PSI-69-CS55), 4 methanol droplet tests (mean initial diameter 3.34 mm) at 30.0% O2 and 70.0 kPa resulted in 3 Disruptions and 1 Completion, with a mean extinction-to-initial diameter ratio of 0.17 and mean burning rate of 0.635 (units labelled 'mm' in table, noted as probably mm^2/s).",
+            "fire_safety_interpretation": "Directly matches Lunar Base O2 (30.0%) and pressure (70.0 kPa) in microgravity, showing droplets burn to completion or disruption rather than early extinction. Inferred: reduced-pressure, 30% O2 habitats have low margin for self-extinction.",
+            "evidence": [
+              "PSI-69 condition_sets (PSI-69-CS55)",
+              "PSI-69 notes (burning-rate units)"
+            ],
+            "why_selected": "Exact match to 30.0% O2 and 70.0 kPa (near 70.3 kPa) in microgravity."
+          },
+          {
+            "rank": 2,
+            "experiment_id": "PSI-69-CS14",
+            "tests": [
+              {
+                "test_number": 27,
+                "test_identifier": "195F001"
+              },
+              {
+                "test_number": 28,
+                "test_identifier": "195F002"
+              },
+              {
+                "test_number": 42,
+                "test_identifier": "223F001"
+              },
+              {
+                "test_number": 43,
+                "test_identifier": "223F002"
+              }
+            ],
+            "experiment": "Heptane, 30.0% O2, 70.0 kPa, no suppressant",
+            "summary_of_key_findings": "In PSI-69 condition_sets (PSI-69-CS14), 4 heptane droplet tests (mean initial diameter 3.28 mm) at 30.0% O2 and 70.0 kPa all ended in Disruption (4 of 4), with a mean burning rate of 0.66 (table unit 'mm') and mean extinction-to-initial ratio Not available.",
+            "fire_safety_interpretation": "Matches 30.0% O2 and 70.0 kPa for a sooting hydrocarbon fuel, showing no flame extinction before droplet disruption. Inferred: sooting fuels in Lunar Base atmospheres also resist self-extinction.",
+            "evidence": [
+              "PSI-69 condition_sets (PSI-69-CS14)"
+            ],
+            "why_selected": "Exact match to 30.0% O2 and 70.0 kPa for heptane."
+          },
+          {
+            "rank": 3,
+            "experiment_id": "PSI-69-CS56",
+            "tests": [
+              {
+                "test_number": 20,
+                "test_identifier": "192F001"
+              },
+              {
+                "test_number": 21,
+                "test_identifier": "192F002"
+              },
+              {
+                "test_number": 22,
+                "test_identifier": "192F003"
+              },
+              {
+                "test_number": 37,
+                "test_identifier": "220R001"
+              },
+              {
+                "test_number": 38,
+                "test_identifier": "220R002"
+              }
+            ],
+            "experiment": "Methanol, 34.0% O2, 70.0 kPa, no suppressant",
+            "summary_of_key_findings": "In PSI-69 condition_sets (PSI-69-CS56), 5 methanol droplet tests (mean initial diameter 3.46 mm) at 34.0% O2 and 70.0 kPa ended in 4 Disruptions and 1 Completion, with a mean extinction-to-initial ratio of 0.37 and mean burning rate of 0.654 (table unit 'mm').",
+            "fire_safety_interpretation": "Shows that at 70.0 kPa and 34.0% O2 (above the 30% query), methanol droplets still burn vigorously to disruption or completion. Inferred: higher O2 further reduces self-extinction margin.",
+            "evidence": [
+              "PSI-69 condition_sets (PSI-69-CS56)"
+            ],
+            "why_selected": "Tests 70.0 kPa at 34.0% O2, bounding the 30% O2 Lunar Base condition."
+          }
+        ],
+        "top_experiments_comparison": {
+          "experiment_ids": [
+            "PSI-69-CS55",
+            "PSI-69-CS14",
+            "PSI-69-CS56"
+          ],
+          "compared_on": [
+            {
+              "attribute": "Fuel or material",
+              "values": {
+                "PSI-69-CS55": "Methanol (liquid droplet)",
+                "PSI-69-CS14": "Heptane (liquid droplet)",
+                "PSI-69-CS56": "Methanol (liquid droplet)"
+              }
+            },
+            {
+              "attribute": "O2",
+              "values": {
+                "PSI-69-CS55": "30.0%",
+                "PSI-69-CS14": "30.0%",
+                "PSI-69-CS56": "34.0%"
+              }
+            },
+            {
+              "attribute": "Pressure",
+              "values": {
+                "PSI-69-CS55": "70.0 kPa",
+                "PSI-69-CS14": "70.0 kPa",
+                "PSI-69-CS56": "70.0 kPa"
+              }
+            },
+            {
+              "attribute": "Number of tests",
+              "values": {
+                "PSI-69-CS55": "4",
+                "PSI-69-CS14": "4",
+                "PSI-69-CS56": "5"
+              }
+            },
+            {
+              "attribute": "Outcomes or events",
+              "values": {
+                "PSI-69-CS55": "Disruption: 3, Completion: 1",
+                "PSI-69-CS14": "Disruption: 4",
+                "PSI-69-CS56": "Disruption: 4, Completion: 1"
+              }
+            },
+            {
+              "attribute": "Key measured values",
+              "values": {
+                "PSI-69-CS55": "Mean burn rate 0.635; ext/init ratio 0.17",
+                "PSI-69-CS14": "Mean burn rate 0.66; ext/init ratio Not available",
+                "PSI-69-CS56": "Mean burn rate 0.654; ext/init ratio 0.37"
+              }
+            }
+          ],
+          "similarities": [
+            "All three ran at 70.0 kPa in microgravity with no suppressant.",
+            "None of the 13 tests ended in Extinction; all ended in Disruption or Completion."
+          ],
+          "differences": [
+            "PSI-69-CS14 tested sooting heptane, while CS55 and CS56 tested non-sooting methanol.",
+            "PSI-69-CS56 tested 34.0% O2 versus 30.0% O2 in CS55 and CS14."
+          ],
+          "conclusion": "Together, these 13 tests show that at 70.0 kPa and 30-34% O2 in microgravity, liquid droplets burn to disruption or completion without self-extinguishing. Evidence is strong for liquid droplets at Lunar Base pressure/O2, but does not directly measure solid materials or flame spread rate."
+        },
+        "runner_up": "PSI-69-CS15: Heptane at 34.0% O2, 70.0 kPa, no suppressant (4 tests, all Disruption).",
+        "score_method": "Prescore 72 kept; 9 filters scored, 0 unknown. Matches fire safety category, research topic, O2, pressure, airflow, and gravity; partial on Lunar Base (inferred); no match on solid materials or flame spread rate."
+      }
+    ],
+    "overall_insights": [
+      "No single investigation covers both solid material flame spread and the Lunar Base atmosphere (30% O2, 70.3 kPa).",
+      "PSI-25 shows solid PMMA burns in microgravity at 21-22% O2 and 101.3 kPa, with thin 0.2 mm films extinguishing at ~1 cm/s flow.",
+      "PSI-69 shows that at 70.0 kPa and 30-34% O2, liquid droplets burn to disruption or completion without self-extinguishing."
+    ],
+    "gaps": [
+      "No solid material flammability or flame spread rate data at 30% O2 and 70.3 kPa.",
+      "No partial-gravity (lunar 1/6 g) data; both investigations are microgravity only.",
+      "No CO2 or He suppressant tests in PSI-69 above 25% O2."
+    ],
+    "caveats": [
+      "PSI-25: Tested at <=22.2% O2 and ~1 atm (101.3 kPa); flow speeds are raw fan/air display sequences, not converted to cm/s.",
+      "PSI-25: Impossible final O2 readings (e.g., B2=1.6, T28a=0.9) ignored; final CO over sensor range for M5, O4, O12, O13b.",
+      "PSI-69: Burning-rate column is labelled 'mm' in the table, probably mm^2/s.",
+      "PSI-69: Lunar Base tag is inferred from 30-34% O2 and ~70 kPa conditions, not stated in FLEX documents."
+    ]
+  },
+  "meta": {
+    "mode": "live",
+    "model": "gemini-4-hydrogen",
+    "run_id": "20261115-014041-825",
+    "schema_mode": "responseFormat",
+    "report_mode": "text",
+    "attempts": 1,
+    "valid": true,
+    "validation_errors": [],
+    "integrity_notes": [],
+    "usage": {
+      "promptTokenCount": 46028,
+      "candidatesTokenCount": 5459,
+      "totalTokenCount": 52950,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 46028
+        }
+      ],
+      "candidatesTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 5459
+        }
+      ],
+      "thoughtsTokenCount": 1463,
+      "serviceTier": "standard"
+    },
+    "duration_s": 22.748,
+    "log": [
+      "01:40:41 BASS-II_Summary_Report.pdf: sending 18 relevant pages (59k characters)",
+      "01:40:41 FLEX_EIRD_v4.pdf: sending 19 relevant pages (59k characters)",
+      "01:40:41 Calling gemini-4-hydrogen (responseFormat, thinking low)",
+      "01:41:04 gemini-4-hydrogen (responseFormat, thinking low): HTTP 200 after 22.614 s; 174438 request bytes"
+    ],
+    "timings": {
+      "data_preparation_ms": 117.708,
+      "gemini_api_ms": 22620.732,
+      "response_processing_ms": 9.647,
+      "chart_records_ms": 1.056
+    },
+    "api_requests": [
+      {
+        "model": "gemini-4-hydrogen",
+        "request_bytes": 174438,
+        "generation_settings": {
+          "thinkingConfig": {
+            "thinkingLevel": "low"
+          }
+        },
+        "status": 200,
+        "duration_ms": 22614.043,
+        "response_bytes": 22652
+      }
+    ],
+    "api_request_count": 1
+  },
+  "records": [
+    {
+      "experiment_id": "PSI-25-CS02",
+      "psi_id": "PSI-25",
+      "investigation": "BASS-II",
+      "label": "PMMA film 0.1 mm, 2 cm wide, 21.0% O2, 101.3 kPa",
+      "fuel": "PMMA film 0.1 mm, 2 cm wide",
+      "fuel_type": "Solid Materials",
+      "sample": "Film",
+      "gravity": "microgravity",
+      "tests": [
+        {
+          "test_number": "B6",
+          "test_identifier": "sample 153m",
+          "oxygen_pct": 21.0,
+          "pressure_kpa": 101.3,
+          "airflow_cm_s": null,
+          "outcome": null,
+          "measurements": []
+        },
+        {
+          "test_number": "B9",
+          "test_identifier": "sample 154m",
+          "oxygen_pct": 21.0,
+          "pressure_kpa": 101.3,
+          "airflow_cm_s": null,
+          "outcome": null,
+          "measurements": []
+        },
+        {
+          "test_number": "B15",
+          "test_identifier": "sample 149m",
+          "oxygen_pct": 21.0,
+          "pressure_kpa": 101.3,
+          "airflow_cm_s": null,
+          "outcome": null,
+          "measurements": []
+        }
+      ],
+      "sources": [
+        {
+          "label": "BASS-II dataset on NASA PSI (PSI-25)",
+          "url": "https://doi.org/10.60555/4qc4-de67",
+          "kind": "dataset",
+          "verified": true
+        },
+        {
+          "label": "BASS-II_Summary_Report.pdf",
+          "kind": "report",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "experiment_id": "PSI-25-CS07",
+      "psi_id": "PSI-25",
+      "investigation": "BASS-II",
+      "label": "PMMA film 0.2 mm, 1 cm wide, 21.0% O2, 101.3 kPa",
+      "fuel": "PMMA film 0.2 mm, 1 cm wide",
+      "fuel_type": "Solid Materials",
+      "sample": "Film",
+      "gravity": "microgravity",
+      "tests": [
+        {
+          "test_number": "B10",
+          "test_identifier": "sample 173m",
+          "oxygen_pct": 21.0,
+          "pressure_kpa": 101.3,
+          "airflow_cm_s": null,
+          "outcome": null,
+          "measurements": []
+        },
+        {
+          "test_number": "B21",
+          "test_identifier": "sample 174m",
+          "oxygen_pct": 20.8,
+          "pressure_kpa": 101.3,
+          "airflow_cm_s": null,
+          "outcome": "Extinction (flow reduced)",
+          "measurements": []
+        },
+        {
+          "test_number": "B22",
+          "test_identifier": "sample 176m",
+          "oxygen_pct": 20.7,
+          "pressure_kpa": 101.3,
+          "airflow_cm_s": null,
+          "outcome": null,
+          "measurements": []
+        }
+      ],
+      "sources": [
+        {
+          "label": "BASS-II dataset on NASA PSI (PSI-25)",
+          "url": "https://doi.org/10.60555/4qc4-de67",
+          "kind": "dataset",
+          "verified": true
+        },
+        {
+          "label": "BASS-II_Summary_Report.pdf",
+          "kind": "report",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "experiment_id": "PSI-25-CS61",
+      "psi_id": "PSI-25",
+      "investigation": "BASS-II",
+      "label": "PMMA rod 1/4 in, clear, 22.0% O2, 101.3 kPa",
+      "fuel": "PMMA rod 1/4 in, clear",
+      "fuel_type": "Solid Materials",
+      "sample": "Rod",
+      "gravity": "microgravity",
+      "tests": [
+        {
+          "test_number": "O1",
+          "test_identifier": "sample 207",
+          "oxygen_pct": 22.2,
+          "pressure_kpa": 101.3,
+          "airflow_cm_s": null,
+          "outcome": null,
+          "measurements": []
+        },
+        {
+          "test_number": "O2",
+          "test_identifier": "sample 204",
+          "oxygen_pct": 22.2,
+          "pressure_kpa": 101.3,
+          "airflow_cm_s": null,
+          "outcome": null,
+          "measurements": []
+        }
+      ],
+      "sources": [
+        {
+          "label": "BASS-II dataset on NASA PSI (PSI-25)",
+          "url": "https://doi.org/10.60555/4qc4-de67",
+          "kind": "dataset",
+          "verified": true
+        },
+        {
+          "label": "BASS-II_Summary_Report.pdf",
+          "kind": "report",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "experiment_id": "PSI-69-CS14",
+      "psi_id": "PSI-69",
+      "investigation": "FLEX",
+      "label": "Heptane, 30.0% O2, 70.0 kPa",
+      "fuel": "Heptane",
+      "fuel_type": "Liquid Fuels",
+      "sample": "Droplet, mean initial diameter 3.28 mm",
+      "gravity": "microgravity",
+      "tests": [
+        {
+          "test_number": 27,
+          "test_identifier": "195F001",
+          "oxygen_pct": 30.0,
+          "pressure_kpa": 72.1,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.64,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        },
+        {
+          "test_number": 28,
+          "test_identifier": "195F002",
+          "oxygen_pct": 30.0,
+          "pressure_kpa": 72.0,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.64,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        },
+        {
+          "test_number": 42,
+          "test_identifier": "223F001",
+          "oxygen_pct": 30.0,
+          "pressure_kpa": 71.3,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.58,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        },
+        {
+          "test_number": 43,
+          "test_identifier": "223F002",
+          "oxygen_pct": 30.0,
+          "pressure_kpa": 71.3,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.78,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "FLEX dataset on NASA PSI (PSI-69)",
+          "url": "https://doi.org/10.60555/mbq8-0451",
+          "kind": "dataset",
+          "verified": true
+        },
+        {
+          "label": "FLEX_EIRD_v4.pdf",
+          "kind": "report",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "experiment_id": "PSI-69-CS55",
+      "psi_id": "PSI-69",
+      "investigation": "FLEX",
+      "label": "Methanol, 30.0% O2, 70.0 kPa",
+      "fuel": "Methanol",
+      "fuel_type": "Liquid Fuels",
+      "sample": "Droplet, mean initial diameter 3.34 mm",
+      "gravity": "microgravity",
+      "tests": [
+        {
+          "test_number": 25,
+          "test_identifier": "191R001",
+          "oxygen_pct": 30.0,
+          "pressure_kpa": 71.6,
+          "airflow_cm_s": null,
+          "outcome": "Completion",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.65,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            },
+            {
+              "quantity": "extinction_condition",
+              "value": 0.59,
+              "unit": "mm",
+              "definition": "Visible flame extinction diameter",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        },
+        {
+          "test_number": 26,
+          "test_identifier": "191F001",
+          "oxygen_pct": 30.0,
+          "pressure_kpa": 71.8,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.62,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            },
+            {
+              "quantity": "extinction_condition",
+              "value": 0.4,
+              "unit": "mm",
+              "definition": "Visible flame extinction diameter",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        },
+        {
+          "test_number": 40,
+          "test_identifier": "219R001",
+          "oxygen_pct": 30.0,
+          "pressure_kpa": 71.3,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.62,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        },
+        {
+          "test_number": 41,
+          "test_identifier": "219F001",
+          "oxygen_pct": 30.0,
+          "pressure_kpa": 71.2,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.65,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "FLEX dataset on NASA PSI (PSI-69)",
+          "url": "https://doi.org/10.60555/mbq8-0451",
+          "kind": "dataset",
+          "verified": true
+        },
+        {
+          "label": "FLEX_EIRD_v4.pdf",
+          "kind": "report",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "experiment_id": "PSI-69-CS56",
+      "psi_id": "PSI-69",
+      "investigation": "FLEX",
+      "label": "Methanol, 34.0% O2, 70.0 kPa",
+      "fuel": "Methanol",
+      "fuel_type": "Liquid Fuels",
+      "sample": "Droplet, mean initial diameter 3.46 mm",
+      "gravity": "microgravity",
+      "tests": [
+        {
+          "test_number": 20,
+          "test_identifier": "192F001",
+          "oxygen_pct": 34.0,
+          "pressure_kpa": 71.9,
+          "airflow_cm_s": null,
+          "outcome": "Completion",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.53,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            },
+            {
+              "quantity": "extinction_condition",
+              "value": 1.56,
+              "unit": "mm",
+              "definition": "Visible flame extinction diameter",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        },
+        {
+          "test_number": 21,
+          "test_identifier": "192F002",
+          "oxygen_pct": 34.0,
+          "pressure_kpa": 72.1,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.66,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            },
+            {
+              "quantity": "extinction_condition",
+              "value": 0.95,
+              "unit": "mm",
+              "definition": "Visible flame extinction diameter",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        },
+        {
+          "test_number": 22,
+          "test_identifier": "192F003",
+          "oxygen_pct": 34.0,
+          "pressure_kpa": 72.1,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.65,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        },
+        {
+          "test_number": 37,
+          "test_identifier": "220R001",
+          "oxygen_pct": 34.0,
+          "pressure_kpa": 71.2,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.72,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        },
+        {
+          "test_number": 38,
+          "test_identifier": "220R002",
+          "oxygen_pct": 34.0,
+          "pressure_kpa": 71.2,
+          "airflow_cm_s": null,
+          "outcome": "Disruption",
+          "measurements": [
+            {
+              "quantity": "burning_rate",
+              "value": 0.71,
+              "unit": "mm\u00b2/s",
+              "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; assumed burning-rate constant K in mm\u00b2/s)",
+              "source": "PSI-69_Experimental_table_FLEX.csv"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "FLEX dataset on NASA PSI (PSI-69)",
+          "url": "https://doi.org/10.60555/mbq8-0451",
+          "kind": "dataset",
+          "verified": true
+        },
+        {
+          "label": "FLEX_EIRD_v4.pdf",
+          "kind": "report",
+          "verified": true
+        }
+      ]
+    }
+  ]
+}

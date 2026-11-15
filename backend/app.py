@@ -100,9 +100,32 @@ def records():
     return jsonify({"records": pl.experiment_records(pl.load_investigations(), ids)})
 
 
+@app.get("/api/reports/<psi_id>/<filename>")
+def report(psi_id, filename):
+    for inv in pl.load_investigations():
+        if inv["psi_id"] == psi_id and any(p.name == filename for p in inv["reports"]):
+            return send_from_directory(inv["folder"] / "reports", filename, mimetype="application/pdf")
+    return jsonify({"error": "Report not found"}), 404
+
+
+def search_response(output, meta, investigations):
+    ids = [exp["experiment_id"] for item in output["ranked"] for exp in item["top_experiments"]]
+    return jsonify({"output": output, "meta": meta, "records": pl.experiment_records(investigations, ids)})
+
+
+def check_answer(text, invs, query, inputs_used, prescores):
+    try:
+        output, notes = pl.ground_output(gc.parse_json(text), invs, query, inputs_used, prescores)
+    except ValueError:
+        return None, [], ["Expected a JSON object containing a ranked array."]
+    return output, notes, pl.validate_output(output)
+
+
 @app.post("/api/search")
 def search():
     body = request.get_json(silent=True) or {}
+    if not isinstance(body, dict):
+        return jsonify({"error": "Expected a JSON object."}), 400
     query = body.get("input")
     research_question = body.get("research_question")   # stored with the run; reserved for the future chat
     report_mode = body.get("report_mode") or os.environ.get("REPORT_MODE", "text")
@@ -123,12 +146,15 @@ def search():
     # ---- no API key: return the saved example (real data, prepared offline for the sample query)
     if not has_key():
         output = json.loads((DEMO / "demo_output.json").read_text(encoding="utf-8"))
+        example_query = json.loads((DEMO / "demo_query.json").read_text(encoding="utf-8"))
+        output, notes = pl.ground_output(output, invs, example_query, output["inputs_used"], saved=True)
+        errors = pl.validate_output(output)
         meta = {"mode": "saved_example", "model": None, "run_id": run_id,
-                "query_matches_example": same_search(query, json.loads((DEMO / "demo_query.json").read_text(encoding="utf-8"))),
-                "valid": True, "validation_errors": pl.validate_output(output), "integrity_notes": [],
+                "query_matches_example": same_search(query, example_query),
+                "valid": not errors, "validation_errors": errors, "integrity_notes": notes,
                 "duration_s": 0, "log": ["No GEMINI_API_KEY in backend/.env: returned the saved example."]}
         save_run(run_id, {"input.json": run_input, "output.json": output, "meta.json": meta})
-        return jsonify({"output": output, "meta": meta})
+        return search_response(output, meta, invs)
 
     # ---- live: Gemini
     if not BUSY.acquire(blocking=False):
@@ -140,36 +166,33 @@ def search():
         print(msg, flush=True)
 
     try:
+        deadline = time.monotonic() + 100
         head, record_blocks, tail = pl.build_text_blocks(invs, query, prescores)
-        parts, inputs_used = [{"text": head}], []
-        for inv in invs:
-            parts.append({"text": record_blocks[inv["psi_id"]]})
-            inputs_used.append(f"{inv['psi_id']}/record.json")
-            if report_mode != "none":
-                parts += gc.report_parts(inv["psi_id"], inv["reports"], report_mode, log, query)
-                inputs_used += [f"{inv['psi_id']}/reports/{p.name}" for p in inv["reports"]]
+        parts = [{"text": head}, *({"text": block} for block in record_blocks.values())]
+        report_parts, report_inputs = gc.report_parts(invs, report_mode, log, query, deadline)
+        parts.extend(report_parts)
         parts.append({"text": tail})
-
+        inputs_used = [f"{inv['psi_id']}/record.json" for inv in invs] + report_inputs
+        log(f"Prepared {sum(len(p.get('text', '')) for p in parts)} input text characters")
         schema_for_gemini = pl.gemini_schema()
-        text, schema_mode, usage, model = gc.generate(model, SYSTEM_PROMPT, parts, schema_for_gemini, log)
+        text, schema_mode, usage, model = gc.generate(model, SYSTEM_PROMPT, parts, schema_for_gemini, log, deadline)
         attempts = 1
-        try:
-            output, notes = pl.ground_output(gc.parse_json(text), invs, query, inputs_used)
-            errors = pl.validate_output(output)
-        except (json.JSONDecodeError, ValueError) as e:
-            output, notes, errors = None, [], [f"Response was not valid JSON: {e}"]
+        output, notes, errors = check_answer(text, invs, query, inputs_used, prescores)
         if errors:
-            log(f"Answer failed the output schema ({len(errors)} errors); asking Gemini to repair it once")
+            log(f"Answer failed validation ({len(errors)} errors); asking Gemini to repair it once")
             attempts = 2
-            text, _, _, _ = gc.repair(model, text, errors, schema_for_gemini, log)
-            output, notes = pl.ground_output(gc.parse_json(text), invs, query, inputs_used)
-            errors = pl.validate_output(output)
+            text, schema_mode, repair_usage, model = gc.repair(model, text, errors, schema_for_gemini, log, deadline)
+            usage = {key: usage.get(key, 0) + repair_usage.get(key, 0) for key in usage.keys() | repair_usage.keys()
+                     if type(usage.get(key, 0)) is int and type(repair_usage.get(key, 0)) is int}
+            output, notes, errors = check_answer(text, invs, query, inputs_used, prescores)
+            if errors:
+                raise gc.GeminiError("Gemini's response remained invalid after one repair.")
     except gc.GeminiError as e:
         save_run(run_id, {"input.json": run_input, "error.txt": str(e), "log.txt": "\n".join(log_lines)})
         return jsonify({"error": str(e), "details": log_lines}), 502
     except Exception as e:  # noqa: BLE001  (show unexpected errors in the UI during development)
-        save_run(run_id, {"input.json": run_input, "error.txt": repr(e), "log.txt": "\n".join(log_lines)})
-        return jsonify({"error": f"Unexpected error: {e!r}", "details": log_lines}), 500
+        save_run(run_id, {"input.json": run_input, "error.txt": type(e).__name__, "log.txt": "\n".join(log_lines)})
+        return jsonify({"error": "Unexpected search error.", "details": log_lines}), 500
     finally:
         BUSY.release()
 
@@ -177,7 +200,7 @@ def search():
             "attempts": attempts, "valid": not errors, "validation_errors": errors, "integrity_notes": notes,
             "usage": usage, "duration_s": round(time.time() - t0, 1), "log": log_lines}
     save_run(run_id, {"input.json": run_input, "raw_response.txt": text, "output.json": output, "meta.json": meta})
-    return jsonify({"output": output, "meta": meta})
+    return search_response(output, meta, invs)
 
 
 if __name__ == "__main__":

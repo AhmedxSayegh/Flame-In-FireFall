@@ -68,6 +68,28 @@ export function SectionTitle({ index, title, kicker, orbit = false, right }: { i
   );
 }
 
+/** Compact heading used inside Page 2 workspace panels. */
+export function PanelTitle({ index, title, kicker, right }: { index: string; title: string; kicker?: string; right?: ReactNode }) {
+  return (
+    <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-line pb-3">
+      <div>
+        <div className="flex items-center gap-2">
+          <span className="display text-xs font-light tracking-[0.3em] text-teal">{index}</span>
+          <Star size={9} color="#EA8B33" />
+        </div>
+        <h2 className="mt-1 text-[26px] font-medium uppercase leading-none sm:text-[30px]">{title}</h2>
+        {kicker && <p className="mt-1.5 text-xs leading-relaxed text-muted">{kicker}</p>}
+      </div>
+      {right}
+    </div>
+  );
+}
+
+/** White workspace panel with a thin border. */
+export function Panel({ id, className = '', children }: { id?: string; className?: string; children: ReactNode }) {
+  return <section id={id} className={`min-w-0 rounded-2xl border border-line bg-white p-5 sm:p-6 ${className}`}>{children}</section>;
+}
+
 export function Divider() {
   return (
     <div aria-hidden className="my-16 flex items-center gap-4">

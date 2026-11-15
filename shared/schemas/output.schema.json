@@ -21,53 +21,41 @@
   },
   "properties": {
     "query": {
-      "description": "Copy of the input query (see query_schema.json)",
       "type": "object",
-      "required": [
-        "crew_environment",
-        "fire_safety_category",
-        "research_topic",
-        "investigation",
-        "fuel_type",
-        "measurement_type"
-      ],
-      "additionalProperties": false,
+      "description": "The user's field entries. 'All' or null = no filter.",
       "properties": {
         "crew_environment": {
           "enum": [
-            "All Environments",
+            "All",
             "Spacecraft",
             "Space Station",
             "Lunar Base",
             "Martian Base",
             "Pressurized Rover"
-          ],
-          "default": "All Environments"
+          ]
         },
         "fire_safety_category": {
           "enum": [
-            "All Categories",
+            "All",
             "Fire Prevention",
             "Fire Detection",
             "Fire Growth & Spread",
             "Fire Suppression"
-          ],
-          "default": "All Categories"
+          ]
         },
         "research_topic": {
           "enum": [
-            "All Topics",
+            "All",
             "Material Flammability",
             "Flame Spread",
             "Smoke & Aerosols",
             "Flame Extinction",
             "Combustion Behavior"
-          ],
-          "default": "All Topics"
+          ]
         },
         "investigation": {
           "enum": [
-            "All Investigations",
+            "All",
             "BASS",
             "BASS-II",
             "Saffire-I",
@@ -78,8 +66,7 @@
             "FLEX",
             "FLEX-2",
             "ACME"
-          ],
-          "default": "All Investigations"
+          ]
         },
         "fuel_type": {
           "enum": [
@@ -87,62 +74,51 @@
             "Solid Materials",
             "Liquid Fuels",
             "Gaseous Fuels"
-          ],
-          "default": "All"
+          ]
+        },
+        "conditions": {
+          "type": "object",
+          "properties": {
+            "oxygen_pct": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pressure_kpa": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "airflow_cm_s": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "gravity": {
+              "enum": [
+                "All",
+                "microgravity",
+                "partial gravity",
+                "normal gravity",
+                "simulated microgravity",
+                null
+              ]
+            }
+          }
         },
         "measurement_type": {
           "enum": [
-            "All Measurements",
+            "All",
             "Flame Spread Rate",
             "Flame Size",
             "Burning Rate",
             "Extinction Conditions",
             "Smoke Particle Size",
             "Detector Response"
-          ],
-          "default": "All Measurements"
-        },
-        "conditions": {
-          "type": "object",
-          "additionalProperties": false,
-          "description": "Optional Experimental Conditions filter. Omit a field or set it to null for no filter.",
-          "properties": {
-            "oxygen_pct": {
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0,
-              "maximum": 100,
-              "description": "Target O2, % by volume"
-            },
-            "pressure_kpa": {
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0,
-              "description": "Target pressure, kPa (1 psi = 6.895 kPa)"
-            },
-            "airflow_cm_s": {
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0,
-              "description": "Target airflow velocity, cm/s"
-            },
-            "gravity_level": {
-              "enum": [
-                "All",
-                "microgravity",
-                "partial gravity",
-                "normal gravity",
-                null
-              ],
-              "default": "All"
-            }
-          }
+          ]
         }
       }
     },
@@ -324,6 +300,21 @@
               }
             }
           },
+          "report_evidence": {
+            "type": "array",
+            "description": "Verified report context with physical PDF page links and explicit test scope.",
+            "items": {
+              "type": "object",
+              "required": ["title", "text", "page", "test_numbers", "url"],
+              "properties": {
+                "title": {"type": "string"},
+                "text": {"type": "string"},
+                "page": {"type": "integer", "minimum": 1},
+                "test_numbers": {"type": "array", "items": {"type": ["string", "integer"]}},
+                "url": {"type": "string", "format": "uri-reference"}
+              }
+            }
+          },
           "runner_up": {
             "type": [
               "string",
@@ -347,7 +338,6 @@
                 "items": {
                   "type": "string"
                 },
-                "minItems": 1,
                 "maxItems": 3,
                 "description": "experiment_id of each top experiment, in rank order"
               },

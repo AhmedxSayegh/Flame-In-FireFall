@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "saved_records": {
+    "PSI-25": [
+      "PSI-25-CS07",
+      "PSI-25-CS02",
+      "PSI-25-CS68"
+    ],
+    "PSI-69": [
+      "PSI-69-CS55",
+      "PSI-69-CS56",
+      "PSI-69-CS14"
+    ]
+  },
+  "replayed_searches": 4,
+  "generation_requests": 0,
+  "local_navigation_extra_searches": 0,
+  "browser_errors": [],
+  "http_errors": [],
+  "console_errors": [],
+  "failed_requests": [],
+  "edge_cases": [
+    "single experiment",
+    "empty investigation",
+    "empty results"
+  ],
+  "screenshots": [
+    "comparison-flex-desktop.png",
+    "comparison-mobile.png",
+    "evidence-flex-desktop.png",
+    "evidence-mobile.png",
+    "experiment-mobile.png",
+    "search-desktop.png"
+  ]
+}

@@ -1,6 +1,6 @@
 # Flame in Freefall
 
-Search NASA PSI combustion investigations by fire-safety needs. Gemini ranks the investigations, picks the top 3 experiments in each, and explains what they mean for crews.
+Search NASA PSI combustion investigations by fire-safety needs. The backend ranks investigations from the active filters. Gemini selects up to three candidate experiments per investigation and provides qualitative interpretation. Run-level findings and verified report citations come from the backend.
 
 ```
 flame-in-freefall/
@@ -25,7 +25,8 @@ frontend/src/lib/api.ts  ──HTTP──▶  backend/app.py  ──▶  pipelin
 |---|---|---|
 | `getStatus()` | `GET /api/status` | Live or saved-example mode, model, loaded investigations |
 | `search()` | `POST /api/search` with `{input, research_question}` | `{output, meta}`; `output` follows `output.schema.json` |
-| inside `search()` | `GET /api/records?experiment_ids=A,B` | Per-test numbers for the charts |
+| Compatibility endpoint | `GET /api/records?experiment_ids=A,B` | Per-test chart data, also bundled in the search response |
+| PDF evidence links | `GET /api/reports/<psi-id>/<filename>` | A local report with support for PDF range requests |
 
 - `input` follows `shared/schemas/input.schema.json` (the filters).
 - `output` follows `shared/schemas/output.schema.json` (ranking, top experiments, comparison, insights).
@@ -49,7 +50,7 @@ In production the backend serves the built frontend (`frontend/dist`), so both u
 | `GEMINI_API_KEY` | Your key. Without it the app returns the saved example. |
 | `GEMINI_MODEL` | Model ID, default `gemini-3.5-flash-lite` (fastest). |
 | `GEMINI_FALLBACK_MODEL` | Used automatically if the main model is overloaded. |
-| `REPORT_MODE` | `text` (relevant report pages, fast), `pdf` (whole PDFs, slow), `none` |
+| `REPORT_MODE` | `text` (bounded report excerpts, default), `pdf` (whole PDFs through the Gemini Files API), `none` |
 
 `start.bat` copies `.env` from the old `..\flame-dashboard` folder the first time, if it finds one.
 
@@ -73,3 +74,7 @@ In production the backend serves the built frontend (`frontend/dist`), so both u
 | Page layout and charts | `frontend/src/pages`, `frontend/src/components` |
 
 Every search is logged in `backend/runs/<time>/` (input, Gemini's raw answer, output, timings).
+
+## Verification
+
+Run `python -m unittest discover -s tests -v` in `backend/` after installing its requirements. From `frontend/`, run `npm ci`, `node --test tests/chartData.test.mjs`, and `npm run build`. The tests do not need a Gemini key.

@@ -4,6 +4,7 @@
  * so incompatible definitions are never drawn on the same axis.
  */
 import type { ExperimentRecord, Quantity, TestRecord } from '../types';
+import { measurementKey } from './records';
 
 export const SERIES_COLORS = ['#EA8B33', '#32667F', '#F3B940', '#EEA23A', '#132F45'];
 export const SERIES_SHAPES = ['circle', 'square', 'triangle', 'diamond', 'star'] as const;
@@ -24,17 +25,22 @@ export interface MeasureGroup { key: string; quantity: Quantity; unit: string; d
 
 export function groupsFor(records: ExperimentRecord[], quantity: Quantity): MeasureGroup[] {
   const map = new Map<string, MeasureGroup>();
-  for (const r of records) for (const t of r.tests) for (const m of t.measurements) {
-    if (m.quantity !== quantity) continue;
-    const key = `${m.unit}|${m.definition}`;
-    const g = map.get(key) ?? { key, quantity, unit: m.unit, definition: m.definition, count: 0 };
-    g.count++; map.set(key, g);
+  for (const r of records) for (const t of r.tests) {
+    const seen = new Set<string>();
+    for (const m of t.measurements) {
+      if (m.quantity !== quantity) continue;
+      const key = measurementKey(m);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const g = map.get(key) ?? { key, quantity, unit: m.unit, definition: m.definition, count: 0 };
+      g.count++; map.set(key, g);
+    }
   }
   return [...map.values()].sort((a, b) => b.count - a.count);
 }
 
 const valueOf = (t: TestRecord, q: Quantity, groupKey: string) =>
-  t.measurements.find((m) => m.quantity === q && `${m.unit}|${m.definition}` === groupKey)?.value;
+  t.measurements.find((m) => m.quantity === q && measurementKey(m) === groupKey)?.value;
 
 export interface ScatterData {
   series: { exp: string; points: Pt[] }[];
@@ -52,7 +58,7 @@ export function scatterData(records: ExperimentRecord[], quantity: Quantity, gro
       const y = valueOf(t, quantity, groupKey);
       if (y == null) continue;
       const xv = t[x];
-      if (xv == null) { missingX.push(t.test_identifier); continue; }
+      if (xv == null) { missingX.push(`${r.experiment_id} #${t.test_number} · ${t.test_identifier}`); continue; }
       points.push({ x: xv, y, exp: r.experiment_id, test: t.test_identifier, test_number: t.test_number, outcome: t.outcome, o2: t.oxygen_pct, p: t.pressure_kpa, u: t.airflow_cm_s });
     }
     if (!points.length && !r.tests.some((t) => valueOf(t, quantity, groupKey) != null)) noData.push(r.experiment_id);
@@ -67,7 +73,7 @@ export function barData(records: ExperimentRecord[], quantity: Quantity, groupKe
   const rows: BarRow[] = [];
   for (const r of records) {
     const vals: number[] = [], tests: string[] = [];
-    for (const t of r.tests) { const v = valueOf(t, quantity, groupKey); if (v != null) { vals.push(v); tests.push(t.test_identifier); } }
+    for (const t of r.tests) { const v = valueOf(t, quantity, groupKey); if (v != null) { vals.push(v); tests.push(`#${t.test_number} · ${t.test_identifier}`); } }
     if (!vals.length) continue;
     const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
     const min = Math.min(...vals), max = Math.max(...vals);
@@ -86,7 +92,7 @@ export function outcomeVsO2(records: ExperimentRecord[]) {
       if (t.outcome == null || t.oxygen_pct == null) continue;
       const k = `${t.oxygen_pct}|${t.outcome}`;
       const p = m.get(k) ?? { x: t.oxygen_pct, y: t.outcome, exp: r.experiment_id, n: 0, tests: [] };
-      p.n++; p.tests.push(t.test_identifier); m.set(k, p);
+      p.n++; p.tests.push(`#${t.test_number} · ${t.test_identifier}`); m.set(k, p);
     }
     return { exp: r.experiment_id, points: [...m.values()] };
   });
@@ -109,7 +115,7 @@ export function toCSV(rows: Record<string, unknown>[]): string {
   if (!rows.length) return '';
   const cols = Object.keys(rows[0]);
   const esc = (v: unknown) => { const s = v == null ? '' : String(v); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
-  return [cols.join(','), ...rows.map((r) => cols.map((c) => esc(r[c])).join(','))].join('\n');
+  return [cols.map(esc).join(','), ...rows.map((r) => cols.map((c) => esc(r[c])).join(','))].join('\n');
 }
 
 export function downloadCSV(name: string, rows: Record<string, unknown>[]) {

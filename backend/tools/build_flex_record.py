@@ -34,6 +34,7 @@ def load_table(path):
         # '~6' -> 6; unreadable characters -> NaN
         df[c] = pd.to_numeric(df[c].astype(str).str.replace("~", "", regex=False), errors="coerce")
     df.loc[df.p_mmhg <= 0, "p_mmhg"] = np.nan          # test 114 logs 0 mmHg: data error
+    df.loc[df.d0_mm <= 0, "d0_mm"] = np.nan
     df.loc[df.dext_mm <= 0, "dext_mm"] = np.nan         # 0 = no measurable extinction diameter
     df["p_kpa"] = df.p_mmhg * MMHG_TO_KPA
     df["suppressant"] = np.select([df.x_co2 > 0, df.x_he > 0], ["CO2", "He"], "none")
@@ -84,9 +85,8 @@ def test_rows(df, sets):
     for _, t in df.iterrows():
         m = []
         if pd.notna(t.burn_rate):
-            m.append({"quantity": "burning_rate", "value": float(t.burn_rate), "unit": "mm²/s",
-                      "definition": "Burning rate column of the FLEX table (labelled 'mm' in the source; "
-                                    "assumed burning-rate constant K in mm²/s)", "source": TABLE})
+            m.append({"quantity": "burning_rate", "value": float(t.burn_rate), "unit": "unconfirmed",
+                      "definition": "FLEX table burning-rate column (source label: mm; physical unit unconfirmed)", "source": TABLE})
         if pd.notna(t.dext_mm):
             m.append({"quantity": "extinction_condition", "value": float(t.dext_mm), "unit": "mm",
                       "definition": "Visible flame extinction diameter", "source": TABLE})
@@ -239,7 +239,7 @@ def build(table_path, zip_path):
         "notes": [
             "The Engineering Requirements Document is for FLEX-2, a separate follow-on investigation. It was not used for FLEX values.",
             "FLEX_Overall_Ext_File-2.pdf is mostly rack hardware and imaging specs; used only to confirm diagnostics.",
-            "Burning-rate column is labelled 'mm' in the table; it is probably a burning-rate constant in mm^2/s. Check before displaying units.",
+            "Burning-rate column is labelled 'mm' in the table. Its physical unit is unconfirmed.",
             "Test 114 (C11M201) records 0 mmHg pressure; treated as missing. Some cells contain unreadable characters; treated as missing.",
             "Extinction diameter of 0 treated as 'no measurable extinction diameter', not as a measurement.",
             "Tested pressure starts at ~70 kPa although 0.5 atm was planned; SF6 was planned but not tested in this table.",
