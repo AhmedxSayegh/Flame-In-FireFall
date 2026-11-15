@@ -69,7 +69,9 @@ test('backend error details survive; failed search never returns demo output',as
 });
 test('saved-example backend cannot masquerade as a live API result',async()=>{
   global.fetch=async()=>reply({...fixture,meta:{...fixture.meta,mode:'saved_example'}});
-  await assert.rejects(api.search(request),/saved.example/i);
+  const result = await api.search(request);
+  assert.equal(result.meta.mode, 'saved_example');
+  assert.equal(Object.keys(result.records).length, 6);
 });
 test('records failure stays distinct from absent scientific measurements',async()=>{
   let calls=0;

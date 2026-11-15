@@ -86,6 +86,14 @@ export interface TopExperimentsComparison {
   conclusion: string;
 }
 
+export interface ReportEvidence {
+  title: string;
+  text: string;
+  page: number;
+  test_numbers: (number | string)[];
+  url: string;
+}
+
 export interface RankedInvestigation {
   psi_id: string;
   name: string;
@@ -96,6 +104,7 @@ export interface RankedInvestigation {
   field_matches: FieldMatches;
   top_experiments: TopExperiment[];
   runner_up?: string | null;
+  report_evidence?: ReportEvidence[];
   top_experiments_comparison: TopExperimentsComparison;
 }
 
@@ -168,6 +177,29 @@ export interface ExperimentRecord {
   gravity: Exclude<OutputGravity, 'All' | null> | null;
   tests: TestRecord[];
   sources: SourceRef[];
-  /** true when the record is synthetic demo data, never NASA measurements */
   demo?: boolean;
+}
+
+// ─── Backend response (backend/app.py, POST /api/search) ──────────────────
+/** How the result was produced. "saved_example" = no API key set; the backend returned its saved example. */
+export interface RunMeta {
+  mode: 'live' | 'saved_example';
+  model: string | null;
+  run_id: string;
+  duration_s: number;
+  valid: boolean;
+  validation_errors: string[];
+  /** Fields the backend corrected after Gemini answered (links, test lists). */
+  integrity_notes: string[];
+  query_matches_example?: boolean;
+  log?: string[];
+}
+
+export interface SearchResponse { output: SearchOutput; meta: RunMeta; records?: unknown[] }
+
+/** GET /api/status */
+export interface BackendStatus {
+  mode: 'live' | 'saved_example';
+  model: string | null;
+  investigations: { psi_id: string; acronym?: string; title?: string; experiments: number; reports: { name: string; mb: number }[] }[];
 }

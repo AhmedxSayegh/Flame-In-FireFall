@@ -6,8 +6,8 @@ import { ExperimentComparisonTable } from '../components/ExperimentComparisonTab
 import { ResearchGaps, SupportingSources } from '../components/GapsAndSources';
 import { InvestigationRanking } from '../components/InvestigationRanking';
 import { SelectedExperimentAnalysis, SelectedExperimentEvidence } from '../components/SelectedExperimentAnalysis';
-import { DataSourceBadge, DemoBanner } from '../components/Shared';
-import { DEFAULT_FORM, useSearch, type FormState } from '../state/SearchContext';
+import { DataSourceBadge, DemoBanner, SavedExampleBanner, RunInfo } from '../components/Shared';
+import { useSearch, type FormState } from '../state/SearchContext';
 
 /** Desktop: each Part 1 panel scrolls on its own inside a practical max height. */
 const PANEL_MAX = 'lg:max-h-[min(1100px,calc(100vh-32px))] lg:overflow-y-auto';
@@ -22,9 +22,11 @@ export default function ResultsPage() {
   const nav = useNavigate();
   const [tab, setTab] = useState('Experiment');
   if (!result || !submittedForm) return <Navigate to="/" replace />;
-  const { output, records } = result;
-  const chips = (Object.keys(CHIP_LABEL) as (keyof FormState)[]).filter((k) => submittedForm[k] !== DEFAULT_FORM[k]);
+  const { output, meta, records } = result;
   const isDemo = Object.values(records).some((r) => r.demo);
+  const { conditions, ...filters } = output.query;
+  const chips = (Object.entries({ ...filters, ...conditions, gravity_level: conditions?.gravity }) as [keyof FormState, string | number | null][])
+    .filter(([key, value]) => CHIP_LABEL[key] && value != null && !(typeof value === 'string' && value.startsWith('All')));
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-white">
@@ -40,12 +42,15 @@ export default function ResultsPage() {
           <h1 className="text-[48px] font-medium uppercase leading-none sm:text-[68px]">Research Results</h1>
           <p className="mt-2 text-lg font-light text-teal">NASA PSI Combustion Experiment Analysis</p>
         </div>
-        <div className="mt-6 flex flex-wrap gap-2 border-y border-line py-3 text-xs">
-          {chips.length === 0 ? <span className="text-muted">No filters applied — all loaded investigations shown.</span> : chips.map((k) => (
-            <span key={k} className="pill"><span className="text-muted">{CHIP_LABEL[k]}</span> {submittedForm[k]}</span>
+        <div className="mt-8 flex flex-wrap items-center gap-2 border-y border-line py-3 text-xs" aria-label="Active result filters">
+          <span className="label mb-0 mr-1">Active filters</span>
+          {chips.length === 0 ? <span className="text-muted">All loaded investigations</span> : chips.map(([k, value]) => (
+            <span key={k} className="pill"><span className="text-muted">{CHIP_LABEL[k]}</span> {value}</span>
           ))}
         </div>
         <DemoBanner show={isDemo} />
+        <SavedExampleBanner meta={meta} />
+        <RunInfo meta={meta} />
         {result.warnings.length > 0 && <div role="status" className="mt-4 border-l-2 border-orange pl-4 text-sm"><p className="font-medium text-navy">Numeric record availability</p><ul className="mt-1 list-disc pl-5 text-muted">{result.warnings.map((warning,i) => <li key={i}>{warning}</li>)}</ul></div>}
       </header>
 

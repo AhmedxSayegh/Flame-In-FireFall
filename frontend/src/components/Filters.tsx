@@ -10,7 +10,7 @@ function Select<K extends keyof FormState>({ k, label, options }: { k: K; label:
   return (
     <div>
       <label className="label" htmlFor={k}>{label}</label>
-      <select id={k} className="field" value={form[k] as string} onChange={(e) => setField(k, e.target.value as FormState[K])}>
+      <select id={k} className={`field ${form[k] !== options[0] ? 'border-teal' : ''}`} value={form[k] as string} onChange={(e) => setField(k, e.target.value as FormState[K])}>
         {options.map((o) => <option key={o} value={o}>{o}</option>)}
       </select>
     </div>
@@ -57,7 +57,7 @@ export function AdvancedFilters() {
   const activeCount = [form.oxygen_pct, form.pressure_kpa, form.airflow_cm_s].filter((v) => v.trim() !== '').length + (form.gravity_level !== 'All' ? 1 : 0);
   return (
     <div className="border-y border-line">
-      <button type="button" aria-expanded={advancedOpen} onClick={() => setAdvancedOpen(!advancedOpen)}
+      <button type="button" aria-expanded={advancedOpen} aria-controls="advanced-conditions" onClick={() => setAdvancedOpen(!advancedOpen)}
         className="flex w-full items-center justify-between py-4 text-left">
         <span className="flex items-center gap-3">
           <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-navy">Advanced Experimental Conditions</span>
@@ -66,7 +66,7 @@ export function AdvancedFilters() {
         <ChevronDown size={16} className={`text-navy transition-transform ${advancedOpen ? 'rotate-180' : ''}`} />
       </button>
       {advancedOpen && (
-        <div className="grid gap-x-8 gap-y-6 pb-6 md:grid-cols-2">
+        <div id="advanced-conditions" className="grid gap-x-8 gap-y-6 pb-6 md:grid-cols-2">
           <NumField k="oxygen_pct" label="Oxygen Concentration" unit="% O₂" />
           <NumField k="pressure_kpa" label="Atmospheric Pressure" unit="kPa" />
           <NumField k="airflow_cm_s" label="Airflow Velocity" unit="cm/s" />

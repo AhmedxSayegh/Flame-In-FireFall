@@ -11,7 +11,7 @@ The visual source in this folder comes from `flame-in-freefall.zip`. This build 
 - Existing `GET /api/records?experiment_ids=A,B` is used when inline records are absent. Missing/failed record requests are reported explicitly, with no synthetic substitute.
 - Canonical input/output contracts remain in `../shared/schemas`. Active validation imports these canonical files.
 - The team's local engine/fixture source is retained for traceability. It never supplies API-mode results. The only engine exports used by UI components are display labels and comparison helpers; backend ranking and scores are rendered unchanged.
-- A saved-example response from an unconfigured backend is rejected as an integration state; it is not presented as a new live search.
+- A saved-example response from an unconfigured backend is labeled in the results. The active filter chips show the example query.
 
 The research-question UI and summary chip are removed. Previously persisted question values are cleared; this UI sends `research_question: null`. The API contract and backend support remain unchanged.
 

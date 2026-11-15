@@ -132,7 +132,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     } finally {
       inFlight.current = false;
     }
-  }, [form]);
+  }, [form, setCompareIds]);
 
   const value = useMemo<Ctx>(() => ({
     form, setField, reset, advancedOpen, setAdvancedOpen, status, error, result, submittedForm, apply,

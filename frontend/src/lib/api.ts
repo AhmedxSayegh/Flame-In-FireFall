@@ -16,7 +16,7 @@ export class ApiError extends Error {
 }
 export interface RunMeta {
   mode?: string; model?: string | null; run_id?: string; duration_s?: number;
-  valid?: boolean; validation_errors?: string[]; integrity_notes?: string[];
+  query_matches_example?: boolean; valid?: boolean; validation_errors?: string[]; integrity_notes?: string[];
 }
 export interface SearchResult {
   output: SearchOutput; records: Record<string, ExperimentRecord>; meta?: RunMeta; warnings: string[];
@@ -43,7 +43,6 @@ export async function search(req: SearchRequest): Promise<SearchResult> {
   } catch { throw new ApiError(`Cannot reach the research backend at ${BASE}. Start the backend and check the API connection.`); }
   const body = await jsonResponse(response, 'Search');
   const meta = body.meta as RunMeta | undefined;
-  if (meta?.mode === 'saved_example') throw new ApiError('The backend is in saved-example mode. Configure its Gemini connection to perform a live search. No synthetic data was substituted.');
   if (meta?.valid === false) throw new ApiError('The backend reported an invalid output.',meta.validation_errors ?? []);
   const output = body.output ?? body;
   const vo = validateOutput(output);

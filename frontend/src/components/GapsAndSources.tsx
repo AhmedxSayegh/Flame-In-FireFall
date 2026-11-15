@@ -1,7 +1,7 @@
 import { sourceIdentity } from '../lib/sourceCatalog';
 import type { SourceRef } from '../types';
 import { AlertTriangle, Info } from 'lucide-react';
-import type { SearchOutput } from '../types';
+import type { ReportEvidence, SearchOutput } from '../types';
 import { Panel, PanelTitle } from './Decor';
 import { usePool } from './Shared';
 import { useSearch } from '../state/SearchContext';
@@ -48,9 +48,24 @@ export function ResearchGaps({ output, className = '' }: { output: SearchOutput;
   );
 }
 
+export function ReportEvidenceList({ evidence }: { evidence: ReportEvidence[] }) {
+  return (
+    <ul className="space-y-2 text-sm">
+      {evidence.map((e) => (
+        <li key={e.url} className="border-l border-line pl-3">
+          <p className="font-medium">{e.title}</p>
+          <p>{e.text}</p>
+          <a className="text-teal hover:underline" href={e.url} target="_blank" rel="noreferrer">BASS-II Summary Report · PDF page {e.page}</a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function SupportingSources({ output, className = '' }: { output: SearchOutput; className?: string }) {
   const pool=usePool();
   const {investigationId}=useSearch();
+  const reportEvidence = output.ranked.find((inv) => inv.psi_id === investigationId)?.report_evidence ?? [];
   const catalog=new Map<string,{refs:SourceRef[];experiments:Set<string>;investigations:Set<string>}>();
   for(const inv of output.ranked.filter(inv=>inv.psi_id===investigationId)){
     const experiments=[...pool.values()].filter(p=>p.inv.psi_id===inv.psi_id);
@@ -75,5 +90,6 @@ export function SupportingSources({ output, className = '' }: { output: SearchOu
         {[...entry.experiments].map(expId=>{const exp=pool.get(expId)!;return <div className="mt-3 border-l border-line pl-3 text-xs" key={expId}><p className="font-medium">{expId} · {exp.exp.tests.map(t=>t.test_identifier).join(', ')}</p><p className="mt-1">{exp.exp.summary_of_key_findings}</p><ul className="mt-1 space-y-1">{exp.exp.evidence.map(e=><li key={e}>{e}</li>)}</ul></div>;})}
       </details>
     </li>)}</ol>{catalog.size===0 && <p className="text-sm text-muted">No sources available for the selected investigation.</p>}<p className="mt-4 text-xs text-muted">Search-wide inputs used: {output.inputs_used.join(', ')}</p>
+    {reportEvidence.length > 0 && <div className="mt-4"><h3 className="mb-2 font-medium">Findings from the report</h3><ReportEvidenceList evidence={reportEvidence} /></div>}
   </Panel>;
 }
