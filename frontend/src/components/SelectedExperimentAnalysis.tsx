@@ -142,11 +142,11 @@ function Block({ letter, title, accent, children }: { letter: string; title: str
   );
 }
 
-/** Tabs for the selected investigation's top experiments (max 3, rank order). */
+/** Dropdown shared by analysis and evidence, using the common investigation scope. */
 function ExperimentTabs() {
   const pool=usePool();
   const {activeId,setActiveId}=useSearch();
-  return <label className="mb-6 block"><span className="label">Selected experiment</span><select className="field w-full" aria-label="Selected experiment" value={activeId ?? ''} title={pool.get(activeId ?? '')?.exp.experiment} onChange={e => setActiveId(e.target.value)}>{[...pool.values()].map(it => <option key={it.id} value={it.id}>{it.id} · {it.exp.experiment}</option>)}</select></label>;
+  return <label className="mb-6 block"><span className="label">Selected experiment</span><select className="field w-full" aria-label="Selected experiment" disabled={!pool.size} value={activeId ?? ''} title={pool.get(activeId ?? '')?.exp.experiment} onChange={e => setActiveId(e.target.value)}>{!pool.size && <option value="">No experiments available</option>}{[...pool.values()].map(it => <option key={it.id} value={it.id}>{it.id} · {it.exp.experiment}</option>)}</select></label>;
 }
 
 export function SelectedExperimentAnalysis({ className = '', onViewEvidence }: { className?: string; onViewEvidence: () => void }) {
@@ -199,8 +199,8 @@ export function SelectedExperimentAnalysis({ className = '', onViewEvidence }: {
 
 export function SelectedExperimentEvidence() {
   const pool=usePool(); const {activeId}=useSearch(); const item=pool.get(activeId ?? '');
-  if (!item) return <EmptyState title="No experiment selected" />;
-  return <Panel id="selected-evidence"><PanelTitle index="02" title="Selected experiment evidence" />          <div className="mt-3">
+  return <Panel id="selected-evidence"><PanelTitle index="02" title="Selected experiment evidence" /><ExperimentTabs />
+    {!item ? <EmptyState title="No experiment selected" /> : <div className="mt-3">
             <div>
               <dl className="grid grid-cols-[110px_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm sm:grid-cols-[160px_minmax(0,1fr)]">
                 <dt className="label mb-0">NASA PSI ID</dt><dd>{item.inv.psi_id}</dd>
@@ -214,6 +214,6 @@ export function SelectedExperimentEvidence() {
                 <dd><ul className="space-y-1">{item.exp.evidence.map((e) => <li key={e} className="flex items-start gap-2"><FileText size={13} className="mt-0.5 shrink-0 text-orange" strokeWidth={1.5} />{e}</li>)}</ul></dd>
               </dl>
             </div>
-          </div>
+          </div>}
 </Panel>;
 }

@@ -30,21 +30,6 @@ export function ResearchFilters() {
   );
 }
 
-export function ResearchQuestionInput() {
-  const { form, setField } = useSearch();
-  return (
-    <div>
-      <label className="label" htmlFor="rq">Research Question — Optional</label>
-      <textarea
-        id="rq" rows={2} className="field resize-y"
-        placeholder="How does oxygen concentration affect flame spread in microgravity?"
-        value={form.research_question} onChange={(e) => setField('research_question', e.target.value)}
-      />
-      <p className="mt-1.5 text-xs text-muted">Sent alongside the search as free text. It is not part of the strict input schema and does not change the filter scores.</p>
-    </div>
-  );
-}
-
 const condProps = (inputSchema as { properties: { conditions: { properties: Record<string, { description?: string; minimum?: number; maximum?: number }> } } }).properties.conditions.properties;
 
 function NumField({ k, label, unit }: { k: 'oxygen_pct' | 'pressure_kpa' | 'airflow_cm_s'; label: string; unit: string }) {

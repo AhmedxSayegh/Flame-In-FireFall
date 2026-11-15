@@ -5,6 +5,21 @@ const fs = require('node:fs');
 const Module = require('node:module');
 const esbuild = require('esbuild');
 
+test('workspace selections remain within one investigation, including empty and single-experiment cases', () => {
+  const built=esbuild.buildSync({entryPoints:[path.resolve(__dirname,'../src/state/selection.ts')],bundle:true,write:false,platform:'node',format:'cjs'});
+  const mod=new Module(path.join(__dirname,'selection-test.cjs'),module);
+  mod._compile(built.outputFiles[0].text,mod.id);
+  const {experimentsForInvestigation,selectWorkspace,validComparisonIds}=mod.exports;
+  const ranked=[{psi_id:'A',top_experiments:[{experiment_id:'A2',rank:2},{experiment_id:'A1',rank:1}]},{psi_id:'B',top_experiments:[{experiment_id:'B1',rank:1}]},{psi_id:'EMPTY',top_experiments:[]}];
+  assert.deepEqual(experimentsForInvestigation(ranked,'A').map(e=>e.experiment_id),['A1','A2']);
+  assert.deepEqual(selectWorkspace(ranked,'A',{activeId:'B1',compareIds:['B1','A2','A2']}),{investigationId:'A',activeId:'A1',compareIds:['A2','A1']});
+  assert.deepEqual(selectWorkspace(ranked,'B',{activeId:'A2',compareIds:['A1','A2']}),{investigationId:'B',activeId:'B1',compareIds:['B1']});
+  assert.deepEqual(selectWorkspace(ranked,'EMPTY',{activeId:'B1',compareIds:['B1']}),{investigationId:'EMPTY',activeId:null,compareIds:[]});
+  assert.deepEqual(selectWorkspace([],null),{investigationId:null,activeId:null,compareIds:[]});
+  assert.equal(selectWorkspace(ranked,'A',{activeId:'A2',compareIds:[]}).activeId,'A2');
+  assert.deepEqual(validComparisonIds(['B1','A2','A2','A1'],experimentsForInvestigation(ranked,'A')),['A2','A1']);
+});
+
 // Compile the real browser API module for Node, replacing only Vite's public URL.
 const built = esbuild.buildSync({ entryPoints: [path.resolve(__dirname,'../src/lib/api.ts')], bundle:true,
   write:false, platform:'node',format:'cjs',define:{'import.meta.env.VITE_API_BASE_URL':'"/api"','import.meta.env.VITE_DATA_SOURCE':'"api"'} });

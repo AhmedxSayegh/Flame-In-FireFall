@@ -3,7 +3,7 @@ import type { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Constellation, OrbitalSystem, Star } from '../components/Decor';
 import { DataSourceBadge } from '../components/Shared';
-import { AdvancedFilters, ResearchFilters, ResearchQuestionInput } from '../components/Filters';
+import { AdvancedFilters, ResearchFilters } from '../components/Filters';
 import { formErrors, useSearch } from '../state/SearchContext';
 
 export default function SearchPage() {
@@ -51,7 +51,6 @@ export default function SearchPage() {
           </div>
 
           <ResearchFilters />
-          <ResearchQuestionInput />
           <AdvancedFilters />
 
           {error && (

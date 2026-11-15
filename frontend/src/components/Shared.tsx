@@ -3,6 +3,7 @@ import { Fragment, useMemo, useState, type ReactNode } from 'react';
 import { DATA_SOURCE } from '../lib/api';
 import { downloadCSV, SERIES_COLORS } from '../lib/chartData';
 import { useSearch } from '../state/SearchContext';
+import { experimentsForInvestigation } from '../state/selection';
 import type { ExperimentRecord, RankedInvestigation, TopExperiment } from '../types';
 
 export function DataSourceBadge() {
@@ -26,16 +27,16 @@ export function DemoBanner({ show }: { show: boolean }) {
 
 export interface PoolItem { id: string; exp: TopExperiment; inv: RankedInvestigation; record?: ExperimentRecord }
 
-/** Flat lookup of every top experiment across all ranked investigations. */
+/** Shared lookup scoped to the authoritative selected investigation. */
 export function usePool() {
-  const { result } = useSearch();
+  const { result, investigationId } = useSearch();
   return useMemo(() => {
     const map = new Map<string, PoolItem>();
-    for (const inv of result?.output.ranked ?? [])
-      for (const exp of inv.top_experiments)
+    const inv = result?.output.ranked.find(inv => inv.psi_id === investigationId);
+    if (inv) for (const exp of experimentsForInvestigation(result?.output.ranked ?? [], investigationId))
         map.set(exp.experiment_id, { id: exp.experiment_id, exp, inv, record: result?.records[exp.experiment_id] });
     return map;
-  }, [result]);
+  }, [result, investigationId]);
 }
 
 export function seriesColor(i: number) { return SERIES_COLORS[i % SERIES_COLORS.length]; }

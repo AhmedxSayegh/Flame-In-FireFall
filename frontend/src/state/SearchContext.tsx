@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { search, SchemaError, type SearchResult } from '../lib/api';
 import type { InputGravity, SearchInput } from '../types';
+import { experimentsForInvestigation, selectWorkspace, validComparisonIds, type WorkspaceSelection } from './selection';
 
 export interface FormState {
   crew_environment: SearchInput['crew_environment'];
@@ -62,12 +63,12 @@ interface Ctx {
   /** experiment_ids in the comparison (2–3) */
   compareIds: string[];
   setCompareIds: (ids: string[]) => void;
-  /** experiment shown in the analysis panel; selecting one also selects its investigation */
+  /** Experiment shown in analysis; may only be selected within the active investigation. */
   activeId: string | null;
   setActiveId: (id: string) => void;
   /** psi_id highlighted in the ranking panel */
   investigationId: string | null;
-  /** selects an investigation and its highest-ranked experiment; comparison selection is untouched */
+  /** Updates the shared investigation and reconciles all experiment selections. */
   selectInvestigation: (psiId: string) => void;
 }
 
@@ -75,7 +76,7 @@ const SearchCtx = createContext<Ctx | null>(null);
 const KEY = 'fif.form.v1';
 
 function load(): FormState {
-  try { const s = sessionStorage.getItem(KEY); if (s) return { ...DEFAULT_FORM, ...JSON.parse(s) }; } catch { /* storage unavailable */ }
+  try { const s = sessionStorage.getItem(KEY); if (s) return { ...DEFAULT_FORM, ...JSON.parse(s), research_question: '' }; } catch { /* storage unavailable */ }
   return DEFAULT_FORM;
 }
 
@@ -86,28 +87,30 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<Ctx['error']>(null);
   const [result, setResult] = useState<SearchResult | null>(null);
   const [submittedForm, setSubmittedForm] = useState<FormState | null>(null);
-  const [compareIds, setCompareIds] = useState<string[]>([]);
-  const [activeId, setActiveIdRaw] = useState<string | null>(null);
-  const [investigationId, setInvestigationId] = useState<string | null>(null);
+  const [selection, setSelection] = useState<WorkspaceSelection>({ investigationId: null, activeId: null, compareIds: [] });
+  const { compareIds, activeId, investigationId } = selection;
   const inFlight = useRef(false);
 
   const setActiveId = useCallback((id: string) => {
-    setActiveIdRaw(id);
-    const inv = result?.output.ranked.find((r) => r.top_experiments.some((e) => e.experiment_id === id));
-    if (inv) setInvestigationId(inv.psi_id);
+    setSelection(current => experimentsForInvestigation(result?.output.ranked ?? [], current.investigationId)
+      .some(exp => exp.experiment_id === id) ? { ...current, activeId: id } : current);
+  }, [result]);
+
+  const setCompareIds = useCallback((ids: string[]) => {
+    setSelection(current => ({ ...current, compareIds: validComparisonIds(ids,
+      experimentsForInvestigation(result?.output.ranked ?? [], current.investigationId)) }));
   }, [result]);
 
   const selectInvestigation = useCallback((psiId: string) => {
     const inv = result?.output.ranked.find((r) => r.psi_id === psiId);
     if (!inv) return;
-    setInvestigationId(psiId);
-    const top = [...inv.top_experiments].sort((a, b) => a.rank - b.rank)[0];
-    if (top) setActiveIdRaw(top.experiment_id);
+    setSelection(current => current.investigationId === psiId ? current
+      : selectWorkspace(result!.output.ranked, psiId, current));
   }, [result]);
 
   useEffect(() => { try { sessionStorage.setItem(KEY, JSON.stringify(form)); } catch { /* ignore */ } }, [form]);
 
-  const setField = useCallback(<K extends keyof FormState>(k: K, v: FormState[K]) => setForm((f) => ({ ...f, [k]: v })), []);
+  const setField = useCallback(<K extends keyof FormState>(k: K, v: FormState[K]) => setForm((f) => ({ ...f, [k]: v, research_question: '' })), []);
   const reset = useCallback(() => { setForm(DEFAULT_FORM); setError(null); }, []);
 
   const apply = useCallback(async () => {
@@ -116,16 +119,9 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     inFlight.current = true;
     setStatus('loading'); setError(null);
     try {
-      const r = await search({ input: toInput(form), research_question: form.research_question.trim() || null });
-      setResult(r); setSubmittedForm(form); setStatus('ready');
-      // Default comparison: top experiments in rank order across investigations (max 3).
-      const pool = r.output.ranked.flatMap((inv) => inv.top_experiments.map((e) => e.experiment_id));
-      const first = r.output.ranked[0]?.top_experiments.map((e) => e.experiment_id) ?? [];
-      const ids = (first.length >= 2 ? first : pool).slice(0, 3);
-      setCompareIds(ids);
-      const firstInv = r.output.ranked[0];
-      setInvestigationId(firstInv?.psi_id ?? null);
-      setActiveIdRaw(firstInv?.top_experiments[0]?.experiment_id ?? null);
+      const r = await search({ input: toInput(form), research_question: null });
+      setResult(r); setSubmittedForm({ ...form, research_question: '' }); setStatus('ready');
+      setSelection(selectWorkspace(r.output.ranked, r.output.ranked[0]?.psi_id ?? null));
       return true;
     } catch (e) {
       setStatus('error');
@@ -141,7 +137,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const value = useMemo<Ctx>(() => ({
     form, setField, reset, advancedOpen, setAdvancedOpen, status, error, result, submittedForm, apply,
     compareIds, setCompareIds, activeId, setActiveId, investigationId, selectInvestigation,
-  }), [form, setField, reset, advancedOpen, status, error, result, submittedForm, apply, compareIds, activeId, setActiveId, investigationId, selectInvestigation]);
+  }), [form, setField, reset, advancedOpen, status, error, result, submittedForm, apply, compareIds, setCompareIds, activeId, setActiveId, investigationId, selectInvestigation]);
 
   return <SearchCtx.Provider value={value}>{children}</SearchCtx.Provider>;
 }

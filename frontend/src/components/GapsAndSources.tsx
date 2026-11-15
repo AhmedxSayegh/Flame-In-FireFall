@@ -4,12 +4,13 @@ import { AlertTriangle, Info } from 'lucide-react';
 import type { SearchOutput } from '../types';
 import { Panel, PanelTitle } from './Decor';
 import { usePool } from './Shared';
+import { useSearch } from '../state/SearchContext';
 
 export function ResearchGaps({ output, className = '' }: { output: SearchOutput; className?: string }) {
   const weak = /^\s*(weak|partial)/i.test(output.match_quality);
   return (
     <Panel id="gaps" className={`@container flex flex-col ${className}`}>
-      <PanelTitle index="05" title="Research Gaps & Limitations" />
+      <PanelTitle index="05" title="Research Gaps & Limitations" kicker="Search-wide: match quality, gaps, caveats and overall insights cover the complete search results, not only this investigation." />
       <div className="pr-1">
       <div className={`mb-6 flex items-start gap-3 border-l-2 pl-4 ${weak ? 'border-orange' : 'border-teal'}`}>
         <div>
@@ -49,9 +50,14 @@ export function ResearchGaps({ output, className = '' }: { output: SearchOutput;
 
 export function SupportingSources({ output, className = '' }: { output: SearchOutput; className?: string }) {
   const pool=usePool();
+  const {investigationId}=useSearch();
   const catalog=new Map<string,{refs:SourceRef[];experiments:Set<string>;investigations:Set<string>}>();
-  for(const inv of output.ranked){
+  for(const inv of output.ranked.filter(inv=>inv.psi_id===investigationId)){
     const experiments=[...pool.values()].filter(p=>p.inv.psi_id===inv.psi_id);
+    if (!experiments.length) {
+      const ref:SourceRef={label:inv.name+' investigation record',url:inv.reference_link,kind:'dataset',verified:false};
+      catalog.set(sourceIdentity(ref,inv.psi_id,output.inputs_used),{refs:[Object.assign(ref,{recordOnly:true})],experiments:new Set(),investigations:new Set([inv.psi_id])});
+    }
     for(const exp of experiments){
       const refs:(SourceRef & {recordOnly?:boolean})[]=[{label:inv.name+' investigation record',url:inv.reference_link,kind:'dataset',verified:false,recordOnly:true},...(exp.record?.sources??[])];
       for(const ref of refs){const id=sourceIdentity(ref,inv.psi_id,output.inputs_used);const entry=catalog.get(id)??{refs:[],experiments:new Set<string>(),investigations:new Set<string>()};
@@ -68,6 +74,6 @@ export function SupportingSources({ output, className = '' }: { output: SearchOu
       <details className="mt-3"><summary className="cursor-pointer text-sm">Experiment references and supporting claims ({entry.experiments.size})</summary><p className="mt-2 text-xs text-muted">The record associates these sources with each experiment. Individual source-to-claim attribution is shown only through the supplied evidence text below.</p>
         {[...entry.experiments].map(expId=>{const exp=pool.get(expId)!;return <div className="mt-3 border-l border-line pl-3 text-xs" key={expId}><p className="font-medium">{expId} · {exp.exp.tests.map(t=>t.test_identifier).join(', ')}</p><p className="mt-1">{exp.exp.summary_of_key_findings}</p><ul className="mt-1 space-y-1">{exp.exp.evidence.map(e=><li key={e}>{e}</li>)}</ul></div>;})}
       </details>
-    </li>)}</ol><p className="mt-4 text-xs text-muted">Inputs used: {output.inputs_used.join(', ')}</p>
+    </li>)}</ol>{catalog.size===0 && <p className="text-sm text-muted">No sources available for the selected investigation.</p>}<p className="mt-4 text-xs text-muted">Search-wide inputs used: {output.inputs_used.join(', ')}</p>
   </Panel>;
 }

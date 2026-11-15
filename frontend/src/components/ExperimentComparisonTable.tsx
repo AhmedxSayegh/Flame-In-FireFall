@@ -42,7 +42,7 @@ export function ExperimentComparisonTable({ className = '' }: { className?: stri
   const cols = compareIds.map((id) => pool.get(id)).filter((x): x is PoolItem => !!x);
 
   if (pool.size === 0) return (
-    <Panel id="comparison" className={className}><PanelTitle index="03" title="Experiment Comparison" /><EmptyState title="No experiments returned for this search" /></Panel>
+    <Panel id="comparison" className={className}><PanelTitle index="03" title="Experiment Comparison" /><ExperimentPicker /><EmptyState title="No experiments available for the selected investigation" /></Panel>
   );
 
   const rows = TABLE_ATTRIBUTES.map((attribute) => ({ attribute, values: Object.fromEntries(cols.map((c) => [c.id, cellValue(c, attribute)])) }));

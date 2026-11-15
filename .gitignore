@@ -11,3 +11,6 @@ __pycache__/
 frontend/node_modules/
 frontend/dist/
 frontend/.env.local
+
+# Generated TypeScript build cache
+frontend/tsconfig.tsbuildinfo

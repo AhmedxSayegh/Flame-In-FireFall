@@ -1,6 +1,6 @@
 # Team frontend integration
 
-The visual source in this folder comes from `flame-in-freefall.zip`. This build is API-only. The original team README and source are preserved at `../integrations/team-frontend-source` for reference; its demo mode and example port 8000 do not describe the integrated application.
+The visual source in this folder comes from `flame-in-freefall.zip`. This build is API-only. The supplied team frontend is integrated into the existing application; its proposed demo mode and example port 8000 do not describe the actual backend.
 
 ## Actual connection
 
@@ -9,11 +9,11 @@ The visual source in this folder comes from `flame-in-freefall.zip`. This build 
 - Public optional setting: `VITE_API_BASE_URL=/api`. No LLM credentials belong in frontend variables.
 - `POST /api/search` receives `{input,research_question}` and returns `{output,meta,records}`. `lib/api.ts` validates/unpacks this envelope and uses inline records when present.
 - Existing `GET /api/records?experiment_ids=A,B` is used when inline records are absent. Missing/failed record requests are reported explicitly, with no synthetic substitute.
-- Canonical input/output contracts remain in `../shared/schemas`. The team's bundled copies match, but active validation imports the canonical files.
+- Canonical input/output contracts remain in `../shared/schemas`. Active validation imports these canonical files.
 - The team's local engine/fixture source is retained for traceability. It never supplies API-mode results. The only engine exports used by UI components are display labels and comparison helpers; backend ranking and scores are rendered unchanged.
 - A saved-example response from an unconfigured backend is rejected as an integration state; it is not presented as a new live search.
 
-Research question: sent outside the strict input object, saved in backend run input, **not included in Gemini prompts**. Integration does not alter that behavior.
+The research-question UI and summary chip are removed. Previously persisted question values are cleared; this UI sends `research_question: null`. The API contract and backend support remain unchanged.
 
 ## Commands
 
@@ -34,11 +34,6 @@ npm.cmd run build
 
 `start.bat` launches the built application. `dev.bat` starts both development processes. Runtime provider/model/settings, prompts and source datasets remain in the existing backend.
 
-## Rollback
+## Recovered frontend
 
-```
-.venv\Scripts\python.exe tools\restore_previous_frontend.py --check
-.venv\Scripts\python.exe tools\restore_previous_frontend.py
-```
-
-Run the second command only when you intend to roll back. It restores the pre-integration frontend and snapshots the integrated files before replacement. It does not restore or modify backend/environment files.
+This publication uses the pre-animation file checkpoint plus unchanged frontend files over commit `59076c1d53b2be0d3826bfde743011c5b8599e02`. It retains the three-tab layout and globally scoped local selections. See [publication verification](../docs/PRE_ANIMATION_PUBLICATION.md). The completed Animation working project was preserved separately; this checkout does not modify it.

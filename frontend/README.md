@@ -25,6 +25,6 @@ npm.cmd test
 npm.cmd run build
 ```
 
-See [integration contracts and rollback](INTEGRATION.md) and the [verification report](../docs/TEAM_FRONTEND_INTEGRATION.md).
+See [the actual integration contracts](INTEGRATION.md) and [the pre-animation publication report](../docs/PRE_ANIMATION_PUBLICATION.md).
 
-The [original team README](../integrations/team-frontend-source/README.md) is preserved unchanged. Its demo mode and example API on port 8000 were proposed defaults, not the actual backend configuration.
+This branch keeps Experiment / Comparison / Evidence navigation, investigation-selection strips, globally scoped experiment dropdowns, and the removed research-question UI. It excludes the later Animation workspace.

@@ -18,7 +18,7 @@ const CHIP_LABEL: Partial<Record<keyof FormState, string>> = {
 };
 
 export default function ResultsPage() {
-  const { result, submittedForm } = useSearch();
+  const { result, submittedForm, investigationId, selectInvestigation } = useSearch();
   const nav = useNavigate();
   const [tab, setTab] = useState('Experiment');
   if (!result || !submittedForm) return <Navigate to="/" replace />;
@@ -44,7 +44,6 @@ export default function ResultsPage() {
           {chips.length === 0 ? <span className="text-muted">No filters applied — all loaded investigations shown.</span> : chips.map((k) => (
             <span key={k} className="pill"><span className="text-muted">{CHIP_LABEL[k]}</span> {submittedForm[k]}</span>
           ))}
-          {submittedForm.research_question.trim() && <span className="pill max-w-full truncate"><span className="text-muted">Question</span> {submittedForm.research_question}</span>}
         </div>
         <DemoBanner show={isDemo} />
         {result.warnings.length > 0 && <div role="status" className="mt-4 border-l-2 border-orange pl-4 text-sm"><p className="font-medium text-navy">Numeric record availability</p><ul className="mt-1 list-disc pl-5 text-muted">{result.warnings.map((warning,i) => <li key={i}>{warning}</li>)}</ul></div>}
@@ -55,6 +54,14 @@ export default function ResultsPage() {
           <span aria-hidden="true" className="workspace-indicator" style={{transform:`translateX(${['Experiment','Comparison','Evidence'].indexOf(tab)*100}%)`}} />
           {['Experiment','Comparison','Evidence'].map((name,i) => <button key={name} id={`workspace-tab-${name}`} role="tab" aria-selected={tab === name} aria-controls={`workspace-${name}`} tabIndex={tab === name ? 0 : -1} className="workspace-tab" onClick={() => setTab(name)} onKeyDown={e => { const names=['Experiment','Comparison','Evidence']; const n=e.key === 'ArrowRight' ? (i+1)%3 : e.key === 'ArrowLeft' ? (i+2)%3 : e.key === 'Home' ? 0 : e.key === 'End' ? 2 : -1; if(n>=0) { e.preventDefault(); setTab(names[n]); document.getElementById(`workspace-tab-${names[n]}`)?.focus(); } }}>{name}</button>)}
         </div>
+        {tab !== 'Experiment' && <div role="group" aria-label="Select investigation" className="mb-6 flex flex-wrap items-center gap-2">
+          <span className="label mb-0 mr-2">Investigation</span>
+          {output.ranked.map(inv => <button key={inv.psi_id} type="button" className="pill transition-colors hover:border-orange"
+            aria-pressed={investigationId === inv.psi_id} onClick={() => selectInvestigation(inv.psi_id)}>
+            {inv.name} <span className="text-muted">{inv.psi_id}</span>
+          </button>)}
+          {output.ranked.length === 0 && <span className="text-xs text-muted">No investigations returned.</span>}
+        </div>}
         <div id="workspace-Experiment" role="tabpanel" aria-labelledby="workspace-tab-Experiment" style={{display:tab === 'Experiment' ? undefined : 'none'}}>
         {/* PART 1 — ranking + analysis of the selected investigation */}
         <PartLabel n="Part 1" title="Investigations & Experiment Analysis" />
